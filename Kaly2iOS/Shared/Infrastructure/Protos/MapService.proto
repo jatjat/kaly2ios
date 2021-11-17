@@ -1,0 +1,13 @@
+syntax = "proto3";
+package ca.joelathiessen.kaly2.proto;
+option java_multiple_files = true;
+
+service MapService {
+    rpc CreateMap (CreateMapRequest) returns (CreateMapResponse);
+}
+message CreateMapRequest {
+    string mapName = 1;
+}
+message CreateMapResponse {
+    int64 mapId = 1;
+}

@@ -1,0 +1,88 @@
+syntax = "proto3";
+package ca.joelathiessen.kaly2.proto;
+option java_multiple_files = true;
+
+service SessionService {
+    rpc SubscribeNew (SubscribeNewRequest) returns (stream SubscribeResponse);
+    rpc SubscribeExisting (SubscribeExistingRequest) returns (stream SubscribeResponse);
+    rpc GetPastIterations (GetPastIterationsRequest) returns (GetPastIterationsResponse);
+    rpc ModifySlamSettings (ModifySlamSettingsRequest) returns (ModifySlamSettingsResponse);
+    rpc ModifySessionSettings (ModifySessionSettingsRequest) returns (ModifySessionSettingsResponse);
+}
+
+message SubscribeNewRequest {
+    int64 robotId = 1;
+    int64 mapId = 2;
+}
+message SubscribeExistingRequest {
+    int64 robotSessionId = 1;
+    int64 minPrevIterationNo = 3;
+}
+message SubscribeResponse {
+    int64 robotSessionId = 1;
+    Iteration iteration = 2;
+    string retryServer = 3;
+}
+message Iteration {
+    int64 iterationNo = 1;
+    int64 timestamp = 2;
+    Pose bestPose = 3;
+    Pose odoPose = 4;
+    Pose truePose = 5;
+    repeated Feature features = 6;
+    repeated Particle particles = 7;
+    SlamSettings slamSettings = 8;
+    SessionSettings sessionSettings = 9;
+}
+
+message Pose {
+    float x = 1;
+    float y = 2;
+    float heading = 3;
+}
+message SlamSettings {
+    int32 numParticles = 1;
+    float sensorDistVar = 2;
+    float sensorAngVar = 3;
+}
+message SessionSettings {
+    bool isRunning = 1;
+}
+message Feature {
+    float x = 1;
+    float y = 2;
+}
+message Particle {
+    float x = 1;
+    float y = 2;
+    float heading = 3;
+}
+
+message GetPastIterationsRequest {
+    int64 robotSessionId = 1;
+    int64 firstIterationNo = 2;
+    int64 uptoIterationNo = 3;
+}
+message GetPastIterationsResponse {
+    int64 robotSessionId = 1;
+    repeated Iteration iterations = 2;
+    string retryServer = 3;
+}
+
+message ModifySessionSettingsRequest {
+    int64 robotSessionId = 1;
+    bool shouldRun = 2;
+}
+message ModifySessionSettingsResponse {
+    string retryServer = 1;
+}
+
+message ModifySlamSettingsRequest {
+    int64 robotSessionId = 1;
+    int32 numParticles = 2;
+    float sensorDistVar = 3;
+    float sensorAngVar = 4;
+}
+message ModifySlamSettingsResponse {
+    string retryServer = 1;
+}

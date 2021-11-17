@@ -1,0 +1,14 @@
+syntax = "proto3";
+package ca.joelathiessen.kaly2.proto;
+option java_multiple_files = true;
+
+service RobotService {
+    rpc CreateRobot (CreateRobotRequest) returns (CreateRobotResponse);
+}
+message CreateRobotRequest {
+    string robotName = 1;
+    bool isReal = 2;
+}
+message CreateRobotResponse {
+    int64 robotID = 1;
+}
