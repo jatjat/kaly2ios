@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol DomainDependency: Dependency {
     var mapClient: MapClient { get }
@@ -35,9 +36,67 @@ extension DomainDIComponent: UIDependency {
 protocol SessionService {
     
 }
-public class SessionServiceImpl: SessionService {
+
+public actor SessionServiceImpl: SessionService {
+    let mapClient: MapClient
+    
+    let robotClient: RobotClient
+    
+    let sessionClient: SessionClient
+    
+//    @Published var iterations = [Iteration]()
+//    @Published var bestPoses = [UIPose]()
+//    @Published var odoPoses = [UIPose]()
+//    @Published var truePoses = [UIPose]()
+    
+    //    let bestPoses = CurrentValueSubject<[Pose], Never>([Pose]())
+    
+//    var robotSessionID: Int64 = 0
+    
+    var iterations = [Iteration]()
+
+    
+//    var bestPose: UIPose {
+//
+//    }
+//
+//    var odoPoses: UIPose {
+//
+//    }
+//
+//    var truePose: UIPose {
+//
+//    }
+//
+//    var numParticles: Int32 {
+//
+//    }
+//
+//    var sensorDistVar: Float {
+//
+//    }
+//
+//    var sensorAngVar: Float {
+//
+//    }
+
+    
+
+//    var unknownFields = SwiftProtobuf.UnknownStorage()
+    
+    var itr: SessionIterator?
+    
+    func create(mapName: String, robotName: String, isReal: Bool) async throws {
+        let mapId = try await mapClient.createMap(mapName: mapName)
+        let robotId = try await robotClient.createRobot(robotName: robotName, isReal: isReal)
+        itr = try await sessionClient.subscribeNew(robotID: robotId, mapID: mapId)
+    }
+    
+//    var numParticles
+    
     init(mapClient: MapClient, robotClient: RobotClient, sessionClient: SessionClient) {
-        
+        self.mapClient = mapClient
+        self.robotClient = robotClient
+        self.sessionClient = sessionClient
     }
 }
-

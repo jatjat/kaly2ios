@@ -30,6 +30,22 @@ struct BottomSheetView<Content: View>: View {
     let maxHeight: CGFloat
     let minHeight: CGFloat
     let content: Content
+    
+
+    
+    // Animation params for when finger is dragging bottom sheet
+////     or bottom sheet top edge is tapped:
+//    let touchResp = 0.15
+//    let touchDampFrac = 0.86
+//    let touchBlendDur = 0.25
+    let dragOrTapAnim: Animation = .spring(response: 0.15, dampingFraction: 0.86, blendDuration: 0.25)
+    
+    // Animation for after finger is lifted from dragging
+    // bottom sheet, or bottom sheet top edge is tapped:
+//    let touchEndedResp = 0.3
+//    let touchEndedDampFrac = 0.8
+//    let touchEndedBlendDur = 0.25
+    let tapOrTouchEndedAnim: Animation = .spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0.25)
 
     @GestureState private var translation: CGFloat = 0
     @State private var dragAmount = CGSize.zero
@@ -45,7 +61,7 @@ struct BottomSheetView<Content: View>: View {
                 width: Constants.indicatorWidth,
                 height: Constants.indicatorHeight
         ).onTapGesture {
-            withAnimation(.spring(response: 0.15, dampingFraction: 0.86, blendDuration: 0.25)) {
+            withAnimation(tapOrTouchEndedAnim) {
                 self.isOpen.toggle()
             }
         }
@@ -68,22 +84,14 @@ struct BottomSheetView<Content: View>: View {
             .background(Color(.secondarySystemBackground))
             .cornerRadius(Constants.radius)
             .frame(height: geometry.size.height, alignment: .bottom)
-//            .offset(y: max(self.offset + self.translation, 0))
             .offset(y: self.offset + self.dragAmount.height)
-//            .offset(y: max(self.offset + self.dragAmount.height, 0))
-//            .animation(.interactiveSpring(response: 0.15, dampingFraction: 0.96, blendDuration: 10000))
-//            .animation(.interactiveSpring(response: 0.15, dampingFraction: 0.96, blendDuration: 10000), value: translation)
-            .highPriorityGesture(
-//                DragGesture().updating(self.$translation) { value, state, _ in
+            .gesture(
                 DragGesture(minimumDistance: 0, coordinateSpace: .global).onChanged { changeValue in
-                    withAnimation(.spring(response: 0.15, dampingFraction: 0.86, blendDuration: 0.25)) {
+                    withAnimation(dragOrTapAnim) {
                         dragAmount = changeValue.translation
                     }
-          //      }
-                //(self.$translation) { value, state, _ in
-            //        state = value.translation.height
                 }.onEnded { value in
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0.25)) {
+                    withAnimation(tapOrTouchEndedAnim) {
                         dragAmount = .zero
                         let snapDistance = self.maxHeight * Constants.snapRatio
                         guard abs(value.translation.height) > snapDistance else {
@@ -91,7 +99,6 @@ struct BottomSheetView<Content: View>: View {
                         }
                         self.isOpen = value.translation.height < 0
                     }
-
                 }
             )
         }

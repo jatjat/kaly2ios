@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		5D13A1E527477A2800E44016 /* InsideBottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13A1E427477A2800E44016 /* InsideBottomSheetViewModel.swift */; };
+		5D13A1E727477A7100E44016 /* InsideBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13A1E627477A7100E44016 /* InsideBottomSheetView.swift */; };
 		5D3BA1BA2703EA2900AC6B1C /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1B92703EA2900AC6B1C /* Tests_iOS.swift */; };
 		5D3BA1BC2703EA2900AC6B1C /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1BB2703EA2900AC6B1C /* Tests_iOSLaunchTests.swift */; };
 		5D3BA1C62703EA2900AC6B1C /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1C52703EA2900AC6B1C /* Tests_macOS.swift */; };
@@ -34,8 +36,8 @@
 		5D3BA1EC2703EBBE00AC6B1C /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1EB2703EBBE00AC6B1C /* MapView.swift */; };
 		5D3BA1EF2703EBF800AC6B1C /* MainAppLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1EE2703EBF800AC6B1C /* MainAppLogic.swift */; };
 		5D3BA1F32703EC1500AC6B1C /* MainAppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1F22703EC1500AC6B1C /* MainAppViewModel.swift */; };
-		5D3BA1F52703EC7900AC6B1C /* PullupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1F42703EC7900AC6B1C /* PullupView.swift */; };
-		5D3BA1F62703EC7900AC6B1C /* PullupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1F42703EC7900AC6B1C /* PullupView.swift */; };
+		5D3BA1F52703EC7900AC6B1C /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1F42703EC7900AC6B1C /* BottomSheetView.swift */; };
+		5D3BA1F62703EC7900AC6B1C /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1F42703EC7900AC6B1C /* BottomSheetView.swift */; };
 		5D3BA2022703F27C00AC6B1C /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 5D3BA2012703F27C00AC6B1C /* GRPC */; };
 		5D3BA2162703FC0300AC6B1C /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA2152703FC0300AC6B1C /* Injected.swift */; };
 		5D3BA2172703FC0300AC6B1C /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA2152703FC0300AC6B1C /* Injected.swift */; };
@@ -105,6 +107,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D13A1E427477A2800E44016 /* InsideBottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsideBottomSheetViewModel.swift; sourceTree = "<group>"; };
+		5D13A1E627477A7100E44016 /* InsideBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsideBottomSheetView.swift; sourceTree = "<group>"; };
 		5D3BA1A12703EA2600AC6B1C /* Kaly2iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kaly2iOSApp.swift; sourceTree = "<group>"; };
 		5D3BA1A22703EA2600AC6B1C /* MainAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView.swift; sourceTree = "<group>"; };
 		5D3BA1A32703EA2900AC6B1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -122,7 +126,7 @@
 		5D3BA1EB2703EBBE00AC6B1C /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		5D3BA1EE2703EBF800AC6B1C /* MainAppLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppLogic.swift; sourceTree = "<group>"; };
 		5D3BA1F22703EC1500AC6B1C /* MainAppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewModel.swift; sourceTree = "<group>"; };
-		5D3BA1F42703EC7900AC6B1C /* PullupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullupView.swift; sourceTree = "<group>"; };
+		5D3BA1F42703EC7900AC6B1C /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		5D3BA2152703FC0300AC6B1C /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
 		5D3BA2182703FCF800AC6B1C /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		5D3BA22627041E5C00AC6B1C /* RobotService.proto */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.protobuf; path = RobotService.proto; sourceTree = "<group>"; };
@@ -298,19 +302,20 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
-		5D3BA1E22703EAC600AC6B1C /* Pullup */ = {
+		5D3BA1E22703EAC600AC6B1C /* BottomSheet */ = {
 			isa = PBXGroup;
 			children = (
-				5D3BA1F42703EC7900AC6B1C /* PullupView.swift */,
+				5D3BA1F42703EC7900AC6B1C /* BottomSheetView.swift */,
 			);
-			path = Pullup;
+			path = BottomSheet;
 			sourceTree = "<group>";
 		};
 		5D3BA1E32703EAF400AC6B1C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				865E4C1627473ECA00A5F247 /* SharedGeneral */,
+				865E4C1727473F3600A5F247 /* InsideBottomSheet */,
 				5D3BA1E12703EABE00AC6B1C /* Map */,
-				5D3BA1E22703EAC600AC6B1C /* Pullup */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -422,6 +427,23 @@
 			children = (
 			);
 			path = DI2;
+			sourceTree = "<group>";
+		};
+		865E4C1627473ECA00A5F247 /* SharedGeneral */ = {
+			isa = PBXGroup;
+			children = (
+				5D3BA1E22703EAC600AC6B1C /* BottomSheet */,
+			);
+			path = SharedGeneral;
+			sourceTree = "<group>";
+		};
+		865E4C1727473F3600A5F247 /* InsideBottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				5D13A1E427477A2800E44016 /* InsideBottomSheetViewModel.swift */,
+				5D13A1E627477A7100E44016 /* InsideBottomSheetView.swift */,
+			);
+			path = InsideBottomSheet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -627,6 +649,7 @@
 				5D3BA1EF2703EBF800AC6B1C /* MainAppLogic.swift in Sources */,
 				5D3BA244270430A200AC6B1C /* MapService.pb.swift in Sources */,
 				5D52D6DA273F33BA0048C73A /* DomainDIComponent.swift in Sources */,
+				5D13A1E527477A2800E44016 /* InsideBottomSheetViewModel.swift in Sources */,
 				5D3BA23E27042FA400AC6B1C /* MapService.grpc.swift in Sources */,
 				5D3BA25E27058F0500AC6B1C /* MapClient.swift in Sources */,
 				5D3D37A927095E620065E681 /* SessionClient.swift in Sources */,
@@ -643,8 +666,9 @@
 				5D3BA1EC2703EBBE00AC6B1C /* MapView.swift in Sources */,
 				5D52D6E0273F35B70048C73A /* DIComponent.swift in Sources */,
 				5D3BA1C92703EA2900AC6B1C /* Kaly2iOSApp.swift in Sources */,
-				5D3BA1F52703EC7900AC6B1C /* PullupView.swift in Sources */,
+				5D3BA1F52703EC7900AC6B1C /* BottomSheetView.swift in Sources */,
 				5D52D6D7273F33A10048C73A /* InfrastructureDIComponent.swift in Sources */,
+				5D13A1E727477A7100E44016 /* InsideBottomSheetView.swift in Sources */,
 				5D3BA23A27042FA400AC6B1C /* SessionService.grpc.swift in Sources */,
 				5D3BA1E82703EB9300AC6B1C /* MapViewModel.swift in Sources */,
 				5D3BA23C27042FA400AC6B1C /* RobotService.grpc.swift in Sources */,
@@ -658,7 +682,7 @@
 			files = (
 				5D52D6DE273F356B0048C73A /* UIDIComponent.swift in Sources */,
 				5D3D37AA27095E620065E681 /* SessionClient.swift in Sources */,
-				5D3BA1F62703EC7900AC6B1C /* PullupView.swift in Sources */,
+				5D3BA1F62703EC7900AC6B1C /* BottomSheetView.swift in Sources */,
 				5D3BA245270430A200AC6B1C /* MapService.pb.swift in Sources */,
 				5D3D37B027095FE50065E681 /* SubscribeResponseImpl.swift in Sources */,
 				5D52D6D8273F33A10048C73A /* InfrastructureDIComponent.swift in Sources */,
