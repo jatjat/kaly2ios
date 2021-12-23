@@ -201,11 +201,8 @@
 		5D3BA1A02703EA2600AC6B1C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				5D3BA1A12703EA2600AC6B1C /* Kaly2iOSApp.swift */,
-				5D3BA25A27058AE400AC6B1C /* AppModule.swift */,
+				5DDFBA6D27753FBA0075F1BF /* Logic */,
 				5D3BA1DF2703EA8500AC6B1C /* UI */,
-				5D3BA1DD2703EA6600AC6B1C /* Domain */,
-				5D3BA1DE2703EA7100AC6B1C /* Infrastructure */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -273,6 +270,7 @@
 		5D3BA1DF2703EA8500AC6B1C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5D3BA1A12703EA2600AC6B1C /* Kaly2iOSApp.swift */,
 				5D52D6DC273F356B0048C73A /* UIDIComponent.swift */,
 				5D3BA1E02703EAB400AC6B1C /* MainApp */,
 				5D3BA1A32703EA2900AC6B1C /* Assets.xcassets */,
@@ -427,6 +425,16 @@
 			children = (
 			);
 			path = DI2;
+			sourceTree = "<group>";
+		};
+		5DDFBA6D27753FBA0075F1BF /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				5D3BA25A27058AE400AC6B1C /* AppModule.swift */,
+				5D3BA1DD2703EA6600AC6B1C /* Domain */,
+				5D3BA1DE2703EA7100AC6B1C /* Infrastructure */,
+			);
+			path = Logic;
 			sourceTree = "<group>";
 		};
 		865E4C1627473ECA00A5F247 /* SharedGeneral */ = {
