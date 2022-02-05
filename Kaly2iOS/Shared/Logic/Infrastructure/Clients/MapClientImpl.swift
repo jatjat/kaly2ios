@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import GRPC
+import wat_swift_grpc2
 
 
 class MapClientImpl : MapClient {

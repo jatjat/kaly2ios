@@ -22,5 +22,4 @@ class RobotClientImpl : RobotClient {
         req.isReal = isReal
         return try await client.createRobot(req).robotID
     }
-
 }

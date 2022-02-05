@@ -17,9 +17,9 @@ struct MapView: View {
 }
 
 
-struct LoadingView: View {
-    
-    var body: some View {
-        
-    }
-}
+//struct LoadingView: View {
+//    
+//    var body: some View {
+//        
+//    }
+//}

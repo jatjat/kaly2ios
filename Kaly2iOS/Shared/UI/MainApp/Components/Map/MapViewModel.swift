@@ -44,20 +44,20 @@ class MapViewModel: ObservableObject {
 //        Task() {
 //            bestPoses = [UIPose]()
 //        }
-        while true {
-//            let itr: Iteration = sessionService.latestItr
-//            bestPoses = itr.
-            
-//            let newBestPoses, oldBestPoses = sessionService.bestPoses
-            do {
-                try await sessionService.waitForNextItr()
-            } catch {
-                showError(message: .derived(error: error))
-            }
-            bestPoses = sessionService.bestPoses
-            odoPoses = sessionService.odoPoses
-            truePoses = sessionService.truePoses
-        }
+//        while true {
+////            let itr: Iteration = sessionService.latestItr
+////            bestPoses = itr.
+//            
+////            let newBestPoses, oldBestPoses = sessionService.bestPoses
+//            do {
+//                try await sessionService.waitForNextItr()
+//            } catch {
+//                showError(message: .derived(error: error))
+//            }
+//            bestPoses = sessionService.bestPoses
+//            odoPoses = sessionService.odoPoses
+//            truePoses = sessionService.truePoses
+//        }
         
 //        sessionService.onUpdate {
 ////            do {
