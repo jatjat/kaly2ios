@@ -53,7 +53,8 @@ ios_application(
     families = ["iphone"],
     infoplists = ["Info.plist"],
     minimum_os_version = "15.0",
-    visibility = ["//visibility:public"],
+    # visibility = ["//visibility:public"],
+    visibility = ["//swift:__subpackages__"],
     # deps = ["ios-app-main"],
     deps = ["//Kaly2iOS/Shared/UI:ui"],
 )
@@ -92,4 +93,41 @@ xcode_project(
     targets = [
         "//:ios-app",
     ],
+)
+
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary")
+swift_binary(
+    name = "simple",
+    srcs = ["main.swift"],
+    visibility = ["//swift:__subpackages__"],
+    deps = [
+        "@swift_pkgs//grpc-swift:GRPC",
+    ],
+)
+
+swift_library(
+
+        name = "simple2",
+    srcs = ["main.swift"],
+    visibility = ["//swift:__subpackages__"],
+    deps = [
+        "@swift_pkgs//grpc-swift:GRPC",
+    ],
+)
+load("@cgrindel_rules_spm//spm:defs.bzl", "spm_swift_binary")
+# spm_swift_binary(
+#     name = "sprotoc",
+#     # module_name = "protoc-gen-grpc-swift",
+#     # package_name = "protoc-gen-grpc-swift",
+#     packages = "@swift_pkgs//grpc-swift:protoc-gen-grpc-swift"
+# )
+
+genrule(
+    name = "concat_all_files",
+    srcs = [
+        "//some:files",  # a filegroup with multiple files in it ==> $(locations)
+        "//other:gen",   # a genrule with a single output ==> $(location)
+    ],
+    outs = ["concatenated.txt"],
+    cmd = "cat $(locations //some:files) $(location //other:gen) > $@",
 )
