@@ -113,3 +113,9 @@ spm_repositories(
         ),
     ],
 )
+
+http_archive(
+    name = "protobuf",
+    url = "https://github.com/google/protobuf/releases/download/v3.19.4/protobuf-cpp-3.19.4.zip",
+    strip_prefix = "protobuf-3.19.4",
+)

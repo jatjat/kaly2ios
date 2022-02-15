@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		5D0177C927B8575100DE0B78 /* AppAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0177C827B8575100DE0B78 /* AppAPI.swift */; };
+		5D0177CA27B8575900DE0B78 /* AppAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0177C827B8575100DE0B78 /* AppAPI.swift */; };
 		5D13A1E527477A2800E44016 /* InsideBottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13A1E427477A2800E44016 /* InsideBottomSheetViewModel.swift */; };
 		5D13A1E727477A7100E44016 /* InsideBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13A1E627477A7100E44016 /* InsideBottomSheetView.swift */; };
 		5D3BA1BA2703EA2900AC6B1C /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1B92703EA2900AC6B1C /* Tests_iOS.swift */; };
@@ -114,6 +116,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D0177C827B8575100DE0B78 /* AppAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAPI.swift; sourceTree = "<group>"; };
 		5D13A1E427477A2800E44016 /* InsideBottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsideBottomSheetViewModel.swift; sourceTree = "<group>"; };
 		5D13A1E627477A7100E44016 /* InsideBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsideBottomSheetView.swift; sourceTree = "<group>"; };
 		5D3BA1A12703EA2600AC6B1C /* Kaly2iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kaly2iOSApp.swift; sourceTree = "<group>"; };
@@ -194,6 +197,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D0177C727B8438900DE0B78 /* APIForDomain */ = {
+			isa = PBXGroup;
+			children = (
+				5D0177C827B8575100DE0B78 /* AppAPI.swift */,
+			);
+			path = APIForDomain;
+			sourceTree = "<group>";
+		};
 		5D3BA19B2703EA2500AC6B1C = {
 			isa = PBXGroup;
 			children = (
@@ -255,7 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				5D52D6D9273F33BA0048C73A /* DomainDIComponent.swift */,
-				5D3D37A727095E410065E681 /* Models */,
+				5D3D37A727095E410065E681 /* APIForInfrastructure */,
 				5D3BA2592705833F00AC6B1C /* Services */,
 			);
 			path = Domain;
@@ -277,6 +288,7 @@
 		5D3BA1DF2703EA8500AC6B1C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5D0177C727B8438900DE0B78 /* APIForDomain */,
 				5D3BA1A12703EA2600AC6B1C /* Kaly2iOSApp.swift */,
 				5D52D6DC273F356B0048C73A /* UIDIComponent.swift */,
 				5D3BA1E02703EAB400AC6B1C /* MainApp */,
@@ -400,7 +412,7 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		5D3D37A727095E410065E681 /* Models */ = {
+		5D3D37A727095E410065E681 /* APIForInfrastructure */ = {
 			isa = PBXGroup;
 			children = (
 				5D3BA25D27058F0500AC6B1C /* MapClient.swift */,
@@ -408,7 +420,7 @@
 				5D3D37A827095E620065E681 /* SessionClient.swift */,
 				5D3D37B227096BD60065E681 /* SubscribeResponse.swift */,
 			);
-			path = Models;
+			path = APIForInfrastructure;
 			sourceTree = "<group>";
 		};
 		5D3D37B127096BAA0065E681 /* Models */ = {
@@ -680,6 +692,7 @@
 				5D3BA246270430A200AC6B1C /* RobotService.pb.swift in Sources */,
 				5D3BA254270565B300AC6B1C /* AppContainer.swift in Sources */,
 				5D3BA1EC2703EBBE00AC6B1C /* MapView.swift in Sources */,
+				5D0177C927B8575100DE0B78 /* AppAPI.swift in Sources */,
 				5D52D6E0273F35B70048C73A /* DIComponent.swift in Sources */,
 				5D3BA1C92703EA2900AC6B1C /* Kaly2iOSApp.swift in Sources */,
 				5D3BA1F52703EC7900AC6B1C /* BottomSheetView.swift in Sources */,
@@ -718,6 +731,7 @@
 				5D3BA21D2704028300AC6B1C /* Kaly2iOSApp.swift in Sources */,
 				5D3BA25C27058AE400AC6B1C /* AppModule.swift in Sources */,
 				5D3BA25F27058F0500AC6B1C /* MapClient.swift in Sources */,
+				5D0177CA27B8575900DE0B78 /* AppAPI.swift in Sources */,
 				5D52D6E1273F35B70048C73A /* DIComponent.swift in Sources */,
 				5D3BA2172703FC0300AC6B1C /* Injected.swift in Sources */,
 				5D3BA21C2704027F00AC6B1C /* MainAppViewModel.swift in Sources */,
