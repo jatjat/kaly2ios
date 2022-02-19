@@ -1,33 +1,51 @@
 
-load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library",    "swift_grpc_library",
-    "swift_proto_library",     "swift_binary")
-load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 
-outs = [
-        "Infrastructure/Protos/MapService.grpc.swift",
-        "Infrastructure/Protos/RobotService.grpc.swift",
-        "Infrastructure/Protos/SessionService.grpc.swift"
+grpc_stubs = [
+        "Infrastructure/Impl/Protos/MapService.grpc.swift",
+        "Infrastructure/Impl/Protos/RobotService.grpc.swift",
+        "Infrastructure/Impl/Protos/SessionService.grpc.swift"
       ]
+proto_models = [
+        "Infrastructure/Impl/Protos/MapService.pb.swift",
+        "Infrastructure/Impl/Protos/RobotService.pb.swift",
+        "Infrastructure/Impl/Protos/SessionService.pb.swift"
+]
+tools = ["@protobuf//:protoc", "@swift_pkgs//grpc-swift:protoc-gen-grpc-swift"]
+protos = glob([
+        "**/*.proto",
+    ])
 
 swift_library(
     name = "logic",
-    srcs = glob(["**/*.swift"]) + outs,
+    srcs = glob(["API/**/*.swift"]) + glob(["Impl/**/*.swift"]) + grpc_stubs + proto_models,
     visibility = ["//visibility:public"],
     module_name = "logic",
     deps = ["@swift_pkgs//grpc-swift:GRPC"],
 )
 
 genrule(
-    name = "prot",
-    outs = outs,
+    name = "grpc_stubs",
+    outs = grpc_stubs,
     cmd = """
     $(location @protobuf//:protoc) \
     --plugin=$(location @swift_pkgs//grpc-swift:protoc-gen-grpc-swift) \
     --grpc-swift_out=Client=true,ExperimentalAsyncClient=true:$(GENDIR) \
     --proto_path=. $(SRCS)
     """,
-    srcs = glob([
-        "**/*.proto",
-    ]),
-    tools = ["@protobuf//:protoc", "@swift_pkgs//grpc-swift:protoc-gen-grpc-swift"],
+    srcs = protos,
+    tools = tools,
+)
+
+genrule(
+    name = "proto_models",
+    outs = proto_models,
+    cmd = """
+    $(location @protobuf//:protoc) \
+    --plugin=$(location @swift_pkgs//grpc-swift:protoc-gen-grpc-swift) \
+    --swift_out=$(GENDIR) \
+    --proto_path=. $(SRCS)
+    """,
+    srcs = protos,
+    tools = tools,
 )

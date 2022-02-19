@@ -30,7 +30,6 @@ class MapViewModel: ObservableObject {
             spinning = true
             out = try call()
         } catch {
-            spinning = false
             throw error
         }
         return out
