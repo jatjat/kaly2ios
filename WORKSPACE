@@ -109,7 +109,7 @@ spm_repositories(
             "https://github.com/grpc/grpc-swift.git",
             # from_version = "1.0.0",
             products = ["GRPC", "protoc-gen-grpc-swift"],
-            revision = "8fcf4f3765a09fdebd6bb4a504ab48cccf617619",
+            revision = "1.6.0-async-await",
         ),
     ],
 )
