@@ -12,6 +12,6 @@ import CommonMacOSAPI
 import CommonIOSAPI
 #endif
 
-public protocol DataDependency: Dependency {
-    // Data module needs no dependencies
-}
+//public protocol DataDependency: Dependency {
+//    // Data module needs no dependencies
+//}

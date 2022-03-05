@@ -48,6 +48,15 @@
 		5D01790027C1E3B900DE0B78 /* DomainMacOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0178EA27C1E3B800DE0B78 /* DomainMacOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5D13A1E527477A2800E44016 /* InsideBottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13A1E427477A2800E44016 /* InsideBottomSheetViewModel.swift */; };
 		5D13A1E727477A7100E44016 /* InsideBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13A1E627477A7100E44016 /* InsideBottomSheetView.swift */; };
+		5D35C15627C4AB6100731CE4 /* NeedleGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D35C15527C4AB6100731CE4 /* NeedleGenerated.swift */; };
+		5D35C15927C5E83C00731CE4 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 5D35C15827C5E83C00731CE4 /* Cleanse */; };
+		5D35C15D27C5E86800731CE4 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 5D35C15C27C5E86800731CE4 /* Cleanse */; };
+		5D35C16127C5E89A00731CE4 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 5D35C16027C5E89A00731CE4 /* Cleanse */; };
+		5D35C16527C5E8C500731CE4 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 5D35C16427C5E8C500731CE4 /* Cleanse */; };
+		5D35C16727C5E8CA00731CE4 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 5D35C16627C5E8CA00731CE4 /* Cleanse */; };
+		5D35C16927C5E8D000731CE4 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 5D35C16827C5E8D000731CE4 /* Cleanse */; };
+		5D35C16B27C5E8D500731CE4 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 5D35C16A27C5E8D500731CE4 /* Cleanse */; };
+		5D35C16D27C5E8E900731CE4 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 5D35C16C27C5E8E900731CE4 /* Cleanse */; };
 		5D3BA1BA2703EA2900AC6B1C /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1B92703EA2900AC6B1C /* Tests_iOS.swift */; };
 		5D3BA1BC2703EA2900AC6B1C /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1BB2703EA2900AC6B1C /* Tests_iOSLaunchTests.swift */; };
 		5D3BA1C62703EA2900AC6B1C /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3BA1C52703EA2900AC6B1C /* Tests_macOS.swift */; };
@@ -545,6 +554,7 @@
 		5D0178F327C1E3B800DE0B78 /* DomainMacOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainMacOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D13A1E427477A2800E44016 /* InsideBottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsideBottomSheetViewModel.swift; sourceTree = "<group>"; };
 		5D13A1E627477A7100E44016 /* InsideBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsideBottomSheetView.swift; sourceTree = "<group>"; };
+		5D35C15527C4AB6100731CE4 /* NeedleGenerated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeedleGenerated.swift; path = Shared/NeedleGenerated.swift; sourceTree = "<group>"; };
 		5D3BA1A12703EA2600AC6B1C /* Kaly2iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kaly2iOSApp.swift; sourceTree = "<group>"; };
 		5D3BA1A22703EA2600AC6B1C /* MainAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView.swift; sourceTree = "<group>"; };
 		5D3BA1A32703EA2900AC6B1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -622,6 +632,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D35C16927C5E8D000731CE4 /* Cleanse in Frameworks */,
 				5DAE585027C2EAD100694AFD /* CommonIOSAPI.framework in Frameworks */,
 				5DAE579027C20E7300694AFD /* GRPC in Frameworks */,
 				5DAE57A727C21C7D00694AFD /* DataMacOSAPI.framework in Frameworks */,
@@ -641,6 +652,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D35C16B27C5E8D500731CE4 /* Cleanse in Frameworks */,
 				5DAE583C27C2EAA000694AFD /* CommonIOSAPI.framework in Frameworks */,
 				5DAE578C27C20E3800694AFD /* GRPC in Frameworks */,
 				5DAE578A27C20E3400694AFD /* CGRPCZlib in Frameworks */,
@@ -662,6 +674,7 @@
 			files = (
 				5DAE585A27C2EAF200694AFD /* CommonIOSAPI.framework in Frameworks */,
 				5DAE572D27C2014500694AFD /* DataIOSAPI.framework in Frameworks */,
+				5D35C16727C5E8CA00731CE4 /* Cleanse in Frameworks */,
 				5DAE573727C2016100694AFD /* DomainIOSAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -680,6 +693,7 @@
 			files = (
 				5DAE585F27C2EAFA00694AFD /* CommonMacOSAPI.framework in Frameworks */,
 				5DAE573227C2014E00694AFD /* DomainMacOSAPI.framework in Frameworks */,
+				5D35C16527C5E8C500731CE4 /* Cleanse in Frameworks */,
 				5DAE573B27C2016F00694AFD /* DataMacOSAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,6 +712,7 @@
 			files = (
 				5DAE56EB27C2000900694AFD /* DomainIOSAPI.framework in Frameworks */,
 				5DAE57E127C2AC3300694AFD /* CommonIOS.framework in Frameworks */,
+				5D35C15927C5E83C00731CE4 /* Cleanse in Frameworks */,
 				5D0178BB27C1E22A00DE0B78 /* DataIOS.framework in Frameworks */,
 				5D0178DD27C1E3A200DE0B78 /* DomainIOS.framework in Frameworks */,
 				5DAE57C227C2AC2300694AFD /* CommonIOSAPI.framework in Frameworks */,
@@ -715,6 +730,7 @@
 				5DAE57B027C21CBB00694AFD /* DomainMacOSAPI.framework in Frameworks */,
 				5DAE57AC27C21CBB00694AFD /* DataMacOSAPI.framework in Frameworks */,
 				5D01789827C1E1F300DE0B78 /* DataMacOS.framework in Frameworks */,
+				5D35C16D27C5E8E900731CE4 /* Cleanse in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,6 +791,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D35C16127C5E89A00731CE4 /* Cleanse in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,6 +807,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D35C15D27C5E86800731CE4 /* Cleanse in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,9 +909,18 @@
 			path = DataMacOSTests;
 			sourceTree = "<group>";
 		};
+		5D35C13827C4A71600731CE4 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		5D3BA19B2703EA2500AC6B1C = {
 			isa = PBXGroup;
 			children = (
+				5D35C15527C4AB6100731CE4 /* NeedleGenerated.swift */,
+				5D35C13827C4A71600731CE4 /* Packages */,
 				5D3BA1A02703EA2600AC6B1C /* Shared */,
 				5D3BA1AF2703EA2900AC6B1C /* macOS */,
 				5D3BA1B82703EA2900AC6B1C /* Tests iOS */,
@@ -1453,6 +1480,7 @@
 			packageProductDependencies = (
 				5DAE578D27C20E6F00694AFD /* CGRPCZlib */,
 				5DAE578F27C20E7300694AFD /* GRPC */,
+				5D35C16827C5E8D000731CE4 /* Cleanse */,
 			);
 			productName = DataMacOS;
 			productReference = 5D01788327C1E1F300DE0B78 /* DataMacOS.framework */;
@@ -1496,6 +1524,7 @@
 			packageProductDependencies = (
 				5DAE578927C20E3400694AFD /* CGRPCZlib */,
 				5DAE578B27C20E3800694AFD /* GRPC */,
+				5D35C16A27C5E8D500731CE4 /* Cleanse */,
 			);
 			productName = DataIOS;
 			productReference = 5D0178A627C1E22900DE0B78 /* DataIOS.framework */;
@@ -1537,6 +1566,9 @@
 				5DAE585D27C2EAF200694AFD /* PBXTargetDependency */,
 			);
 			name = DomainIOS;
+			packageProductDependencies = (
+				5D35C16627C5E8CA00731CE4 /* Cleanse */,
+			);
 			productName = DomainIOS;
 			productReference = 5D0178C827C1E3A100DE0B78 /* DomainIOS.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1577,6 +1609,9 @@
 				5DAE586227C2EAFA00694AFD /* PBXTargetDependency */,
 			);
 			name = DomainMacOS;
+			packageProductDependencies = (
+				5D35C16427C5E8C500731CE4 /* Cleanse */,
+			);
 			productName = DomainMacOS;
 			productReference = 5D0178EA27C1E3B800DE0B78 /* DomainMacOS.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1604,6 +1639,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5D3BA1D12703EA2900AC6B1C /* Build configuration list for PBXNativeTarget "Kaly2iOS (iOS)" */;
 			buildPhases = (
+				5D35C13C27C4A83400731CE4 /* Run Script: Needle */,
 				5D3BA1A42703EA2900AC6B1C /* Sources */,
 				5D3BA1A52703EA2900AC6B1C /* Frameworks */,
 				5D3BA1A62703EA2900AC6B1C /* Resources */,
@@ -1622,6 +1658,7 @@
 			);
 			name = "Kaly2iOS (iOS)";
 			packageProductDependencies = (
+				5D35C15827C5E83C00731CE4 /* Cleanse */,
 			);
 			productName = "Kaly2iOS (iOS)";
 			productReference = 5D3BA1A82703EA2900AC6B1C /* Kaly2iOS.app */;
@@ -1647,6 +1684,9 @@
 				5DAE581527C2AC5E00694AFD /* PBXTargetDependency */,
 			);
 			name = "Kaly2iOS (macOS)";
+			packageProductDependencies = (
+				5D35C16C27C5E8E900731CE4 /* Cleanse */,
+			);
 			productName = "Kaly2iOS (macOS)";
 			productReference = 5D3BA1AE2703EA2900AC6B1C /* Kaly2iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -1795,6 +1835,9 @@
 			dependencies = (
 			);
 			name = CommonIOS;
+			packageProductDependencies = (
+				5D35C16027C5E89A00731CE4 /* Cleanse */,
+			);
 			productName = CommonIOS;
 			productReference = 5DAE57CC27C2AC3300694AFD /* CommonIOS.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1832,6 +1875,9 @@
 			dependencies = (
 			);
 			name = CommonMacOS;
+			packageProductDependencies = (
+				5D35C15C27C5E86800731CE4 /* Cleanse */,
+			);
 			productName = CommonMacOS;
 			productReference = 5DAE57EE27C2AC4B00694AFD /* CommonMacOS.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1973,6 +2019,7 @@
 			mainGroup = 5D3BA19B2703EA2500AC6B1C;
 			packageReferences = (
 				5D01783427C1DDE200DE0B78 /* XCRemoteSwiftPackageReference "grpc-swift" */,
+				5D35C15727C5E83C00731CE4 /* XCRemoteSwiftPackageReference "Cleanse" */,
 			);
 			productRefGroup = 5D3BA1A92703EA2900AC6B1C /* Products */;
 			projectDirPath = "";
@@ -2165,6 +2212,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5D35C13C27C4A83400731CE4 /* Run Script: Needle */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script: Needle";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#export SOURCEKIT_LOGGING=0 && /opt/homebrew/bin/needle generate Shared/NeedleGenerated.swift Shared/\n";
+		};
 		5D3BA22327041C5200AC6B1C /* Generate GRPC + protobufs */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2299,6 +2364,7 @@
 			files = (
 				5D3BA1CB2703EA2900AC6B1C /* MainAppView.swift in Sources */,
 				5D3BA25B27058AE400AC6B1C /* AppModule.swift in Sources */,
+				5D35C15627C4AB6100731CE4 /* NeedleGenerated.swift in Sources */,
 				5D3BA1EF2703EBF800AC6B1C /* MainAppLogic.swift in Sources */,
 				5D13A1E527477A2800E44016 /* InsideBottomSheetViewModel.swift in Sources */,
 				5D3BA1F32703EC1500AC6B1C /* MainAppViewModel.swift in Sources */,
@@ -4236,9 +4302,57 @@
 				kind = branch;
 			};
 		};
+		5D35C15727C5E83C00731CE4 /* XCRemoteSwiftPackageReference "Cleanse" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/square/Cleanse.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5D35C15827C5E83C00731CE4 /* Cleanse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D35C15727C5E83C00731CE4 /* XCRemoteSwiftPackageReference "Cleanse" */;
+			productName = Cleanse;
+		};
+		5D35C15C27C5E86800731CE4 /* Cleanse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D35C15727C5E83C00731CE4 /* XCRemoteSwiftPackageReference "Cleanse" */;
+			productName = Cleanse;
+		};
+		5D35C16027C5E89A00731CE4 /* Cleanse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D35C15727C5E83C00731CE4 /* XCRemoteSwiftPackageReference "Cleanse" */;
+			productName = Cleanse;
+		};
+		5D35C16427C5E8C500731CE4 /* Cleanse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D35C15727C5E83C00731CE4 /* XCRemoteSwiftPackageReference "Cleanse" */;
+			productName = Cleanse;
+		};
+		5D35C16627C5E8CA00731CE4 /* Cleanse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D35C15727C5E83C00731CE4 /* XCRemoteSwiftPackageReference "Cleanse" */;
+			productName = Cleanse;
+		};
+		5D35C16827C5E8D000731CE4 /* Cleanse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D35C15727C5E83C00731CE4 /* XCRemoteSwiftPackageReference "Cleanse" */;
+			productName = Cleanse;
+		};
+		5D35C16A27C5E8D500731CE4 /* Cleanse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D35C15727C5E83C00731CE4 /* XCRemoteSwiftPackageReference "Cleanse" */;
+			productName = Cleanse;
+		};
+		5D35C16C27C5E8E900731CE4 /* Cleanse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D35C15727C5E83C00731CE4 /* XCRemoteSwiftPackageReference "Cleanse" */;
+			productName = Cleanse;
+		};
 		5DAE578927C20E3400694AFD /* CGRPCZlib */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5D01783427C1DDE200DE0B78 /* XCRemoteSwiftPackageReference "grpc-swift" */;

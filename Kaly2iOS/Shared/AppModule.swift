@@ -6,9 +6,69 @@
 //
 
 import Foundation
+import Cleanse
+
+#if os(macOS)
+import DataMacOS
+import DomainIOS
+#else
+import DataIOS
+import DomainIOS
+#endif
+
+class CoffeeMaker {
+    init(useCase: ChangeRobotSettingsUseCase) {
+        Task.init {
+            try? await useCase.execute(robotSessionID: 0, shouldRun: false)
+        }
+    }
+}
+
+struct Bob {
+    
+}
+
+// The data module only satisties
+struct DataComponent: Component {
+    typealias Root = Bob
+    
+    static func configureRoot(binder bind: ReceiptBinder<Bob>) -> BindingReceipt<Bob> {
+        return bind.to(factory: Bob.init)
+    }
+
+    static func configure(binder: Binder<Singleton>) {
+        binder.include(module: DataModule.self)
+        binder.include(module: DomainModule.self)
+    }
+}
+
+struct AppComponent: RootComponent {
+    typealias Root = CoffeeMaker
+
+    static func configureRoot(binder bind: ReceiptBinder<CoffeeMaker>) -> BindingReceipt<CoffeeMaker> {
+        return bind.to(factory: CoffeeMaker.init)
+    }
+    
+    static func configure(binder: Binder<Singleton>) {
+        binder.include(module: DataModule.self)
+        binder.include(module: DomainModule.self)
+//        binder.include(module: PresentationModule.self)
+
+        
+//                binder
+//                    .bind(ChangeRobotSettingsUseCase.self)
+//                    .to(factory: ChangeRobotSettingsUseCaseImpl.init)
+    }
+}
 
 class AppModule {
     func registerAll() {
+        
+        let coffeeMaker = try! ComponentFactory.of(AppComponent.self).build(())
+
+        
+        
+//        let bob = NeedleFoundation.Scope.self
 //        // Create services:
 //        let appConfig = AppConfig.fromAppPlist()
 //        let mapClient = MapClientImpl()

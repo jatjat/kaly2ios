@@ -14,24 +14,37 @@ import DataMacOSAPI
 import CommonIOSAPI
 import DataIOSAPI
 #endif
+//import NeedleFoundation
+import Cleanse
 
-protocol DomainDependency: Dependency {
-    var mapClient: MapClient { get }
-    var robotClient: RobotClient { get }
-    var sessionClient: SessionClient { get }
-}
-//
-class DomainComponentImpl: Component<DomainDependency> {
-    
-    var changeRobotSettingsUseCase: ChangeRobotSettingsUseCase {
-        ChangeRobotSettingsUseCase(sessionClient: dependency.sessionClient)
+public struct DomainModule: Module {
+    public static func configure(binder: Binder<Unscoped>) {
+//        binder.include(module: DataModule.self)
+        
+        
+        binder
+            .bind(ChangeRobotSettingsUseCase.self)
+            .to(factory: ChangeRobotSettingsUseCaseImpl.init)
     }
-    
-//    var uiDIComponent: UIDIComponent {
-//        UIDIComponent(parent: self)
-//    }
-    
 }
+
+//protocol DomainDependency: Dependency {
+//    var mapClient: MapClient { get }
+//    var robotClient: RobotClient { get }
+//    var sessionClient: SessionClient { get }
+//}
+////
+//class DomainComponentImpl: Component<DomainDependency> {
+//
+//    var changeRobotSettingsUseCase: ChangeRobotSettingsUseCase {
+//        ChangeRobotSettingsUseCase(sessionClient: dependency.sessionClient)
+//    }
+//
+////    var uiDIComponent: UIDIComponent {
+////        UIDIComponent(parent: self)
+////    }
+//
+//}
 //
 //extension DomainDIComponent: UIDependency {
 //    var sessionService: SessionService {

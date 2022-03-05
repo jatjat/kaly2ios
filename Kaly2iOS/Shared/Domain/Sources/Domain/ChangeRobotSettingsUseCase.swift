@@ -12,11 +12,11 @@ import DataMacOSAPI
 import DataIOSAPI
 #endif
 
-protocol PChangeRobotSettingsUseCase {
+public protocol ChangeRobotSettingsUseCase {
      func execute(robotSessionID: Int64, shouldRun: Bool) async throws
 }
 
-class ChangeRobotSettingsUseCase: PChangeRobotSettingsUseCase {
+class ChangeRobotSettingsUseCaseImpl: ChangeRobotSettingsUseCase {
     let sessionClient: SessionClient
     
     init(sessionClient: SessionClient) {
