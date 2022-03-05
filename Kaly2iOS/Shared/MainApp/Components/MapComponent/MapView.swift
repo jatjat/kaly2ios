@@ -12,14 +12,4 @@ struct MapView: View {
     var body: some View {
         EmptyView()
     }
-    
-    
 }
-
-
-//struct LoadingView: View {
-//    
-//    var body: some View {
-//        
-//    }
-//}

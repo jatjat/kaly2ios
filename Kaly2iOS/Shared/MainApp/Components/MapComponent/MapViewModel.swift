@@ -8,19 +8,12 @@
 import Foundation
 
 class MapViewModel: ObservableObject {
-//    @Published var robotPose = UIPose(x: 0, y: 0 , heading: 0)
     @Published var bestPoses = [UIPose]()
     @Published var odoPoses = [UIPose]()
     @Published var truePoses = [UIPose]()
     @Published var spinning = false
     @Published var shownError: ErrorMessage?
 
-//    let sessionService: SessionService
-//    
-//    init(sessionService: SessionService) {
-//        self.sessionService = sessionService
-//    }
-    
     func withSpinner<T>(_ call: () throws -> T) rethrows -> T {
         defer {
             spinning = false

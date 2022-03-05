@@ -40,7 +40,6 @@
 		5D0178DE27C1E3A200DE0B78 /* Domain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0178C827C1E3A100DE0B78 /* Domain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5D13A1E527477A2800E44016 /* InsideBottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13A1E427477A2800E44016 /* InsideBottomSheetViewModel.swift */; };
 		5D13A1E727477A7100E44016 /* InsideBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13A1E627477A7100E44016 /* InsideBottomSheetView.swift */; };
-		5D35C15627C4AB6100731CE4 /* NeedleGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D35C15527C4AB6100731CE4 /* NeedleGenerated.swift */; };
 		5D35C15927C5E83C00731CE4 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 5D35C15827C5E83C00731CE4 /* Cleanse */; };
 		5D35C16127C5E89A00731CE4 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 5D35C16027C5E89A00731CE4 /* Cleanse */; };
 		5D35C16727C5E8CA00731CE4 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 5D35C16627C5E8CA00731CE4 /* Cleanse */; };
@@ -120,8 +119,6 @@
 		5DAE583C27C2EAA000694AFD /* CommonAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DAE57BC27C2AC2300694AFD /* CommonAPI.framework */; };
 		5DAE584627C2EAB900694AFD /* CommonAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DAE57BC27C2AC2300694AFD /* CommonAPI.framework */; };
 		5DAE585A27C2EAF200694AFD /* CommonAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DAE57BC27C2AC2300694AFD /* CommonAPI.framework */; };
-		5DAE586D27C2FB0F00694AFD /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAE586C27C2FB0F00694AFD /* DataProvider.swift */; };
-		5DAE587D27C3170900694AFD /* DataDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAE587C27C3170900694AFD /* DataDependency.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -334,7 +331,6 @@
 		5D0178D127C1E3A100DE0B78 /* DomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D13A1E427477A2800E44016 /* InsideBottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsideBottomSheetViewModel.swift; sourceTree = "<group>"; };
 		5D13A1E627477A7100E44016 /* InsideBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsideBottomSheetView.swift; sourceTree = "<group>"; };
-		5D35C15527C4AB6100731CE4 /* NeedleGenerated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeedleGenerated.swift; path = Shared/NeedleGenerated.swift; sourceTree = "<group>"; };
 		5D3BA1A12703EA2600AC6B1C /* Kaly2iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kaly2iOSApp.swift; sourceTree = "<group>"; };
 		5D3BA1A22703EA2600AC6B1C /* MainAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView.swift; sourceTree = "<group>"; };
 		5D3BA1A32703EA2900AC6B1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -387,8 +383,6 @@
 		5DAE57D527C2AC3300694AFD /* CommonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAE57DC27C2AC3300694AFD /* CommonIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonIOSTests.swift; sourceTree = "<group>"; };
 		5DAE582727C2E2BD00694AFD /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
-		5DAE586C27C2FB0F00694AFD /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
-		5DAE587C27C3170900694AFD /* DataDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDependency.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -593,7 +587,6 @@
 		5D3BA19B2703EA2500AC6B1C = {
 			isa = PBXGroup;
 			children = (
-				5D35C15527C4AB6100731CE4 /* NeedleGenerated.swift */,
 				5D35C13827C4A71600731CE4 /* Packages */,
 				5D3BA1A02703EA2600AC6B1C /* Shared */,
 				5D3BA1AF2703EA2900AC6B1C /* macOS */,
@@ -705,7 +698,7 @@
 			path = MainApp;
 			sourceTree = "<group>";
 		};
-		5D3BA1E12703EABE00AC6B1C /* Map */ = {
+		5D3BA1E12703EABE00AC6B1C /* MapComponent */ = {
 			isa = PBXGroup;
 			children = (
 				5D3BA1ED2703EBDF00AC6B1C /* Components */,
@@ -713,23 +706,23 @@
 				5D3BA1E72703EB9300AC6B1C /* MapViewModel.swift */,
 				5D3BA1E92703EBB000AC6B1C /* MapAppLogic.swift */,
 			);
-			path = Map;
+			path = MapComponent;
 			sourceTree = "<group>";
 		};
-		5D3BA1E22703EAC600AC6B1C /* BottomSheet */ = {
+		5D3BA1E22703EAC600AC6B1C /* BottomSheetComponent */ = {
 			isa = PBXGroup;
 			children = (
 				5D3BA1F42703EC7900AC6B1C /* BottomSheetView.swift */,
 			);
-			path = BottomSheet;
+			path = BottomSheetComponent;
 			sourceTree = "<group>";
 		};
 		5D3BA1E32703EAF400AC6B1C /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				865E4C1627473ECA00A5F247 /* SharedGeneral */,
-				865E4C1727473F3600A5F247 /* InsideBottomSheet */,
-				5D3BA1E12703EABE00AC6B1C /* Map */,
+				865E4C1727473F3600A5F247 /* InsideBottomSheetComponent */,
+				5D3BA1E12703EABE00AC6B1C /* MapComponent */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -942,12 +935,10 @@
 		5DAE587127C2FB1800694AFD /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				5DAE586C27C2FB0F00694AFD /* DataProvider.swift */,
 				5D3BA25D27058F0500AC6B1C /* MapClient.swift */,
 				5D3BA26027058F1D00AC6B1C /* RobotClient.swift */,
 				5D3D37A827095E620065E681 /* SessionClient.swift */,
 				5D3D37B227096BD60065E681 /* SubscribeResponse.swift */,
-				5DAE587C27C3170900694AFD /* DataDependency.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -955,18 +946,18 @@
 		865E4C1627473ECA00A5F247 /* SharedGeneral */ = {
 			isa = PBXGroup;
 			children = (
-				5D3BA1E22703EAC600AC6B1C /* BottomSheet */,
+				5D3BA1E22703EAC600AC6B1C /* BottomSheetComponent */,
 			);
 			path = SharedGeneral;
 			sourceTree = "<group>";
 		};
-		865E4C1727473F3600A5F247 /* InsideBottomSheet */ = {
+		865E4C1727473F3600A5F247 /* InsideBottomSheetComponent */ = {
 			isa = PBXGroup;
 			children = (
 				5D13A1E427477A2800E44016 /* InsideBottomSheetViewModel.swift */,
 				5D13A1E627477A7100E44016 /* InsideBottomSheetView.swift */,
 			);
-			path = InsideBottomSheet;
+			path = InsideBottomSheetComponent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1582,7 +1573,6 @@
 			files = (
 				5D3BA1CB2703EA2900AC6B1C /* MainAppView.swift in Sources */,
 				5D3BA25B27058AE400AC6B1C /* AppModule.swift in Sources */,
-				5D35C15627C4AB6100731CE4 /* NeedleGenerated.swift in Sources */,
 				5D3BA1EF2703EBF800AC6B1C /* MainAppLogic.swift in Sources */,
 				5D13A1E527477A2800E44016 /* InsideBottomSheetViewModel.swift in Sources */,
 				5D3BA1F32703EC1500AC6B1C /* MainAppViewModel.swift in Sources */,
@@ -1645,9 +1635,7 @@
 			files = (
 				5DAE572027C2010F00694AFD /* SubscribeResponse.swift in Sources */,
 				5DAE572327C2010F00694AFD /* RobotClient.swift in Sources */,
-				5DAE586D27C2FB0F00694AFD /* DataProvider.swift in Sources */,
 				5DAE572227C2010F00694AFD /* MapClient.swift in Sources */,
-				5DAE587D27C3170900694AFD /* DataDependency.swift in Sources */,
 				5DAE572127C2010F00694AFD /* SessionClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

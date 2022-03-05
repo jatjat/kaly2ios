@@ -5,30 +5,14 @@
 //  Created by Joel Thiessen on 2021-11-12.
 //
 
+import Cleanse
 import Foundation
 import SwiftUI
 
-/*
-protocol UIDependency: Dependency {
-    var sessionService: SessionService { get }
-}
-
-class UIDIComponent: Component<UIDependency> {
-    var mainAppView: MainAppView {
-        MainAppView(viewModel: self.mainAppViewModel)
+public struct PresentationModule: Module {
+    public static func configure(binder: Binder<Singleton>) {
+        binder
+            .bind(MainAppView.self)
+            .to(factory: MainAppView.init)
     }
-    
-    var mainAppViewModel: MainAppViewModel {
-        MainAppViewModel()
-    }
-    
-//    var mapComponent: MapComponent {
-//
-//    }
-//
-//    var pullupComponent: PullupComponent {
-//
-//    }
 }
-//
-*/
