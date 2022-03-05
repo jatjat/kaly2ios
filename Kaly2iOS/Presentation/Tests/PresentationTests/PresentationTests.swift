@@ -1,14 +1,14 @@
 //
-//  DataMacOSTests.swift
-//  DataMacOSTests
+//  PresentationTests.swift
+//  PresentationTests
 //
-//  Created by Joel Thiessen on 2022-02-19.
+//  Created by Joel Thiessen on 2022-03-05.
 //
 
 import XCTest
-@testable import DataMacOS
+@testable import Presentation
 
-class DataMacOSTests: XCTestCase {
+class PresentationTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

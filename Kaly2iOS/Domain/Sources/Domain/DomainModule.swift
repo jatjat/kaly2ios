@@ -1,5 +1,5 @@
 //
-//  DomainComponent.swift
+//  DomainModule.swift
 //  Kaly2iOS
 //
 //  Created by Joel Thiessen on 2021-11-12.

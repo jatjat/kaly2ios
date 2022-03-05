@@ -42,7 +42,7 @@ extension Kaly2iOSApp {
         
         static func configure(binder: Binder<Singleton>) {
 //            binder.include(module: IOSPresentationModule.self)
-            binder.include(module: PresentationModule.self)
+            binder.include(module: MainAppModule.self)
             binder.include(module: DomainModule.self)
             binder.include(module: DataModule.self)
 //            binder.include(module: CommonModule.self)
