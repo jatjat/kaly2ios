@@ -7,14 +7,9 @@
 
 import Foundation
 import GRPC
-#if os(macOS)
-import DataMacOSAPI
-#else
-import DataIOSAPI
-#endif
+import DataAPI
 
 class RobotClientImpl : RobotClient {
-//    @Injected var client: Ca_Joelathiessen_Kaly2_Proto_RobotServiceAsyncClient
     let client: Ca_Joelathiessen_Kaly2_Proto_RobotServiceAsyncClient
     
     init(client: Ca_Joelathiessen_Kaly2_Proto_RobotServiceAsyncClient) {

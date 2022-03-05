@@ -6,12 +6,4 @@
 //
 
 import Foundation
-#if os(macOS)
-import CommonMacOSAPI
-#else
-import CommonIOSAPI
-#endif
-
-//public protocol DataDependency: Dependency {
-//    // Data module needs no dependencies
-//}
+import CommonAPI

@@ -6,11 +6,7 @@
 //
 
 import Foundation
-#if os(macOS)
-import DataMacOSAPI
-#else
-import DataIOSAPI
-#endif
+import DataAPI
 
 public protocol ChangeRobotSettingsUseCase {
      func execute(robotSessionID: Int64, shouldRun: Bool) async throws

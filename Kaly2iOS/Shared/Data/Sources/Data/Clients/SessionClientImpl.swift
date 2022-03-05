@@ -7,11 +7,7 @@
 
 import Foundation
 import GRPC
-#if os(macOS)
-import DataMacOSAPI
-#else
-import DataIOSAPI
-#endif
+import DataAPI
 
 struct SessionIteratorImpl: SessionIterator {
     private var inner: GRPCAsyncResponseStream<Ca_Joelathiessen_Kaly2_Proto_SubscribeResponse>.Iterator
@@ -26,7 +22,6 @@ struct SessionIteratorImpl: SessionIterator {
 }
 
 class SessionClientImpl : SessionClient {
-//    @Injected var client: Ca_Joelathiessen_Kaly2_Proto_SessionServiceAsyncClient
     let client: Ca_Joelathiessen_Kaly2_Proto_SessionServiceAsyncClient
     
     init(client: Ca_Joelathiessen_Kaly2_Proto_SessionServiceAsyncClient) {

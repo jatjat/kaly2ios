@@ -7,13 +7,8 @@
 
 import Foundation
 import Combine
-#if os(macOS)
-import CommonMacOSAPI
-import DataMacOSAPI
-#else
-import CommonIOSAPI
-import DataIOSAPI
-#endif
+import CommonAPI
+import DataAPI
 //import NeedleFoundation
 import Cleanse
 

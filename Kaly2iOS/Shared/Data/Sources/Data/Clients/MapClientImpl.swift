@@ -6,14 +6,9 @@
 //
 
 import Foundation
-#if os(macOS)
-import DataMacOSAPI
-#else
-import DataIOSAPI
-#endif
+import DataAPI
 
 class MapClientImpl : MapClient {
-    //    @Injected var client: Ca_Joelathiessen_Kaly2_Proto_MapServiceAsyncClient
     let client: Ca_Joelathiessen_Kaly2_Proto_MapServiceAsyncClient
     
     init(client: Ca_Joelathiessen_Kaly2_Proto_MapServiceAsyncClient) {
@@ -25,6 +20,4 @@ class MapClientImpl : MapClient {
         req.mapName = mapName
         return try await client.createMap(req).mapID
     }
-    
-//    init(cl)
 }

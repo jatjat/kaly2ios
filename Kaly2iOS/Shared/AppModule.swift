@@ -8,13 +8,8 @@
 import Foundation
 import Cleanse
 
-#if os(macOS)
-import DataMacOS
-import DomainIOS
-#else
-import DataIOS
-import DomainIOS
-#endif
+import Data
+import Domain
 
 class CoffeeMaker {
     init(useCase: ChangeRobotSettingsUseCase) {
