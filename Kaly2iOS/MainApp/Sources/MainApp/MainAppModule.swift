@@ -11,8 +11,5 @@ import SwiftUI
 
 public struct MainAppModule: Module {
     public static func configure(binder: Binder<Singleton>) {
-        binder
-            .bind(MainAppView.self)
-            .to(factory: MainAppView.init)
     }
 }

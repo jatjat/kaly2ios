@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import PresentationAPI
 
-struct MainAppView: View {
+struct MainAppViewImpl: MainAppView {
     @StateObject var viewModel = MainAppViewModel()
     var body: some View {
         ContentView()
@@ -16,7 +17,7 @@ struct MainAppView: View {
 
 struct MainAppView_Previews: PreviewProvider {
     static var previews: some View {
-        MainAppView()
+        MainAppViewImpl()
     }
 }
 

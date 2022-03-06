@@ -13,7 +13,6 @@ import Cleanse
 
 public struct DomainModule: Module {
     public static func configure(binder: Binder<Singleton>) {
-        
         binder
             .bind(ChangeRobotSettingsUseCase.self)
             .to(factory: ChangeRobotSettingsUseCaseImpl.init)

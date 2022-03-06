@@ -9,10 +9,12 @@ import Cleanse
 import SwiftUI
 import Domain
 import Data
+import PresentationAPI
+import Presentation
 
 @main
 class Kaly2iOSApp: App {
-    var mainAppView: MainAppView!
+    var mainAppView: AnyView!
     
     required init() {
         let propertyInjector = try! ComponentFactory.of(Kaly2iOSApp.Component.self).build(())
@@ -25,8 +27,8 @@ class Kaly2iOSApp: App {
         }
     }
     
-    func injectProperties(mainAppView: MainAppView) {
-        self.mainAppView = mainAppView
+    func injectProperties(provider: TaggedProvider<MainAppViewTag>) {
+        self.mainAppView = provider.get()
     }
 }
 
@@ -41,11 +43,9 @@ extension Kaly2iOSApp {
         }
         
         static func configure(binder: Binder<Singleton>) {
-//            binder.include(module: IOSPresentationModule.self)
-            binder.include(module: MainAppModule.self)
+            binder.include(module: PresentationModule.self)
             binder.include(module: DomainModule.self)
             binder.include(module: DataModule.self)
-//            binder.include(module: CommonModule.self)
         }
     }
 }

@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:DataProvider.swift">
-   </FileRef>
-   <FileRef
       location = "group:Kaly2iOS/Kaly2iOS.xcodeproj">
    </FileRef>
 </Workspace>

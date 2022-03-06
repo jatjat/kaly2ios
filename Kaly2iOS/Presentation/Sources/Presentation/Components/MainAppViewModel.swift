@@ -8,5 +8,4 @@
 import Foundation
 
 class MainAppViewModel: ObservableObject {
-    let logic = MainAppLogic()
 }
