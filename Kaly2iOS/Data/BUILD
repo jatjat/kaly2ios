@@ -2,14 +2,14 @@
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 
 grpc_stubs = [
-        "Impl/Protos/MapService.grpc.swift",
-        "Impl/Protos/RobotService.grpc.swift",
-        "Impl/Protos/SessionService.grpc.swift"
+        "Sources/Data/Protos/MapService.grpc.swift",
+        "Sources/Data/Protos/RobotService.grpc.swift",
+        "Sources/Data/Protos/SessionService.grpc.swift"
       ]
 proto_models = [
-        "Impl/Protos/MapService.pb.swift",
-        "Impl/Protos/RobotService.pb.swift",
-        "Impl/Protos/SessionService.pb.swift"
+        "Sources/Data/Protos/MapService.pb.swift",
+        "Sources/Data/Protos/RobotService.pb.swift",
+        "Sources/Data/Protos/SessionService.pb.swift"
 ]
 tools = ["@protobuf//:protoc", "@swift_pkgs//grpc-swift:protoc-gen-grpc-swift"]
 protos = glob([
@@ -17,19 +17,22 @@ protos = glob([
     ])
 
 swift_library(
-    name = "DataAPI",
-    srcs = glob(["API/**/*.swift"]),
+    name = "data-api",
+    srcs = glob(["Sources/DataAPI/**/*.swift"]),
     visibility = ["//visibility:public"],
     module_name = "DataAPI",
-    deps = ["@swift_pkgs//grpc-swift:GRPC"],
+    deps = ["//Kaly2iOS/Common:common-api"]
 )
 
 swift_library(
-    name = "Data",
-    srcs = glob(["Impl/**/*.swift"]) + grpc_stubs + proto_models,
+    name = "data",
+    srcs = glob(["Sources/Data/Clients/**/*.swift","Sources/Data/*.swift"]) + grpc_stubs + proto_models,
     visibility = ["//visibility:public"],
     module_name = "Data",
-    deps = ["@swift_pkgs//grpc-swift:GRPC", "DataAPI"],
+    deps = ["@swift_pkgs//grpc-swift:GRPC", "data-api",
+    "@cleanse-repo//:Cleanse"
+],
+    # data = [":grpc_stubs"]
 )
 
 genrule(

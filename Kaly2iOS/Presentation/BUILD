@@ -1,0 +1,21 @@
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+    name = "presentation-api",
+    module_name = "PresentationAPI",
+    srcs = glob(["Sources/presentationAPI/**/*.swift"]),
+    visibility = ["//visibility:public"],
+    deps = ["//Kaly2iOS/Common:common-api"],
+)
+
+swift_library(
+    name = "presentation",
+    module_name = "Presentation",
+    srcs = glob(["Sources/presentation/**/*.swift"]),
+    visibility = ["//visibility:public"],
+    deps = ["//Kaly2iOS/Presentation:presentation-api",
+            "//Kaly2iOS/Common:common",
+            # "@swift_di_pkgs//Cleanse:Cleanse"
+            "@cleanse-repo//:Cleanse"
+            ],
+)

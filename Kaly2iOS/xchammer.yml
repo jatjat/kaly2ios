@@ -1,0 +1,7 @@
+targets:
+    - "//os-app"
+
+projects:
+    "Kaly2:
+        paths:
+            - "**"
