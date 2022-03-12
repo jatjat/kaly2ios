@@ -1,0 +1,84 @@
+{
+  "additionalFilePaths" : [
+    "/BUILD"
+  ],
+  "buildTargets" : [
+    "//:ios-app"
+  ],
+  "optionSet" : {
+    "BazelBuildOptionsDebug" : {
+      "p" : "$(inherited)"
+    },
+    "BazelBuildOptionsRelease" : {
+      "p" : "$(inherited)"
+    },
+    "BazelBuildStartupOptionsDebug" : {
+      "p" : "$(inherited)"
+    },
+    "BazelBuildStartupOptionsRelease" : {
+      "p" : "$(inherited)"
+    },
+    "BuildActionPostActionScript" : {
+      "p" : "$(inherited)"
+    },
+    "BuildActionPreActionScript" : {
+      "p" : "$(inherited)"
+    },
+    "CommandlineArguments" : {
+      "p" : "$(inherited)"
+    },
+    "EnvironmentVariables" : {
+      "p" : "$(inherited)"
+    },
+    "LaunchActionPostActionScript" : {
+      "p" : "$(inherited)"
+    },
+    "LaunchActionPreActionScript" : {
+      "p" : "$(inherited)"
+    },
+    "ProjectGenerationBazelStartupOptions" : {
+      "p" : "$(inherited)"
+    },
+    "TestActionPostActionScript" : {
+      "p" : "$(inherited)"
+    },
+    "TestActionPreActionScript" : {
+      "p" : "$(inherited)"
+    }
+  },
+  "projectName" : "Kaly2T",
+  "sourceFilters" : [
+    "Kaly2iOS",
+    "Kaly2iOS/Common",
+    "Kaly2iOS/Common/Sources",
+    "Kaly2iOS/Common/Sources/Common",
+    "Kaly2iOS/Common/Sources/CommonAPI",
+    "Kaly2iOS/Common/Sources/CommonAPI/Classes",
+    "Kaly2iOS/Data",
+    "Kaly2iOS/Data/Sources",
+    "Kaly2iOS/Data/Sources/Data",
+    "Kaly2iOS/Data/Sources/Data/Clients",
+    "Kaly2iOS/Data/Sources/Data/Clients/Models",
+    "Kaly2iOS/Data/Sources/DataAPI",
+    "Kaly2iOS/Data/Sources/DataAPI/Protocols",
+    "Kaly2iOS/Domain",
+    "Kaly2iOS/Domain/Sources",
+    "Kaly2iOS/Domain/Sources/Domain",
+    "Kaly2iOS/Domain/Sources/DomainAPI",
+    "Kaly2iOS/MainApp",
+    "Kaly2iOS/MainApp/Sources",
+    "Kaly2iOS/MainApp/Sources/MainApp",
+    "Kaly2iOS/Presentation",
+    "Kaly2iOS/Presentation/Sources",
+    "Kaly2iOS/Presentation/Sources/presentation",
+    "Kaly2iOS/Presentation/Sources/presentation/Components",
+    "Kaly2iOS/Presentation/Sources/presentation/Components/MainAppComponent",
+    "Kaly2iOS/Presentation/Sources/presentation/Components/MainAppComponent/InsideBottomSheetComponent",
+    "Kaly2iOS/Presentation/Sources/presentation/Components/MainAppComponent/MapComponent",
+    "Kaly2iOS/Presentation/Sources/presentation/Components/Shared",
+    "Kaly2iOS/Presentation/Sources/presentation/Components/Shared/BottomSheetComponent",
+    "Kaly2iOS/Presentation/Sources/presentationAPI",
+    "Kaly2iOS/Presentation/Sources/presentationAPI/Protocols",
+    "Kaly2iOS/Presentation/Sources/presentationAPI/Structs"
+  ]
+}

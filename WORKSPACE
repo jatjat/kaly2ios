@@ -7,7 +7,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
-PINTEREST_TULSI_COMMIT = "c9b533f4612444e0a5e0fa639d4cb508399d9e08"
+# PINTEREST_TULSI_COMMIT = "c9b533f4612444e0a5e0fa639d4cb508399d9e08"
 
 # namespaced_git_repository(
 #     name = "Tulsi",
@@ -20,15 +20,24 @@ PINTEREST_TULSI_COMMIT = "c9b533f4612444e0a5e0fa639d4cb508399d9e08"
 #     ],
 # )
 
-# This is a hack for XCHammer development, but is how XCHammer is imported
-# into a workspace as a binary build
-new_git_repository(
-    name = "xchammer_tulsi_aspects",
-    remote = "https://github.com/pinterest/tulsi.git",
-    commit = PINTEREST_TULSI_COMMIT,
-    strip_prefix = "src/TulsiGenerator/Bazel",
-    build_file_content = "exports_files(['tulsi'])",
+http_archive(
+    name = "build_bazel_tulsi",
+    # Grabbing master for this example, so it always points to the latest. You may want to do otherwise.
+    urls = ["https://github.com/bazelbuild/tulsi/archive/master.zip"],
+    strip_prefix = "tulsi-master"
 )
+
+
+
+# # This is a hack for XCHammer development, but is how XCHammer is imported
+# # into a workspace as a binary build
+# new_git_repository(
+#     name = "xchammer_tulsi_aspects",
+#     remote = "https://github.com/pinterest/tulsi.git",
+#     commit = PINTEREST_TULSI_COMMIT,
+#     strip_prefix = "src/TulsiGenerator/Bazel",
+#     build_file_content = "exports_files(['tulsi'])",
+# )
 
 
 # new_git_repository(
@@ -40,16 +49,16 @@ new_git_repository(
 # )
 
 
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+# load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-git_repository(
-    name = "xchammer",
-    remote  = "https://github.com/pinterest/xchammer",
-    commit = "c588329904e05072c8d674191318e64d8dabc685"
-)
-load("@xchammer//third_party:repositories.bzl", "xchammer_dependencies")
+# git_repository(
+#     name = "xchammer",
+#     remote  = "https://github.com/pinterest/xchammer",
+#     commit = "c588329904e05072c8d674191318e64d8dabc685"
+# )
+# load("@xchammer//third_party:repositories.bzl", "xchammer_dependencies")
 
-xchammer_dependencies()
+# xchammer_dependencies()
 
 
 http_archive(
@@ -65,18 +74,18 @@ http_archive(
 
 
 
-## Build system
-# This needs to be manually imported
-# https://github.com/bazelbuild/bazel/issues/1550
-git_repository(
-    name = "xcbuildkit",
-    commit = "b619d25f65cf7195c57e2dbc26d488e5606e763a",
-    remote = "https://github.com/jerrymarino/xcbuildkit.git",
-)
+# ## Build system
+# # This needs to be manually imported
+# # https://github.com/bazelbuild/bazel/issues/1550
+# git_repository(
+#     name = "xcbuildkit",
+#     commit = "b619d25f65cf7195c57e2dbc26d488e5606e763a",
+#     remote = "https://github.com/jerrymarino/xcbuildkit.git",
+# )
 
-load("@xcbuildkit//third_party:repositories.bzl", xcbuildkit_dependencies = "dependencies")
+# load("@xcbuildkit//third_party:repositories.bzl", xcbuildkit_dependencies = "dependencies")
 
-xcbuildkit_dependencies()
+# xcbuildkit_dependencies()
 
 
 
@@ -90,6 +99,15 @@ xcbuildkit_dependencies()
 #     remote = "https://github.com/pinterest/xchammer.git",
 #     commit = "c588329904e05072c8d674191318e64d8dabc685",
 # )
+
+http_archive(
+    name = "xchammer",
+    # urls = [ "https://github.com/pinterest/xchammer/releases/download/v3.4.1.0/xchammer.zip" ],
+    # xchammer_dist
+
+    # urls = ["file:////Users/joel/Development/xchammer/bazel-bin/xchammer_dist_repo.zip"]
+    urls = ["file:////Users/joel/Development/xchammer/xchammer.zip"]
+)
 
 
 git_repository(

@@ -1,14 +1,14 @@
 # BUILD.Bazel
 #load("@xchammer//:xcodeproject.bzl", "xcode_project")
 
-load(
-    "@xchammer//:BazelExtensions/xchammerconfig.bzl",
-    "execution_action",
-    "project_config",
-    "scheme_action_config",
-    "target_config",
-)
-load("@xchammer//:BazelExtensions/xcodeproject.bzl", "xcode_project")
+# load(
+#     "@xchammer//:xcodeproject.bzl",
+#     "xcode_project",
+#     "execution_action",
+#     "project_config",
+#     "scheme_action_config",
+#     "target_config",
+# )
 
 # load("@xchammer//:xcodeproject.bzl", "xcode_project")
 
@@ -23,9 +23,52 @@ load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 #     paths = [ "Kaly2iOS/**" ],
 #     )
 # )
+# load("@xchammer//:BazelExtensions/xcodeproject.bzl", "xcode_project",
+#     # "execution_action",
+
+# )
+
+# load("@xchammer//:BazelExtensions/xchammerconfig.bzl",
+#     "project_config",
+#     "scheme_action_config",
+#     "target_config",
+#     "app_scheme_config"
+# )
+
+
+
+load(
+    "@xchammer//:BazelExtensions/xchammerconfig.bzl",
+    "project_config",
+)
+load("@xchammer//:BazelExtensions/xcodeproject.bzl", "xcode_project")
+
 
 xcode_project(
-    name = "kaly2",
+    name = "XcodeBazel",
+    # bazel = "tools/bazelwrapper",
+    project_config = project_config(
+        # build_bazel_platform_options = {
+        #     "ios_x86_64": ["--config=ios_x86_64"],
+        #     "ios_i386": ["--config=ios_i386"],
+        #     "ios_arm64": ["--config=ios_arm64"],
+        #     "ios_armv7": ["--config=ios_armv7"],
+        # },
+        # generate_transitive_xcode_targets = True,
+    #    generate_transitive_xcode_targets = False,
+        # generate_xcode_schemes = True,
+    #    generate_xcode_schemes = False,
+        paths = ["**"],
+        # paths = ["Kaly2iOS/**"],
+        # paths = ["Kaly2iOS/Presentation/**"],
+    ),
+    targets = [
+        "//:ios-app",
+    ],
+)
+
+# xcode_project(
+#     name = "kaly2",
     # testonly = True,
     # bazel = "tools/bazelwrapper",
     # project_config = project_config(
@@ -44,14 +87,14 @@ xcode_project(
     #         scheme_config = app_scheme_config,
     #     ),
     # },
-    targets = [
-        ":ios-app",
+    # targets = [
+    #     ":ios-app",
         # "//Kaly2iOS/Shared:ios-app",
         # "//ios-app:UrlGetClasses",
         # "//ios-app:UnitTests",
         # "//ios-app:UnitTestsWithHost",
-    ],
-)
+    # ],
+# )
 
 genrule(
     name = "wat",
@@ -77,11 +120,20 @@ ios_application(
 
             ],
 )
+ios_application(
+    name = "ios-app-h",
+    bundle_id = "ca.joelathiessen.kaly2",
+    families = ["iphone"],
+    infoplists = ["Info.plist"],
+    minimum_os_version = "14.0",
+    visibility = ["//visibility:public"],
+    deps = [":ios-app-main"],
+)
 
 swift_library(
     name = "ios-app-main",
     srcs = [
-        "**",
+        "Dummy.swift",
     ],
     visibility = ["//visibility:public"],
 )
@@ -126,4 +178,3 @@ swift_library(
     ],
 )
 
-# xchammer_dist

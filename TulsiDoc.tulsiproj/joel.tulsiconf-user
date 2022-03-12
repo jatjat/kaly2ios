@@ -1,0 +1,10 @@
+{
+  "optionSet" : {
+    "BazelPath" : {
+      "p" : "/Users/joel/Library/Caches/bazelisk/downloads/bazelbuild/bazel-5.0.0-darwin-arm64/bin/bazel"
+    },
+    "WorkspaceRootPath" : {
+      "p" : "/Users/joel/Development/kaly2ios"
+    }
+  }
+}
