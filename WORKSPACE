@@ -51,14 +51,14 @@ http_archive(
 
 # load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-# git_repository(
-#     name = "xchammer",
-#     remote  = "https://github.com/pinterest/xchammer",
-#     commit = "c588329904e05072c8d674191318e64d8dabc685"
-# )
-# load("@xchammer//third_party:repositories.bzl", "xchammer_dependencies")
+git_repository(
+    name = "xchammer",
+    remote  = "https://github.com/pinterest/xchammer",
+    commit = "c588329904e05072c8d674191318e64d8dabc685"
+)
+load("@xchammer//third_party:repositories.bzl", "xchammer_dependencies")
 
-# xchammer_dependencies()
+xchammer_dependencies()
 
 
 http_archive(
@@ -74,18 +74,18 @@ http_archive(
 
 
 
-# ## Build system
-# # This needs to be manually imported
-# # https://github.com/bazelbuild/bazel/issues/1550
-# git_repository(
-#     name = "xcbuildkit",
-#     commit = "b619d25f65cf7195c57e2dbc26d488e5606e763a",
-#     remote = "https://github.com/jerrymarino/xcbuildkit.git",
-# )
+## Build system
+# This needs to be manually imported
+# https://github.com/bazelbuild/bazel/issues/1550
+git_repository(
+    name = "xcbuildkit",
+    commit = "b619d25f65cf7195c57e2dbc26d488e5606e763a",
+    remote = "https://github.com/jerrymarino/xcbuildkit.git",
+)
 
-# load("@xcbuildkit//third_party:repositories.bzl", xcbuildkit_dependencies = "dependencies")
+load("@xcbuildkit//third_party:repositories.bzl", xcbuildkit_dependencies = "dependencies")
 
-# xcbuildkit_dependencies()
+xcbuildkit_dependencies()
 
 
 
@@ -100,20 +100,21 @@ http_archive(
 #     commit = "c588329904e05072c8d674191318e64d8dabc685",
 # )
 
-http_archive(
-    name = "xchammer",
-    # urls = [ "https://github.com/pinterest/xchammer/releases/download/v3.4.1.0/xchammer.zip" ],
-    # xchammer_dist
+# http_archive(
+#     name = "xchammer",
+#     # urls = [ "https://github.com/pinterest/xchammer/releases/download/v3.4.1.0/xchammer.zip" ],
+#     # xchammer_dist
 
-    # urls = ["file:////Users/joel/Development/xchammer/bazel-bin/xchammer_dist_repo.zip"]
-    urls = ["file:////Users/joel/Development/xchammer/xchammer.zip"]
-)
+#     # urls = ["file:////Users/joel/Development/xchammer/bazel-bin/xchammer_dist_repo.zip"]
+#     urls = ["file:////Users/joel/Development/xchammer/xchammer.zip"]
+# )
 
 
 git_repository(
     name = "build_bazel_rules_apple",
     remote = "https://github.com/bazelbuild/rules_apple.git",
     tag = "0.33.0",
+    # commit = "0d1e9559332ad97dc3d2e7e5165a10f958279bf4" # see if 
 )
 
 load(
@@ -127,6 +128,25 @@ http_archive(
     name = "build_bazel_rules_swift",
     # sha256 = "3e52a508cdc47a7adbad36a3d2b712e282cc39cc211b0d63efcaf608961eb36b",
     url = "https://github.com/bazelbuild/rules_swift/releases/download/0.26.0/rules_swift.0.26.0.tar.gz",
+)
+# git_repository(
+#     name = "build_bazel_rules_swift",
+#     remote = "https://github.com/bazelbuild/rules_swift.git",
+#     commit = "c1d7d1df6969c2675c7826ecf1202d78016b1753", 
+#     # commit = "4e66b096d5f7d4b75932573f8d8745c2d5f54d2b", # old working
+#     # commit = "9d4c3b1dd99cab67fa922af2b0bd0a96f791afa7", # feb 14
+#     # commit = "c72cbc61f172851848826569766185c458f95e0a", # feb 4
+# )
+
+
+http_archive(
+    name = "rules_cc",
+    sha256 = "3cde212ccda3ba152897e7fd354c42eba275878b6d98fe4f2125c684a73f3842",
+    strip_prefix = "rules_cc-d66a13e2a01630afcafc4ba411d83e291ecf02bd",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_cc/archive/d66a13e2a01630afcafc4ba411d83e291ecf02bd.tar.gz",
+        "https://github.com/bazelbuild/rules_cc/archive/d66a13e2a01630afcafc4ba411d83e291ecf02bd.tar.gz",
+    ],
 )
 
 load(
@@ -207,7 +227,8 @@ spm_repositories(
     dependencies = [
         spm_pkg(
             "https://github.com/grpc/grpc-swift.git",
-            products = ["GRPC", "protoc-gen-grpc-swift"],
+            # products = ["GRPC", "protoc-gen-grpc-swift"],
+            products = ["protoc-gen-grpc-swift"],
             revision = "8fcf4f3765a09fdebd6bb4a504ab48cccf617619" #"1.6.0-async-await",
         ),
     ],
@@ -250,3 +271,373 @@ swift_library(
     visibility = ["//visibility:public"],
  )""",
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+new_git_repository(
+    name = "grpc-swift-repo",
+    remote = "https://github.com/grpc/grpc-swift.git",
+    commit = "8fcf4f3765a09fdebd6bb4a504ab48cccf617619", #"1.6.0-async-await",
+    # commit = "4ca9bcf161fc5555747f3095343b41b00616a559", # 1.7.1 async/await
+    build_file_content = """
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+load("@build_bazel_rules_apple//apple:apple.bzl","apple_static_framework_import")
+
+
+objc_library(
+    name = "CGRPCZlib",
+    module_name = "CGRPCZlib",
+    hdrs = glob(["Sources/CGRPCZlib/include/**"]),
+    srcs = glob(["Sources/CGRPCZlib/**/*.c"]),
+    visibility = ["//visibility:public"],
+    sdk_dylibs = ["z", "libswift_Concurrency"],
+        # sdk_dylibs = [".dylib"],
+
+ )
+
+
+
+
+
+# apple_static_framework_import(
+#    name = "z",
+#    sdk_dylibs = glob(["z"]),
+# )
+
+swift_library(
+    name = "GRPC",
+    module_name = "GRPC",
+    srcs = glob(["Sources/GRPC/**/*.swift"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "@swift-nio-repo//:NIO",
+        "@swift-nio-repo//:NIOPosix",
+        "@swift-nio-repo//:NIOEmbedded",
+        "@swift-nio-repo//:NIOFoundationCompat",
+        "@swift-nio-repo//:NIOTLS",
+        "@swift-nio-repo//:NIOHTTP1",
+
+
+
+
+        "@swift-nio-repo//:NIOCore",
+        "@swift-nio-http2-repo//:NIOHPACK",
+        "@swift-log-repo//:Logging",
+        "@swift-protobuf-repo//:SwiftProtobuf",
+        "@swift-nio-http2-repo//:NIOHTTP2",
+        "@swift-nio-transport-services-repo//:NIOTransportServices",
+        ":CGRPCZlib",
+        "@swift-nio-extras-repo//:NIOExtras",
+    ],
+)""",
+)
+
+new_git_repository(
+    name = "swift-nio-repo",
+    remote = "https://github.com/apple/swift-nio.git",
+    tag = "2.33.0",
+    build_file_content = """
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library", "swift_module_alias")
+
+
+# swift_library(
+#     name = "NIO",
+#     module_name = "NIO",
+#     srcs = glob(["Sources/NIO/**/*.swift"]),
+#     visibility = ["//visibility:public"],
+#     generates_header = True,
+#     deps = ["NIOCore", "NIOEmbedded", "_NIODataStructures", "NIOPosix"],
+# )
+
+swift_module_alias(
+    name = "NIO",
+    module_name = "NIO",
+    deps = ["NIOCore", "NIOEmbedded", "_NIODataStructures", "NIOPosix"],
+    visibility = ["//visibility:public"],
+)
+
+swift_library(
+    name = "_NIODataStructures",
+    module_name = "_NIODataStructures",
+    srcs = glob(["Sources/_NIODataStructures/**/*.swift"]),
+    visibility = ["//visibility:public"],
+)
+
+swift_library(
+    name = "NIOCore",
+    module_name = "NIOCore",
+    srcs = glob(["Sources/NIOCore/**/*.swift"]),
+    visibility = ["//visibility:public"],
+    # generates_header = True,
+    deps = ["NIOConcurrencyHelpers"],
+    copts = ["-swift-version", "5"],
+ )
+
+swift_library(
+    name = "NIOConcurrencyHelpers",
+    module_name = "NIOConcurrencyHelpers",
+    srcs = glob(["Sources/NIOConcurrencyHelpers/**/*.swift"]),
+    visibility = ["//visibility:public"],
+    deps = ["CNIOAtomics"],
+)
+
+objc_library(
+    name = "CNIOAtomics",
+    module_name = "CNIOAtomics",
+    hdrs = glob(["Sources/CNIOAtomics/include/**"]),
+    srcs = glob(["Sources/CNIOAtomics/src/**"]),
+    visibility = ["//visibility:public"],
+)
+
+swift_library(
+   name = "NIOPosix",
+   module_name = "NIOPosix",
+   srcs = glob(["Sources/NIOPosix/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   deps = ["NIOCore", "CNIODarwin"],
+)
+
+swift_library(
+   name = "NIOEmbedded",
+   module_name = "NIOEmbedded",
+   srcs = glob(["Sources/NIOEmbedded/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   deps = ["NIOCore", "_NIODataStructures", "CNIOAtomics"],
+)
+
+swift_library(
+   name = "NIOFoundationCompat",
+   module_name = "NIOFoundationCompat",
+   srcs = glob(["Sources/NIOFoundationCompat/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   deps = ["NIOCore"],
+)
+
+swift_library(
+   name = "NIOTLS",
+   module_name = "NIOTLS",
+   srcs = glob(["Sources/NIOTLS/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   deps = ["NIOCore"],
+)
+
+swift_library(
+   name = "NIOHTTP1",
+   module_name = "NIOHTTP1",
+   srcs = glob(["Sources/NIOHTTP1/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   deps = ["NIOCore", "CNIOHTTPParser"],
+)
+
+objc_library(
+    name = "CNIOHTTPParser",
+    module_name = "CNIOHTTPParser",
+    hdrs = glob(["Sources/CNIOHTTPParser/include/**"]),
+    includes = ["Sources/CNIOHTTPParser/include"],
+    srcs = glob(["Sources/CNIOHTTPParser/**/*.c"]),
+    visibility = ["//visibility:public"],
+)
+
+objc_library(
+    name = "CNIODarwin",
+    module_name = "CNIODarwin",
+    hdrs = ["Sources/CNIODarwin/include/CNIODarwin.h"],
+    includes = ["Sources/CNIODarwin/include"],
+    srcs = glob(["Sources/CNIODarwin/**/*.c"]),
+    visibility = ["//visibility:public"],
+    defines = ["__APPLE_USE_RFC_3542"],
+    # sdk_dylibs = ["system"]
+)
+
+
+#  swift_library(
+#     name = "NIOExtras",
+#     module_name = "NIOExtras",
+#     srcs = glob(["Sources/NIOExtras/**/*.swift"]),
+#     visibility = ["//visibility:public"],
+#     # deps = ["NIOCore"],
+#  )
+
+#  swift_library(
+#     name = "Logging",
+#     module_name = "Logging",
+#     srcs = glob(["Sources/Logging/**/*.swift"]),
+#     visibility = ["//visibility:public"],
+#     # deps = ["NIOCore"],
+#  )
+
+#   swift_library(
+#     name = "Protobuf",
+#     module_name = "Protobuf",
+#     srcs = glob(["Sources/Protobuf/**/*.swift"]),
+#     visibility = ["//visibility:public"],
+#     # deps = ["NIOCore"],
+#  )
+
+ """,
+)
+
+new_git_repository(
+    name = "swift-nio-http2-repo",
+    remote = "https://github.com/apple/swift-nio-http2.git",
+    # tag = "1.19.2",
+    tag = "1.18.2",
+    build_file_content = """
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+   name = "NIOHPACK",
+   module_name = "NIOHPACK",
+   srcs = glob(["Sources/NIOHPACK/**"]),
+   visibility = ["//visibility:public"],
+   deps = ["@swift-nio-repo//:NIOCore", "@swift-nio-repo//:NIOHTTP1", "@swift-nio-repo//:CNIODarwin", "@swift-nio-repo//:NIO"],
+)
+
+
+swift_library(
+   name = "NIOHTTP2",
+   module_name = "NIOHTTP2",
+   srcs = glob(["Sources/NIOHTTP2/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   deps = ["@swift-nio-repo//:NIOCore", "NIOHPACK", "@swift-nio-repo//:NIOTLS"],
+)
+""",
+)
+
+
+
+
+#unowned
+new_git_repository(
+    name = "swift-nio-transport-services-repo",
+    remote = "https://github.com/apple/swift-nio-transport-services.git",
+    tag = "1.11.1",
+    build_file_content = """
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+  name = "NIOTransportServices",
+  module_name = "NIOTransportServices",
+  srcs = glob(["Sources/NIOTransportServices/**/*.swift"]),
+  visibility = ["//visibility:public"],
+  deps = ["@swift-nio-repo//:NIO", "@swift-nio-repo//:NIOFoundationCompat"]
+)
+""",
+)
+
+
+new_git_repository(
+    name = "swift-nio-extras-repo",
+    remote = "https://github.com/apple/swift-nio-extras.git",
+    tag = "1.4.0",
+    build_file_content = """
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+   name = "NIOExtras",
+   module_name = "NIOExtras",
+   srcs = glob(["Sources/NIOExtras/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   deps = ["@swift-nio-repo//:NIO"],
+)
+""",
+)
+
+
+new_git_repository(
+    name = "swift-protobuf-repo",
+    remote = "https://github.com/apple/swift-protobuf.git",
+    tag = "1.9.0",
+    build_file_content = """
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+   name = "SwiftProtobuf",
+   module_name = "SwiftProtobuf",
+   srcs = glob(["Sources/SwiftProtobuf/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   # deps = ["NIOCore"],
+)
+""",
+)
+
+new_git_repository(
+    name = "swift-log-repo",
+    remote = "https://github.com/apple/swift-log.git",
+    tag = "1.4.0",
+    build_file_content = """
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+   name = "Logging",
+   module_name = "Logging",
+   srcs = glob(["Sources/Logging/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   # deps = ["NIOCore"],
+)
+""",
+)
+
+new_git_repository(
+    name = "swift-argument-parser-repo",
+    remote = "https://github.com/apple/swift-argument-parser.git",
+    tag = "1.0.0",
+    build_file_content = """
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+   name = "SwiftProtobuf",
+   module_name = "SwiftProtobuf",
+   srcs = glob(["Sources/SwiftProtobuf/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   # deps = ["NIOCore"],
+)
+""",
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

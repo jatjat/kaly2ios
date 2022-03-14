@@ -29,7 +29,7 @@ swift_library(
     srcs = glob(["Sources/Data/Clients/**/*.swift","Sources/Data/*.swift"]) + grpc_stubs + proto_models,
     visibility = ["//visibility:public"],
     module_name = "Data",
-    deps = ["@swift_pkgs//grpc-swift:GRPC", "data-api",
+    deps = ["@grpc-swift-repo//:GRPC", "data-api",
     "@cleanse-repo//:Cleanse"
 ],
     # data = [":grpc_stubs"]
