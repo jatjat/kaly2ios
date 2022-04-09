@@ -5,3 +5,6 @@ projects:
     "Kaly2":
         paths:
             - "**"
+        # xcconfigOverrides:
+        #     Debug: "ios-app/Diags.xcconfig"
+        #     Release: "ios-app/Diags.xcconfig"

@@ -1,0 +1,8 @@
+//
+//  Everywhere.xcconfig
+//  XcodeBazel
+//
+//  Created by Joel Thiessen on 2022-04-02.
+//
+
+OTHER_SWIFT_FLAGS = -Xcc -fmodule-map-file=$(PROJECT_DIR)/CNIOAtomics.modulemap

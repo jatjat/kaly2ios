@@ -51,11 +51,16 @@ http_archive(
 
 # load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-git_repository(
+local_repository(
     name = "xchammer",
-    remote  = "https://github.com/pinterest/xchammer",
-    commit = "c588329904e05072c8d674191318e64d8dabc685"
+    path = "/Users/joel/Development/XCHammer",
 )
+
+# git_repository(
+#     name = "xchammer",
+#     remote  = "https://github.com/pinterest/xchammer",
+#     commit = "c588329904e05072c8d674191318e64d8dabc685"
+# )
 load("@xchammer//third_party:repositories.bzl", "xchammer_dependencies")
 
 xchammer_dependencies()
@@ -222,17 +227,17 @@ swift_rules_extra_dependencies()
 # end new spm
 load("@cgrindel_rules_spm//spm:defs.bzl", "spm_pkg", "spm_repositories")
 
-spm_repositories(
-    name = "swift_pkgs",
-    dependencies = [
-        spm_pkg(
-            "https://github.com/grpc/grpc-swift.git",
-            # products = ["GRPC", "protoc-gen-grpc-swift"],
-            products = ["protoc-gen-grpc-swift"],
-            revision = "8fcf4f3765a09fdebd6bb4a504ab48cccf617619" #"1.6.0-async-await",
-        ),
-    ],
-)
+# spm_repositories(
+#     name = "swift_pkgs",
+#     dependencies = [
+#         spm_pkg(
+#             "https://github.com/grpc/grpc-swift.git",
+#             # products = ["GRPC", "protoc-gen-grpc-swift"],
+#             products = ["protoc-gen-grpc-swift"],
+#             revision = "8fcf4f3765a09fdebd6bb4a504ab48cccf617619" #"1.6.0-async-await",
+#         ),
+#     ],
+# )
 
 # spm_repositories(
 #     name = "swift_di_pkgs",
@@ -249,12 +254,23 @@ spm_repositories(
 
 
 
-
+# Recompiles every time the $PATH changes (all the time)
 http_archive(
     name = "protobuf",
+        #    https://github.com/protocolbuffers/protobuf/releases/download/v3.20.0/protobuf-cpp-3.20.0.tar.gz
     url = "https://github.com/google/protobuf/releases/download/v3.19.4/protobuf-cpp-3.19.4.zip",
     strip_prefix = "protobuf-3.19.4",
 )
+# http_archive(
+#     name = "protobuf",
+#     url = "https://github.com/protocolbuffers/protobuf/releases/download/v3.20.0/protoc-3.20.0-osx-aarch_64.zip",
+#     strip_prefix = "bin",
+# )
+
+# run_binary(
+#     name = "protoc",
+#     tool = "@protobuf//protoc"
+# )
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 new_git_repository(
@@ -302,18 +318,52 @@ swift_library(
 
 
 
+#   http_archive(
+#       name = "my_ssl",
+#       urls = ["http://example.com/openssl.zip"],
+#       sha256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    #   build_file = "@//:openssl.BUILD",
+#   )
 
 
-
-
+# http_archive(
+#     name = "grpc-swift-repo",
+#     url = "https://github.com/grpc/grpc-swift/archive/refs/tags/1.6.0-async-await.1.tar.gz",
+#     strip_prefix = "grpc-swift-1.6.0-async-await.1",
+#     build_file_content = """
+# XCHammer seems to ignore Git branches:
 new_git_repository(
     name = "grpc-swift-repo",
     remote = "https://github.com/grpc/grpc-swift.git",
     commit = "8fcf4f3765a09fdebd6bb4a504ab48cccf617619", #"1.6.0-async-await",
+    shallow_since = "1640008839 +0000",
     # commit = "4ca9bcf161fc5555747f3095343b41b00616a559", # 1.7.1 async/await
     build_file_content = """
-load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library", "swift_binary", "swift_c_module")
 load("@build_bazel_rules_apple//apple:apple.bzl","apple_static_framework_import")
+load(
+    "@build_bazel_rules_apple//apple:macos.bzl",
+    "macos_command_line_application",
+)
+
+macos_command_line_application(
+        name = "protoc-gen-grpc-swift",
+        deps = ["protoc-gen-grpc-swift-l"],
+        minimum_os_version = "10.11",
+        visibility = ["//visibility:public"],
+)
+
+swift_library(
+    name = "protoc-gen-grpc-swift-l",
+    deps = ["@swift-protobuf-repo//:SwiftProtobuf", "@swift-protobuf-repo//:SwiftProtobufPluginLibrary"],
+    srcs = glob(["Sources/protoc-gen-grpc-swift/*.swift"]),
+    # outs = ["protoc-gen-grpc-swift.a"],
+    visibility = ["//visibility:public"],
+    alwayslink = True,
+)
+
 
 
 objc_library(
@@ -322,9 +372,9 @@ objc_library(
     hdrs = glob(["Sources/CGRPCZlib/include/**"]),
     srcs = glob(["Sources/CGRPCZlib/**/*.c"]),
     visibility = ["//visibility:public"],
+    includes = [".", "Sources/CGRPCZlib/include"],
     sdk_dylibs = ["z", "libswift_Concurrency"],
         # sdk_dylibs = [".dylib"],
-
  )
 
 
@@ -364,34 +414,50 @@ swift_library(
 )""",
 )
 
+
+
+
+# load("swiftniorepo.bzl", "new_http_archive")
+# http_archive(
+#     name = "swift-nio-repo",
+#     url = "https://github.com/apple/swift-nio/archive/refs/tags/2.33.0.tar.gz",
+#     strip_prefix = "swift-nio-2.33.0",
+#     build_file_content = """
+
+# load("swiftniorepo.bzl", "my_source_lib")
+# my_source_lib(
+#     name = "swift-nio-repo",
+#     build_file_content = """
+
+# XCHammer doesn't seem to work for git repos:
 new_git_repository(
     name = "swift-nio-repo",
     remote = "https://github.com/apple/swift-nio.git",
     tag = "2.33.0",
     build_file_content = """
-load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library", "swift_module_alias")
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library", "swift_module_alias", "swift_c_module")
 
 
-# swift_library(
-#     name = "NIO",
-#     module_name = "NIO",
-#     srcs = glob(["Sources/NIO/**/*.swift"]),
-#     visibility = ["//visibility:public"],
-#     generates_header = True,
-#     deps = ["NIOCore", "NIOEmbedded", "_NIODataStructures", "NIOPosix"],
-# )
-
-swift_module_alias(
+swift_library(
     name = "NIO",
     module_name = "NIO",
-    deps = ["NIOCore", "NIOEmbedded", "_NIODataStructures", "NIOPosix"],
+    srcs = glob(["Sources/NIO/**/*.swift"]),
     visibility = ["//visibility:public"],
+    generates_header = True,
+    deps = ["NIOCore", "NIOEmbedded", "_NIODataStructures", "NIOPosix"],
 )
+
+# swift_module_alias(
+#     name = "NIO",
+#     module_name = "NIO",
+#     deps = ["NIOCore", "NIOEmbedded", "_NIODataStructures", "NIOPosix"],
+#     visibility = ["//visibility:public"],
+# )
 
 swift_library(
     name = "_NIODataStructures",
     module_name = "_NIODataStructures",
-    srcs = glob(["Sources/_NIODataStructures/**/*.swift"]),
+    srcs = glob(["Sources/_NIODataStructures/*.swift"]),
     visibility = ["//visibility:public"],
 )
 
@@ -410,15 +476,85 @@ swift_library(
     module_name = "NIOConcurrencyHelpers",
     srcs = glob(["Sources/NIOConcurrencyHelpers/**/*.swift"]),
     visibility = ["//visibility:public"],
+    # deps = ["CNIOAtomics-i"],
     deps = ["CNIOAtomics"],
+    # tags = ["xchammer"],
 )
 
+
+
+
+
+
+
+
+# def _impl(repo_ctx):
+#   repo_ctx.download_and_extract(...)
+#   repo_ctx.file('BUILD', content = ...)
+#   repo_ctx.file('config.h', content = ...)
+
+# my_source_lib = repository_rule(
+#   implementation = _impl,
+#   local = False,
+# )
+
+
+
+
+
+
+
+
+
+
+
+# genrule(
+#     # output_to_bindir = True,
+#     name = "cnio_modulemaps",
+#     outs = ["Sources/CNIOAtomics/CNIOAtomics.modulemap"],
+#     cmd = \"\"\" tee $@ <<EOF
+# module "CNIOAtomics" {
+#     export *
+#     header "external/swift-nio-repo/Sources/CNIOAtomics/include/CNIOAtomics.h"
+# }
+# EOF\"\"\"
+# )
+
+# genrule(
+#     name = "cnio_modulemaps",
+#     outs = ["$(GENDIR)/CNIOAtomics.modulemap"],
+#     cmd = 
+#     \"""$(GENDIR)/CNIOAtomicsa.modulemap <<< \\"module \\"CNIOAtomics\\" { 
+#     export *
+#     header \\"external/swift-nio-repo/Sources/CNIOAtomics/include/CNIOAtomics.h\\"
+#     }\\"\""",
+#     # srcs = protos,
+#     # exec_tools = tools,
+#     # tags = ["xchammer"],
+# )
+
+
+
+# swift_c_module(
+#     name = "CNIOAtomics",
+#     deps = ["CNIOAtomics-a"],
+#     module_map = "Sources/CNIOAtomics/CNIOAtomics.modulemap",
+#     module_name = "CNIOAtomics",
+#     # files = [],
+# )
+# cc_library(
+#     # data = ["CNIOAtomics.modulemap"],
 objc_library(
     name = "CNIOAtomics",
-    module_name = "CNIOAtomics",
+    # module_name = "CNIOAtomics",
     hdrs = glob(["Sources/CNIOAtomics/include/**"]),
+    includes = ["Sources/CNIOAtomics/include"],
     srcs = glob(["Sources/CNIOAtomics/src/**"]),
     visibility = ["//visibility:public"],
+    # data = [":cnio_modulemaps"],
+    # tags = ["xchammer"],
+    # enable_modules = True,
+    # tags = ["swift_module=CNIOAtomics"],
 )
 
 swift_library(
@@ -426,7 +562,7 @@ swift_library(
    module_name = "NIOPosix",
    srcs = glob(["Sources/NIOPosix/**/*.swift"]),
    visibility = ["//visibility:public"],
-   deps = ["NIOCore", "CNIODarwin"],
+   deps = ["NIOCore", "CNIODarwin", "_NIODataStructures"],
 )
 
 swift_library(
@@ -465,8 +601,9 @@ objc_library(
     name = "CNIOHTTPParser",
     module_name = "CNIOHTTPParser",
     hdrs = glob(["Sources/CNIOHTTPParser/include/**"]),
-    includes = ["Sources/CNIOHTTPParser/include"],
-    srcs = glob(["Sources/CNIOHTTPParser/**/*.c"]),
+    # # includes = ["Sources/CNIOHTTPParser/include"],
+    includes = [".", "Sources/CNIOHTTPParser/include"],
+    srcs = glob(["Sources/CNIOHTTPParser/*.c"]),
     visibility = ["//visibility:public"],
 )
 
@@ -474,7 +611,8 @@ objc_library(
     name = "CNIODarwin",
     module_name = "CNIODarwin",
     hdrs = ["Sources/CNIODarwin/include/CNIODarwin.h"],
-    includes = ["Sources/CNIODarwin/include"],
+    # includes = ["Sources/CNIODarwin/include"],
+    includes = [".", "Sources/CNIODarwin/include"],
     srcs = glob(["Sources/CNIODarwin/**/*.c"]),
     visibility = ["//visibility:public"],
     defines = ["__APPLE_USE_RFC_3542"],
@@ -570,7 +708,12 @@ swift_library(
    module_name = "NIOExtras",
    srcs = glob(["Sources/NIOExtras/**/*.swift"]),
    visibility = ["//visibility:public"],
-   deps = ["@swift-nio-repo//:NIO"],
+   deps = ["@swift-nio-repo//:NIO", # code imports this
+        # XCHammer requires these:
+        "@swift-nio-repo//:NIOCore",
+        "@swift-nio-repo//:NIOEmbedded",
+        "@swift-nio-repo//:_NIODataStructures",
+        "@swift-nio-repo//:NIOPosix"],
 )
 """,
 )
@@ -589,6 +732,14 @@ swift_library(
    srcs = glob(["Sources/SwiftProtobuf/**/*.swift"]),
    visibility = ["//visibility:public"],
    # deps = ["NIOCore"],
+)
+
+swift_library(
+   name = "SwiftProtobufPluginLibrary",
+   module_name = "SwiftProtobufPluginLibrary",
+   srcs = glob(["Sources/SwiftProtobufPluginLibrary/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   deps = ["SwiftProtobuf"],
 )
 """,
 )
@@ -641,3 +792,11 @@ swift_library(
 
 
 
+
+
+
+# module "CNIOAtomics" {
+#     export *
+
+#     header "external/swift-nio-repo/Sources/CNIOAtomics/include/CNIOAtomics.h"
+# }

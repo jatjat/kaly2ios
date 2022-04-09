@@ -48,6 +48,7 @@ xcode_project(
     name = "XcodeBazel",
     # bazel = "tools/bazelwrapper",
     project_config = project_config(
+        
         # build_bazel_platform_options = {
         #     "ios_x86_64": ["--config=ios_x86_64"],
         #     "ios_i386": ["--config=ios_i386"],
@@ -96,16 +97,22 @@ xcode_project(
     # ],
 # )
 
-genrule(
-    name = "wat",
-    outs = ["kaly2.xcodeproject"],
-    cmd = """
-    pwd && cd -P . && ls ./bazel-out/host/bin/external/xchammer && unzip -qq ./bazel-out/host/bin/external/xchammer/xchammer.zip && ./xchammer.app/Contents/MacOS/xchammer \
-    --plugin= \
-    --swift_out=$(GENDIR) \
-    --proto_path=. $(SRCS)
-    """,
-    tools = ["@xchammer//:xchammer"]
+# genrule(
+#     name = "wat",
+#     outs = ["kaly2.xcodeproject"],
+#     cmd = """
+#     pwd && cd -P . && ls ./bazel-out/host/bin/external/xchammer && unzip -qq ./bazel-out/host/bin/external/xchammer/xchammer.zip && ./xchammer.app/Contents/MacOS/xchammer \
+#     --plugin= \
+#     --swift_out=$(GENDIR) \
+#     --proto_path=. $(SRCS)
+#     """,
+#     tools = ["@xchammer//:xchammer"]
+# )
+
+
+alias(
+    name = "swiftlint",
+    actual = "@grpc-swift-repo//:protoc-gen-grpc-swift",
 )
 
 ios_application(
