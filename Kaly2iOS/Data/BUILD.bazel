@@ -92,7 +92,7 @@ genrule(
     name = "grpc_stubs",
     outs = grpc_stubs,
     cmd = """
-    /opt/homebrew/bin/protoc \
+    $(location @protobuf//:protoc) \
     --plugin=$(location @grpc-swift-repo//:protoc-gen-grpc-swift) \
     --grpc-swift_out=Client=true,ExperimentalAsyncClient=true:$(GENDIR) \
     --proto_path=. $(SRCS)
@@ -106,7 +106,7 @@ genrule(
     name = "proto_models",
     outs = proto_models,
     cmd = """
-    /opt/homebrew/bin/protoc \
+    $(location @protobuf//:protoc) \
     --plugin=$(location @grpc-swift-repo//:protoc-gen-grpc-swift) \
     --swift_out=$(GENDIR) \
     --proto_path=. $(SRCS)
