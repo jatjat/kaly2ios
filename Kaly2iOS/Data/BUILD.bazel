@@ -11,7 +11,7 @@ proto_models = [
         "Sources/Data/Protos/RobotService.pb.swift",
         "Sources/Data/Protos/SessionService.pb.swift"
 ]
-tools = ["@protobuf//:protoc", "@grpc-swift-repo//:protoc-gen-grpc-swift"]
+tools = ["@protobuf//:protoc", "@grpc-swift-repo//:protoc-gen-grpc-swift", "@swift-protobuf-repo//:protoc-gen-swift"]
 protos = glob([
         "**/*.proto",
     ])
@@ -98,7 +98,7 @@ genrule(
     --proto_path=. $(SRCS)
     """,
     srcs = protos,
-    exec_tools = tools,
+    tools = tools,
     tags = ["xchammer"],
 )
 
@@ -107,11 +107,11 @@ genrule(
     outs = proto_models,
     cmd = """
     $(location @protobuf//:protoc) \
-    --plugin=$(location @grpc-swift-repo//:protoc-gen-grpc-swift) \
+    --plugin=$(location @swift-protobuf-repo//:protoc-gen-swift) \
     --swift_out=$(GENDIR) \
     --proto_path=. $(SRCS)
     """,
     srcs = protos,
-    exec_tools = tools,
+    tools = tools,
     tags = ["xchammer"],
 )

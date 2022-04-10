@@ -1,1 +1,3 @@
+
+# Path to your Bazel binary goes here. Using Bazelisk is recommended.
 /opt/homebrew/bin/bazel "$@"

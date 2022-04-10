@@ -20,11 +20,23 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 #     ],
 # )
 
-http_archive(
+# http_archive(
+#     name = "build_bazel_tulsi",
+#     commit = ""
+#     # Grabbing master for this example, so it always points to the latest. You may want to do otherwise.
+#     urls = ["https://github.com/bazelbuild/tulsi/archive/master.zip"],
+#     strip_prefix = "tulsi-master"
+# )
+
+git_repository(
     name = "build_bazel_tulsi",
-    # Grabbing master for this example, so it always points to the latest. You may want to do otherwise.
-    urls = ["https://github.com/bazelbuild/tulsi/archive/master.zip"],
-    strip_prefix = "tulsi-master"
+    remote = "https://github.com/pinterest/tulsi.git",
+    commit = "97f645b66d40f591ab31d4de1729913cb843d5cc",
+    patch_cmds = [
+        """
+        sed -i '' 's/\\:__subpackages__/visibility\\:public/g' src/TulsiGenerator/BUILD
+        """,
+    ],
 )
 
 
@@ -40,27 +52,15 @@ http_archive(
 # )
 
 
-# new_git_repository(
-#     name = "xchammer_tulsi_aspects",
-#     remote = "/Users/joel/Development/tulsi",
-#     commit = "625067382b8eb3fd69540dfa1d3de860492958b8", # joel fix
-#     strip_prefix = "src/TulsiGenerator/Bazel",
-#     build_file_content = "exports_files(['tulsi'])",
-# )
-
-
 # load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-local_repository(
+git_repository(
     name = "xchammer",
-    path = "/Users/joel/Development/XCHammer",
+    remote  = "https://github.com/jatjat/xchammer",
+    # remote  = "https://github.com/pinterest/xchammer",
+    commit = "ae4f1ec0978954312dc92822470d048412d866c5"    
+    # commit = "c588329904e05072c8d674191318e64d8dabc685"
 )
-
-# git_repository(
-#     name = "xchammer",
-#     remote  = "https://github.com/pinterest/xchammer",
-#     commit = "c588329904e05072c8d674191318e64d8dabc685"
-# )
 load("@xchammer//third_party:repositories.bzl", "xchammer_dependencies")
 
 xchammer_dependencies()
@@ -725,6 +725,25 @@ new_git_repository(
     tag = "1.9.0",
     build_file_content = """
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+load(
+    "@build_bazel_rules_apple//apple:macos.bzl",
+    "macos_command_line_application",
+)
+
+macos_command_line_application(
+        name = "protoc-gen-swift",
+        deps = ["protoc-gen-swift-l"],
+        minimum_os_version = "10.11",
+        visibility = ["//visibility:public"],
+)
+
+swift_library(
+    name = "protoc-gen-swift-l",
+    deps = ["@swift-protobuf-repo//:SwiftProtobuf", "@swift-protobuf-repo//:SwiftProtobufPluginLibrary"],
+    srcs = glob(["Sources/protoc-gen-swift/*.swift"]),
+    visibility = ["//visibility:public"],
+    alwayslink = True,
+)
 
 swift_library(
    name = "SwiftProtobuf",

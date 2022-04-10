@@ -40,13 +40,28 @@ load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 load(
     "@xchammer//:BazelExtensions/xchammerconfig.bzl",
     "project_config",
+    "execution_action",
+        "scheme_action_config",
+        "target_config",
 )
 load("@xchammer//:BazelExtensions/xcodeproject.bzl", "xcode_project")
 
+# Spawn the index import action as a background process
+app_scheme_config = {
+    "Build": scheme_action_config(
+        post_actions = [
+            execution_action(
+                name = "Import global index",
+                script = "$SRCROOT/tools/XCHammerIndexImportAction.sh &",
+            ),
+        ],
+        pre_actions = [],
+    ),
+}
 
 xcode_project(
     name = "XcodeBazel",
-    # bazel = "tools/bazelwrapper",
+    bazel = "bazel.sh",
     project_config = project_config(
         
         # build_bazel_platform_options = {
@@ -55,14 +70,24 @@ xcode_project(
         #     "ios_arm64": ["--config=ios_arm64"],
         #     "ios_armv7": ["--config=ios_armv7"],
         # },
-        # generate_transitive_xcode_targets = True,
+        generate_transitive_xcode_targets = True,
     #    generate_transitive_xcode_targets = False,
-        # generate_xcode_schemes = True,
+        generate_xcode_schemes = False,
     #    generate_xcode_schemes = False,
         paths = ["**"],
         # paths = ["Kaly2iOS/**"],
         # paths = ["Kaly2iOS/Presentation/**"],
+        xcconfig_overrides = {
+            "Release": "tools/BazelToolchain.xcconfig",
+            "Debug": "tools/BazelToolchain.xcconfig",
+            "Profile": "tools/BazelToolchain.xcconfig",
+        },
     ),
+    target_config = {
+        "//ios-app:ios-app": target_config(
+            scheme_config = app_scheme_config,
+        ),
+    },
     targets = [
         "//:ios-app",
     ],

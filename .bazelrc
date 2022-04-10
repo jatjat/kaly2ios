@@ -1,3 +1,9 @@
 build \
---action_env=LD_LIBRARY_PATH \
---spawn_strategy=standalone
+--compilation_mode dbg \
+--incompatible_strict_action_env \
+--strategy=SwiftCompile=worker \
+--spawn_strategy=local \
+--features=swift.use_global_module_cache \
+--swiftcopt=-Xwrapped-swift=-debug-prefix-pwd-is-dot \
+#--worker_sandboxing=false \
+#--spawn_strategy=standalone \
