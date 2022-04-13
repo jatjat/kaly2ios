@@ -72,7 +72,7 @@ xcode_project(
         # },
         generate_transitive_xcode_targets = True,
     #    generate_transitive_xcode_targets = False,
-        generate_xcode_schemes = False,
+        generate_xcode_schemes = True,
     #    generate_xcode_schemes = False,
         paths = ["**"],
         # paths = ["Kaly2iOS/**"],
@@ -84,7 +84,7 @@ xcode_project(
         },
     ),
     target_config = {
-        "//ios-app:ios-app": target_config(
+        "//:ios-app": target_config(
             scheme_config = app_scheme_config,
         ),
     },

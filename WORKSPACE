@@ -58,8 +58,9 @@ git_repository(
     name = "xchammer",
     remote  = "https://github.com/jatjat/xchammer",
     # remote  = "https://github.com/pinterest/xchammer",
-    commit = "ae4f1ec0978954312dc92822470d048412d866c5"    
+    commit = "62545a5d184d979073ff4c4cab4cc629c3bcbfaf",
     # commit = "c588329904e05072c8d674191318e64d8dabc685"
+    shallow_since = "1649826880 -0500",
 )
 load("@xchammer//third_party:repositories.bzl", "xchammer_dependencies")
 

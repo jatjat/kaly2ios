@@ -18,4 +18,5 @@ swift_library(
             # "@swift_di_pkgs//Cleanse:Cleanse"
             "@cleanse-repo//:Cleanse"
             ],
+                tags = ["xchammer"],
 )

@@ -1,9 +1,14 @@
 build \
 --compilation_mode dbg \
 --incompatible_strict_action_env \
+--action_env=PATH=/usr/bin:/bin \
 --strategy=SwiftCompile=worker \
 --spawn_strategy=local \
 --features=swift.use_global_module_cache \
---swiftcopt=-Xwrapped-swift=-debug-prefix-pwd-is-dot \
-#--worker_sandboxing=false \
+--swiftcopt=-Xwrapped-swift=-debug-prefix-pwd-is-dot
+build --features=debug_prefix_map_pwd_is_dot
+build --features=swift.cacheable_swiftmodules
+build --features=swift.debug_prefix_map
+build --features=swift.enable_vfsoverlays
 #--spawn_strategy=standalone \
+#--worker_sandboxing=false \
