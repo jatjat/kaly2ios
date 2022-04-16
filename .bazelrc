@@ -6,9 +6,10 @@ build \
 --spawn_strategy=local \
 --features=swift.use_global_module_cache \
 --swiftcopt=-Xwrapped-swift=-debug-prefix-pwd-is-dot
+build --swiftcopt=-Onone
 build --features=debug_prefix_map_pwd_is_dot
-build --features=swift.cacheable_swiftmodules
 build --features=swift.debug_prefix_map
 build --features=swift.enable_vfsoverlays
+build --features=swift.cacheable_swiftmodules
 #--spawn_strategy=standalone \
 #--worker_sandboxing=false \

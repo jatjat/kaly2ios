@@ -13,7 +13,7 @@
 # load("@xchammer//:xcodeproject.bzl", "xcode_project")
 
 
-load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application", "ios_unit_test")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 
 # xcode_project(
@@ -90,7 +90,11 @@ xcode_project(
     },
     targets = [
         "//:ios-app",
+        # "//ios-app",
+        # "//Kaly2iOS/Common:common-tests-s",
+        "//:ios-app-tests",
     ],
+    testonly = True,
 )
 
 # xcode_project(
@@ -171,42 +175,18 @@ swift_library(
 )
 
 
-# xcode_project(
-#     name = "Kaly2Bazel",
-#     bazel = "tools/bazelwrapper",
-#     project_config = project_config(
-#         # build_bazel_platform_options = {
-#         #     "ios_x86_64": ["--config=ios_x86_64"],
-#         #     "ios_i386": ["--config=ios_i386"],
-#         #     "ios_arm64": ["--config=ios_arm64"],
-#         #     "ios_armv7": ["--config=ios_armv7"],
-#         # },
-#         generate_transitive_xcode_targets = True,
-#         generate_xcode_schemes = True,
-#         paths = ["**"],
-#     ),
-#     targets = [
-#         "//:ios-app",
-#     ],
-# )
-
-load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary")
-swift_binary(
-    name = "simple",
-    srcs = ["main.swift"],
-    visibility = ["//swift:__subpackages__"],
-    deps = [
-        "@swift_pkgs//grpc-swift:GRPC",
-    ],
+ios_unit_test(
+    name = "ios-app-tests",
+    size = "medium",
+    minimum_os_version = "15.0",
+    runner = ":runner",
+    # test_host = "//:ios-app",
+    visibility = ["//visibility:public"],
+    deps = ["//Kaly2iOS/Common:common-tests-lib"]
 )
 
-swift_library(
-
-        name = "simple2",
-    srcs = ["main.swift"],
-    visibility = ["//swift:__subpackages__"],
-    deps = [
-        "@swift_pkgs//grpc-swift:GRPC",
-    ],
+load("@build_bazel_rules_apple//apple/testing/default_runner:ios_test_runner.bzl", "ios_test_runner")
+ios_test_runner(
+    name = "runner",
+    execution_requirements = {"no-sandbox": "1", "no-remote":"1"},
 )
-

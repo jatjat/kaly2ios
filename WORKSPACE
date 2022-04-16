@@ -58,10 +58,15 @@ git_repository(
     name = "xchammer",
     remote  = "https://github.com/jatjat/xchammer",
     # remote  = "https://github.com/pinterest/xchammer",
-    commit = "62545a5d184d979073ff4c4cab4cc629c3bcbfaf",
+    commit = "34280f4940250a014f41fdb9e31846884fd29fa7",
     # commit = "c588329904e05072c8d674191318e64d8dabc685"
     shallow_since = "1649826880 -0500",
 )
+# local_repository(
+#     name = "xchammer",
+#     path = "/Users/joel/Development/xchammer",
+# )
+
 load("@xchammer//third_party:repositories.bzl", "xchammer_dependencies")
 
 xchammer_dependencies()
@@ -93,7 +98,23 @@ load("@xcbuildkit//third_party:repositories.bzl", xcbuildkit_dependencies = "dep
 
 xcbuildkit_dependencies()
 
-
+# http_file(
+#     name = "xctestrunner",
+#     executable = 1,
+#     urls = ["https://github.com/google/xctestrunner/releases/download/0.2.15/ios_test_runner.par"],
+# )
+git_repository(
+	    name = "subpar",
+	    remote = "https://github.com/google/subpar",
+	    # tag = "2.0.0",
+        commit = "35bb9f0092f71ea56b742a520602da9b3638a24f",
+        shallow_since = "1557863961 -0400"
+)
+git_repository(
+    name = "xctestrunner",
+    commit = "e0bc4b29976cf000794e9e796cb8a584b0c443bc",
+    remote = "https://github.com/google/xctestrunner.git",
+)
 
 # http_archive(
 #     name = "xchammer",
@@ -119,7 +140,8 @@ xcbuildkit_dependencies()
 git_repository(
     name = "build_bazel_rules_apple",
     remote = "https://github.com/bazelbuild/rules_apple.git",
-    tag = "0.33.0",
+    # tag = "0.33.0",
+    commit = "aa0b4843ed98ba1723e42ac88f54374d20b9fde2"
     # commit = "0d1e9559332ad97dc3d2e7e5165a10f958279bf4" # see if 
 )
 
