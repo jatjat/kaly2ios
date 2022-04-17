@@ -20,6 +20,6 @@ jobs:
     - name: Format
       run: swiftformat
     - name: Build for iOS
-      run: build.sh
+      run: ./build.sh
     - name: Run iOS tests
-      run: test.sh
+      run: ./test.sh
