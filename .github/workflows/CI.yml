@@ -14,6 +14,7 @@ jobs:
         path: |
           ~/.cache/bazelisk
           ~/.cache/bazel
+          /private/var/tmp/_bazel_runner
         key: ${{ runner.os }}-${{ env.cache-name }}
     - name: Checkout repository
       uses: actions/checkout@v2
