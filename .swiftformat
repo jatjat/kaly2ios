@@ -1,0 +1,3 @@
+--exclude Kaly2iOS/Data/Sources/Data/Generated
+--exclude Kaly2iOS/Data/Sources/Data/Protos
+--exclude xchammer-includes
