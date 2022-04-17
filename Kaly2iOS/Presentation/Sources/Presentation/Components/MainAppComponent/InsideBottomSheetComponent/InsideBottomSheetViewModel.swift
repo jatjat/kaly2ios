@@ -7,6 +7,4 @@
 
 import Foundation
 
-class InsideBottomSheetViewModel: ObservableObject {
-    
-}
+class InsideBottomSheetViewModel: ObservableObject {}

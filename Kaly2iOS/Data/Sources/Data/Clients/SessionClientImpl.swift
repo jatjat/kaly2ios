@@ -5,9 +5,9 @@
 //  Created by Joel Thiessen on 2021-10-01.
 //
 
+import DataAPI
 import Foundation
 import GRPC
-import DataAPI
 
 struct SessionIteratorImpl: SessionIterator {
     private var inner: GRPCAsyncResponseStream<Ca_Joelathiessen_Kaly2_Proto_SubscribeResponse>.Iterator
@@ -15,35 +15,36 @@ struct SessionIteratorImpl: SessionIterator {
         let resp = try await inner.next()
         return resp.flatMap { SubscribeResponseImpl(resp: $0) }
     }
-    
+
     init(inner: GRPCAsyncResponseStream<Ca_Joelathiessen_Kaly2_Proto_SubscribeResponse>.Iterator) {
         self.inner = inner
     }
 }
 
-class SessionClientImpl : SessionClient {
+class SessionClientImpl: SessionClient {
     let client: Ca_Joelathiessen_Kaly2_Proto_SessionServiceAsyncClient
-    
+
     init(client: Ca_Joelathiessen_Kaly2_Proto_SessionServiceAsyncClient) {
         self.client = client
     }
+
     func subscribeNew(robotID: Int64, mapID: Int64) async throws -> SessionIterator {
         var req = Ca_Joelathiessen_Kaly2_Proto_SubscribeNewRequest()
         req.robotID = robotID
         req.mapID = mapID
-        
+
         let inner = client.subscribeNew(req).makeAsyncIterator()
-        
+
         return SessionIteratorImpl(inner: inner)
     }
-    
+
     func modifySessionSettings(robotSessionID: Int64, shouldRun: Bool) async throws {
         var req = Ca_Joelathiessen_Kaly2_Proto_ModifySessionSettingsRequest()
         req.robotSessionID = robotSessionID
         req.shouldRun = shouldRun
         let _ = try await client.modifySessionSettings(req)
     }
-    
+
     func modifySlamSettings(robotSessionID: Int64, numParticles: Int32, sensorAngVar: Float, sensorDistVar: Float) async throws {
         var req = Ca_Joelathiessen_Kaly2_Proto_ModifySlamSettingsRequest()
         req.robotSessionID = robotSessionID
@@ -54,30 +55,24 @@ class SessionClientImpl : SessionClient {
     }
 }
 
-
-
-
 //
-//protocol ConvertableToStream {
+// protocol ConvertableToStream {
 //    func convertSelf<B>() -> B
-//}
+// }
 
-
-//extension Ca_Joelathiessen_Kaly2_Proto_SubscribeResponse: SubscribeResponse {
+// extension Ca_Joelathiessen_Kaly2_Proto_SubscribeResponse: SubscribeResponse {
 //
-//}
-
+// }
 
 //
-//extension GRPCAsyncResponseStream.Iterator: SubProto {
+// extension GRPCAsyncResponseStream.Iterator: SubProto {
 //    mutating func ne() async throws -> SubscribeResp? where Element == Ca_Joelathiessen_Kaly2_Proto_SubscribeResponse {
 //        return try await nextEle()
 //    }
-//}
-
+// }
 
 //
-//struct Ca_Joelathiessen_Kaly2_Proto_Iteration {
+// struct Ca_Joelathiessen_Kaly2_Proto_Iteration {
 //  // SwiftProtobuf.Message conformance is added in an extension below. See the
 //  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
 //  // methods supported on all messages.
@@ -152,9 +147,9 @@ class SessionClientImpl : SessionClient {
 //  init() {}
 //
 //  fileprivate var _storage = _StorageClass.defaultInstance
-//}
+// }
 
-//struct SesIterator<T: ConvertableToStream, B> {
+// struct SesIterator<T: ConvertableToStream, B> {
 //    private var inner: GRPCAsyncResponseStream<T>.Iterator
 //    mutating func next() async throws -> B? {
 //        let resp = try await inner.next()
@@ -164,29 +159,29 @@ class SessionClientImpl : SessionClient {
 //    init<T: ConvertableToStream>(inner: GRPCAsyncResponseStream<T>.Iterator) {
 //
 //    }
-//}
+// }
 
-//protocol SubProto {
+// protocol SubProto {
 //    mutating func nextEle() async throws -> SubscribeResp?
-//}
+// }
 //
-//extension GRPCAsyncResponseStream.Iterator: SubProto {
+// extension GRPCAsyncResponseStream.Iterator: SubProto {
 //    mutating func nextEle() async throws -> SubscribeResp? {
 //        return try await self.next()
 //            .flatMap { $0 as? Ca_Joelathiessen_Kaly2_Proto_SubscribeResponse }
 //            .flatMap { SubscribeResp(resp: $0) }
 //    }
-//}
+// }
 //
-//struct SubscribeResp {
+// struct SubscribeResp {
 //    init(resp: Ca_Joelathiessen_Kaly2_Proto_SubscribeResponse) {
 //
 //    }
-//}
+// }
 
-//extension
+// extension
 
-//struct SesIterator<T: ConvertableToStream, B> {
+// struct SesIterator<T: ConvertableToStream, B> {
 //    private var inner: GRPCAsyncResponseStream<T>.Iterator
 //    mutating func next() async throws -> B? {
 //        let resp = try await inner.next()
@@ -196,22 +191,21 @@ class SessionClientImpl : SessionClient {
 //    init<T: ConvertableToStream>(inner: GRPCAsyncResponseStream<T>.Iterator) {
 //
 //    }
-//}
+// }
 
-//extension GRPCAsyncResponseStream.Iterator: SesIterator {
+// extension GRPCAsyncResponseStream.Iterator: SesIterator {
 //    mutating func nextResp() async throws -> SubscribeResponse? {
 //
 //    }
-//}
+// }
 
-//extension Ca_Joelathiessen_Kaly2_Proto_SubscribeResponse: ConvertableToStream {
+// extension Ca_Joelathiessen_Kaly2_Proto_SubscribeResponse: ConvertableToStream {
 //    func convertSelf<T>() -> T {
 //        return SubscribeResponse(iteration: Iteration(itr: <#T##Ca_Joelathiessen_Kaly2_Proto_Iteration#>))
 //    }
-//}
+// }
 
-
-//protocol Iteration {
+// protocol Iteration {
 //    var iterationNo: Int64 { get }
 //    var timestamp: Int64 { get }
 //    var bestPose: Pose { get }
@@ -221,7 +215,7 @@ class SessionClientImpl : SessionClient {
 //    var particles: [Particle] { get }
 //    var slamSettings: SlamSettings { get }
 //    var sessionSettings: SessionSettings { get }
-//}
+// }
 //
 //
 //
@@ -229,7 +223,7 @@ class SessionClientImpl : SessionClient {
 //
 //
 //
-//extension Ca_Joelathiessen_Kaly2_Proto_Iteration: Iteration {
+// extension Ca_Joelathiessen_Kaly2_Proto_Iteration: Iteration {
 //    var bestPose: Pose {
 //        <#code#>
 //    }
@@ -258,11 +252,10 @@ class SessionClientImpl : SessionClient {
 //        <#code#>
 //    }
 //
-//}
-
+// }
 
 //
-//struct Iteration {
+// struct Iteration {
 //    private let inner: Ca_Joelathiessen_Kaly2_Proto_Iteration
 //    var bestPose: Pose {
 //        inner.bestPose
@@ -292,4 +285,4 @@ class SessionClientImpl : SessionClient {
 //        inner.sessionSettings
 //    }
 //
-//}
+// }

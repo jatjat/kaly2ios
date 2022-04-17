@@ -27,20 +27,20 @@ class MapViewModel: ObservableObject {
         }
         return out
     }
-    
+
     func showError(message: ErrorMessage) {
         shownError = message
     }
-    
+
     func onAppear() {
 //        Task() {
 //            bestPoses = [UIPose]()
 //        }
 //        while true {
-////            let itr: Iteration = sessionService.latestItr
-////            bestPoses = itr.
-//            
-////            let newBestPoses, oldBestPoses = sessionService.bestPoses
+        ////            let itr: Iteration = sessionService.latestItr
+        ////            bestPoses = itr.
+//
+        ////            let newBestPoses, oldBestPoses = sessionService.bestPoses
 //            do {
 //                try await sessionService.waitForNextItr()
 //            } catch {
@@ -50,17 +50,17 @@ class MapViewModel: ObservableObject {
 //            odoPoses = sessionService.odoPoses
 //            truePoses = sessionService.truePoses
 //        }
-        
+
 //        sessionService.onUpdate {
-////            do {
-////                withSpinner {
+        ////            do {
+        ////                withSpinner {
 //                    bestPoses = sessionService.bestPoses
 //                    odoPoses = sessionService.odoPoses
 //                    truePoses = sessionService.truePoses
-////                }
-////            } catch {
-////
-////            }
+        ////                }
+        ////            } catch {
+        ////
+        ////            }
 //        }
 //        sessionService.onBestPosesUpdated {
 //            self.bestPoses = sessionService.bestPoses
@@ -68,7 +68,6 @@ class MapViewModel: ObservableObject {
 //        sessionService.
     }
 }
-
 
 struct UIPose {
     let x: Float
@@ -80,14 +79,14 @@ enum ErrorMessage {
     case generic
     case custom(text: String)
     case derived(error: Error)
-    
+
     var message: String? {
         switch self {
         case .generic:
             return "An error has occurred. Please try again later."
-        case .custom(let text):
+        case let .custom(text):
             return text
-        case .derived(let error):
+        case let .derived(error):
             return error.localizedDescription
         }
     }

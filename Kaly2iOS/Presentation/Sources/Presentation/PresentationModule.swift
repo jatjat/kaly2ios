@@ -21,6 +21,6 @@ public struct PresentationModule: Module {
     }
 }
 
-public struct MainAppViewTag : Tag {
+public struct MainAppViewTag: Tag {
     public typealias Element = AnyView
 }

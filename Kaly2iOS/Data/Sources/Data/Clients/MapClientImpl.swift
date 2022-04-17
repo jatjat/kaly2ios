@@ -5,12 +5,12 @@
 //  Created by Joel Thiessen on 2021-09-29.
 //
 
-import Foundation
 import DataAPI
+import Foundation
 
-class MapClientImpl : MapClient {
+class MapClientImpl: MapClient {
     let client: Ca_Joelathiessen_Kaly2_Proto_MapServiceAsyncClient
-    
+
     init(client: Ca_Joelathiessen_Kaly2_Proto_MapServiceAsyncClient) {
         self.client = client
     }

@@ -10,6 +10,5 @@ import Foundation
 import SwiftUI
 
 public struct MainAppModule: Module {
-    public static func configure(binder: Binder<Singleton>) {
-    }
+    public static func configure(binder _: Binder<Singleton>) {}
 }

@@ -5,23 +5,23 @@
 //  Created by Joel Thiessen on 2021-11-12.
 //
 
-import Foundation
-import GRPC
+import Cleanse
 import CommonAPI
 import DataAPI
-import Cleanse
+import Foundation
+import GRPC
 
 public struct DataModule: Module {
     public static func configure(binder: Binder<Singleton>) {
         binder.bind(GRPCChannelFactoryImpl.self)
             .sharedInScope()
             .to(factory: GRPCChannelFactoryImpl.init)
-        
+
         binder.bind(GRPCChannel.self)
             .to { (fact: GRPCChannelFactoryImpl) in
-                return fact.makeChannel()
+                fact.makeChannel()
             }
-        
+
         binder.bind(Ca_Joelathiessen_Kaly2_Proto_MapServiceAsyncClient.self)
             .sharedInScope()
             .to {
@@ -37,7 +37,7 @@ public struct DataModule: Module {
             .to {
                 Ca_Joelathiessen_Kaly2_Proto_SessionServiceAsyncClient(channel: $0)
             }
-        
+
         binder.bind(MapClient.self)
             .sharedInScope()
             .to(factory: MapClientImpl.init)

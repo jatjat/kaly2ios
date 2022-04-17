@@ -5,8 +5,7 @@
 //  Created by Joel Thiessen on 2021-09-28.
 //
 
-//import Foundation
-
+// import Foundation
 
 //
 //  BottomSheetView.swift
@@ -16,11 +15,11 @@
 //
 import SwiftUI
 
-fileprivate enum Constants {
+private enum Constants {
     static let radius: CGFloat = 16
     static let indicatorHeight: CGFloat = 6
     static let indicatorWidth: CGFloat = 60
-    static let snapRatio: CGFloat = 0.1 //0.25
+    static let snapRatio: CGFloat = 0.1 // 0.25
     static let minHeightRatio: CGFloat = 0.3
 }
 
@@ -30,16 +29,14 @@ struct BottomSheetView<Content: View>: View {
     let maxHeight: CGFloat
     let minHeight: CGFloat
     let content: Content
-    
 
-    
     // Animation params for when finger is dragging bottom sheet
-////     or bottom sheet top edge is tapped:
+    ////     or bottom sheet top edge is tapped:
 //    let touchResp = 0.15
 //    let touchDampFrac = 0.86
 //    let touchBlendDur = 0.25
     let dragOrTapAnim: Animation = .spring(response: 0.15, dampingFraction: 0.86, blendDuration: 0.25)
-    
+
     // Animation for after finger is lifted from dragging
     // bottom sheet, or bottom sheet top edge is tapped:
 //    let touchEndedResp = 0.3
@@ -60,18 +57,18 @@ struct BottomSheetView<Content: View>: View {
             .frame(
                 width: Constants.indicatorWidth,
                 height: Constants.indicatorHeight
-        ).onTapGesture {
-            withAnimation(tapOrTouchEndedAnim) {
-                self.isOpen.toggle()
+            ).onTapGesture {
+                withAnimation(tapOrTouchEndedAnim) {
+                    self.isOpen.toggle()
+                }
             }
-        }
     }
 
     init(isOpen: Binding<Bool>, maxHeight: CGFloat, @ViewBuilder content: () -> Content) {
-        self.minHeight = maxHeight * Constants.minHeightRatio
+        minHeight = maxHeight * Constants.minHeightRatio
         self.maxHeight = maxHeight
         self.content = content()
-        self._isOpen = isOpen
+        _isOpen = isOpen
     }
 
     var body: some View {

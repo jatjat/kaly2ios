@@ -5,8 +5,8 @@
 //  Created by Joel Thiessen on 2021-09-28.
 //
 
-import SwiftUI
 import PresentationAPI
+import SwiftUI
 
 struct MainAppViewImpl: MainAppView {
     @StateObject var viewModel = MainAppViewModel()
@@ -40,5 +40,3 @@ struct ContentView: View {
         }.edgesIgnoringSafeArea(.all)
     }
 }
-
-

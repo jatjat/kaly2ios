@@ -13,8 +13,8 @@ public protocol SessionIterator {
 
 public protocol SessionClient {
     func subscribeNew(robotID: Int64, mapID: Int64) async throws -> SessionIterator
-    
+
     func modifySessionSettings(robotSessionID: Int64, shouldRun: Bool) async throws
-    
+
     func modifySlamSettings(robotSessionID: Int64, numParticles: Int32, sensorAngVar: Float, sensorDistVar: Float) async throws
 }
