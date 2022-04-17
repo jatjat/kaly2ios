@@ -23,27 +23,17 @@ swift_library(
 #     deps = ["//Kaly2iOS/Common:common-api"],
 # )
 
-swift_test(
-    name = "common-tests-s",
-    srcs = glob(["Tests/Common/CommonTests/**/*.swift"]),
-    visibility = ["//visibility:public"],
-)
-
-
 swift_library(
     name = "common-tests-lib",
     srcs = glob(["Tests/CommonTests/**/*.swift"]),
-    deps = ["common"],
-        # sdk_frameworks = [
-        # "XCTest"],
-    visibility = ["//visibility:public"],
+    visibility = ["//visibility:public"], # for now...
+    deps = [":common"],
 )
 
 ios_unit_test(
     name = "common-tests",
     size = "medium",
     minimum_os_version = "15.0",
-
     visibility = ["//visibility:public"],
     deps = [":common-tests-lib"]
 )

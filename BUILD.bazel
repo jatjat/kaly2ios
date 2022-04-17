@@ -90,9 +90,8 @@ xcode_project(
     },
     targets = [
         "//:ios-app",
-        # "//ios-app",
-        # "//Kaly2iOS/Common:common-tests-s",
-        "//:ios-app-tests",
+        "//Kaly2iOS/Presentation:presentation-api-tests",
+        "//Kaly2iOS/Presentation:presentation-tests",
     ],
     testonly = True,
 )
@@ -172,21 +171,4 @@ swift_library(
         "Dummy.swift",
     ],
     visibility = ["//visibility:public"],
-)
-
-
-ios_unit_test(
-    name = "ios-app-tests",
-    size = "medium",
-    minimum_os_version = "15.0",
-    runner = ":runner",
-    # test_host = "//:ios-app",
-    visibility = ["//visibility:public"],
-    deps = ["//Kaly2iOS/Common:common-tests-lib"]
-)
-
-load("@build_bazel_rules_apple//apple/testing/default_runner:ios_test_runner.bzl", "ios_test_runner")
-ios_test_runner(
-    name = "runner",
-    execution_requirements = {"no-sandbox": "1", "no-remote":"1"},
 )

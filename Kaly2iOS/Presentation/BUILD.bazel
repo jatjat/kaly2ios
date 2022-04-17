@@ -1,4 +1,5 @@
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_unit_test")
 
 swift_library(
     name = "presentation-api",
@@ -18,4 +19,35 @@ swift_library(
             "@cleanse-repo//:Cleanse"
             ],
                 tags = ["xchammer"],
+)
+
+swift_library(
+    name = "presentation-api-tests-lib",
+    module_name = "PresentationAPITests",
+    srcs = glob(["Tests/PresentationAPITests/**/*.swift"]),
+    deps = [":presentation-api"],
+)
+
+swift_library(
+    name = "presentation-tests-lib",
+    module_name = "PresentationTests",
+    srcs = glob(["Tests/PresentationTests/**/*.swift"]),
+    deps = [":presentation"],
+    tags = ["xchammer"],
+)
+
+ios_unit_test(
+    name = "presentation-api-tests",
+    size = "medium",
+    minimum_os_version = "15.0",
+    visibility = ["//visibility:public"],
+    deps = ["presentation-api-tests-lib"]
+)
+
+ios_unit_test(
+    name = "presentation-tests",
+    size = "medium",
+    minimum_os_version = "15.0",
+    visibility = ["//visibility:public"],
+    deps = [":presentation-tests-lib"]
 )
