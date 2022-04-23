@@ -7,6 +7,8 @@ build \
 --features=swift.use_global_module_cache \
 --swiftcopt=-Xwrapped-swift=-debug-prefix-pwd-is-dot
 build --swiftcopt=-Onone
+build --copt=-Onone
+build --features=swift.dbg
 build --features=debug_prefix_map_pwd_is_dot
 build --features=swift.debug_prefix_map
 build --features=swift.enable_vfsoverlays
