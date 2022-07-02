@@ -15,6 +15,27 @@
 
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application", "ios_unit_test")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+load("@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:xcodeproj.bzl", "xcodeproj")
+
+
+XCODEPROJ_TARGETS = [
+    "//:ios-app",
+    # "//Example",
+    # "//ExampleTests",
+    # "//ExampleObjcTests",
+    # "//ExampleUITests",
+    "//Kaly2iOS/Presentation:presentation-api-tests",
+    "//Kaly2iOS/Presentation:presentation-tests",
+]
+xcodeproj(
+    name = "xcodeproj",
+    project_name = "iOS App",
+    # tags = ["manual"],
+    targets = XCODEPROJ_TARGETS,
+
+    build_mode = "xcode",
+    # build_mode = "bazel",
+)
 
 # xcode_project(
 #     name = "kaly2",
@@ -37,64 +58,64 @@ load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 
 
 
-load(
-    "@xchammer//:BazelExtensions/xchammerconfig.bzl",
-    "project_config",
-    "execution_action",
-        "scheme_action_config",
-        "target_config",
-)
-load("@xchammer//:BazelExtensions/xcodeproject.bzl", "xcode_project")
+# load(
+#     "@xchammer//:BazelExtensions/xchammerconfig.bzl",
+#     "project_config",
+#     "execution_action",
+#         "scheme_action_config",
+#         "target_config",
+# )
+# load("@xchammer//:BazelExtensions/xcodeproject.bzl", "xcode_project")
 
 # Spawn the index import action as a background process
-app_scheme_config = {
-    "Build": scheme_action_config(
-        post_actions = [
-            execution_action(
-                name = "Import global index",
-                script = "$SRCROOT/tools/XCHammerIndexImportAction.sh &",
-            ),
-        ],
-        pre_actions = [],
-    ),
-}
+# app_scheme_config = {
+#     "Build": scheme_action_config(
+#         post_actions = [
+#             execution_action(
+#                 name = "Import global index",
+#                 script = "$SRCROOT/tools/XCHammerIndexImportAction.sh &",
+#             ),
+#         ],
+#         pre_actions = [],
+#     ),
+# }
 
-xcode_project(
-    name = "XcodeBazel",
-    bazel = "bazel.sh",
-    project_config = project_config(
+# xcode_project(
+#     name = "XcodeBazel",
+#     bazel = "bazel.sh",
+#     project_config = project_config(
         
-        # build_bazel_platform_options = {
-        #     "ios_x86_64": ["--config=ios_x86_64"],
-        #     "ios_i386": ["--config=ios_i386"],
-        #     "ios_arm64": ["--config=ios_arm64"],
-        #     "ios_armv7": ["--config=ios_armv7"],
-        # },
-        generate_transitive_xcode_targets = True,
-    #    generate_transitive_xcode_targets = False,
-        generate_xcode_schemes = True,
-    #    generate_xcode_schemes = False,
-        paths = ["**"],
-        # paths = ["Kaly2iOS/**"],
-        # paths = ["Kaly2iOS/Presentation/**"],
-        xcconfig_overrides = {
-            "Release": "tools/BazelToolchain.xcconfig",
-            "Debug": "tools/BazelToolchain.xcconfig",
-            "Profile": "tools/BazelToolchain.xcconfig",
-        },
-    ),
-    target_config = {
-        "//:ios-app": target_config(
-            scheme_config = app_scheme_config,
-        ),
-    },
-    targets = [
-        "//:ios-app",
-        "//Kaly2iOS/Presentation:presentation-api-tests",
-        "//Kaly2iOS/Presentation:presentation-tests",
-    ],
-    testonly = True,
-)
+#         # build_bazel_platform_options = {
+#         #     "ios_x86_64": ["--config=ios_x86_64"],
+#         #     "ios_i386": ["--config=ios_i386"],
+#         #     "ios_arm64": ["--config=ios_arm64"],
+#         #     "ios_armv7": ["--config=ios_armv7"],
+#         # },
+#         generate_transitive_xcode_targets = True,
+#     #    generate_transitive_xcode_targets = False,
+#         generate_xcode_schemes = True,
+#     #    generate_xcode_schemes = False,
+#         paths = ["**"],
+#         # paths = ["Kaly2iOS/**"],
+#         # paths = ["Kaly2iOS/Presentation/**"],
+#         xcconfig_overrides = {
+#             "Release": "tools/BazelToolchain.xcconfig",
+#             "Debug": "tools/BazelToolchain.xcconfig",
+#             "Profile": "tools/BazelToolchain.xcconfig",
+#         },
+#     ),
+#     target_config = {
+#         "//:ios-app": target_config(
+#             scheme_config = app_scheme_config,
+#         ),
+#     },
+#     targets = [
+#         "//:ios-app",
+#         "//Kaly2iOS/Presentation:presentation-api-tests",
+#         "//Kaly2iOS/Presentation:presentation-tests",
+#     ],
+#     testonly = True,
+# )
 
 # xcode_project(
 #     name = "kaly2",

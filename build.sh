@@ -1,2 +1,2 @@
 #!/bin/bash
-bazelisk build XcodeBazel && bazelisk build ios-app
+bazelisk build xcodeproj && bazelisk build ios-app

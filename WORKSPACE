@@ -7,6 +7,91 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
+
+
+
+
+
+
+
+
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+# http_archive(
+#     name = "com_github_buildbuddy_io_rules_xcodeproj",
+#     sha256 = "7f617ea9f353567d6443f071391d29e0e365fae4b4c9ef2f7514437a9a3ea9e5",
+#     url = "https://github.com/buildbuddy-io/rules_xcodeproj/releases/download/0.4.1/release.tar.gz",
+# )
+git_repository(
+    name = "com_github_buildbuddy_io_rules_xcodeproj",
+    remote = "https://github.com/buildbuddy-io/rules_xcodeproj.git",
+    commit = "5710480e1c726b34ecc45f1abf1bedb0d8054a46",
+    # patch_cmds = [
+    #     """
+    #     sed -i '' 's/\\:__subpackages__/visibility\\:public/g' src/TulsiGenerator/BUILD
+    #     """,
+    # ],
+)
+
+
+load(
+    "@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:repositories.bzl",
+    "xcodeproj_rules_dependencies",
+)
+
+xcodeproj_rules_dependencies()
+
+load(
+    "@build_bazel_rules_apple//apple:repositories.bzl",
+    "apple_rules_dependencies",
+)
+
+apple_rules_dependencies()
+
+load(
+    "@build_bazel_rules_swift//swift:repositories.bzl",
+    "swift_rules_dependencies",
+)
+
+swift_rules_dependencies()
+
+load(
+    "@build_bazel_rules_swift//swift:extras.bzl",
+    "swift_rules_extra_dependencies",
+)
+
+swift_rules_extra_dependencies()
+
+load(
+    "@build_bazel_apple_support//lib:repositories.bzl",
+    "apple_support_dependencies",
+)
+
+apple_support_dependencies()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # PINTEREST_TULSI_COMMIT = "c9b533f4612444e0a5e0fa639d4cb508399d9e08"
 
 # namespaced_git_repository(
@@ -28,16 +113,16 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 #     strip_prefix = "tulsi-master"
 # )
 
-git_repository(
-    name = "build_bazel_tulsi",
-    remote = "https://github.com/pinterest/tulsi.git",
-    commit = "97f645b66d40f591ab31d4de1729913cb843d5cc",
-    patch_cmds = [
-        """
-        sed -i '' 's/\\:__subpackages__/visibility\\:public/g' src/TulsiGenerator/BUILD
-        """,
-    ],
-)
+# git_repository(
+#     name = "build_bazel_tulsi",
+#     remote = "https://github.com/pinterest/tulsi.git",
+#     commit = "97f645b66d40f591ab31d4de1729913cb843d5cc",
+#     patch_cmds = [
+#         """
+#         sed -i '' 's/\\:__subpackages__/visibility\\:public/g' src/TulsiGenerator/BUILD
+#         """,
+#     ],
+# )
 
 
 
@@ -54,29 +139,29 @@ git_repository(
 
 # load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-git_repository(
-    name = "xchammer",
-    remote  = "https://github.com/jatjat/xchammer",
-    # remote  = "https://github.com/pinterest/xchammer",
-    commit = "34280f4940250a014f41fdb9e31846884fd29fa7",
-    # commit = "c588329904e05072c8d674191318e64d8dabc685"
-    shallow_since = "1649826880 -0500",
-)
+# git_repository(
+#     name = "xchammer",
+#     remote  = "https://github.com/jatjat/xchammer",
+#     # remote  = "https://github.com/pinterest/xchammer",
+#     commit = "34280f4940250a014f41fdb9e31846884fd29fa7",
+#     # commit = "c588329904e05072c8d674191318e64d8dabc685"
+#     shallow_since = "1649826880 -0500",
+# )
 # local_repository(
 #     name = "xchammer",
 #     path = "/Users/joel/Development/xchammer",
 # )
 
-load("@xchammer//third_party:repositories.bzl", "xchammer_dependencies")
+# load("@xchammer//third_party:repositories.bzl", "xchammer_dependencies")
 
-xchammer_dependencies()
+# xchammer_dependencies()
 
 
-http_archive(
-    name = "com_github_bazelbuild_buildtools",
-    strip_prefix = "buildtools-5.0.0",
-    url = "https://github.com/bazelbuild/buildtools/archive/5.0.0.zip",
-)
+# http_archive(
+#     name = "com_github_bazelbuild_buildtools",
+#     strip_prefix = "buildtools-5.0.0",
+#     url = "https://github.com/bazelbuild/buildtools/archive/5.0.0.zip",
+# )
 
 # load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
 
@@ -88,33 +173,33 @@ http_archive(
 ## Build system
 # This needs to be manually imported
 # https://github.com/bazelbuild/bazel/issues/1550
-git_repository(
-    name = "xcbuildkit",
-    commit = "b619d25f65cf7195c57e2dbc26d488e5606e763a",
-    remote = "https://github.com/jerrymarino/xcbuildkit.git",
-)
+# git_repository(
+#     name = "xcbuildkit",
+#     commit = "b619d25f65cf7195c57e2dbc26d488e5606e763a",
+#     remote = "https://github.com/jerrymarino/xcbuildkit.git",
+# )
 
-load("@xcbuildkit//third_party:repositories.bzl", xcbuildkit_dependencies = "dependencies")
+# load("@xcbuildkit//third_party:repositories.bzl", xcbuildkit_dependencies = "dependencies")
 
-xcbuildkit_dependencies()
+# xcbuildkit_dependencies()
 
 # http_file(
 #     name = "xctestrunner",
 #     executable = 1,
 #     urls = ["https://github.com/google/xctestrunner/releases/download/0.2.15/ios_test_runner.par"],
 # )
-git_repository(
-	    name = "subpar",
-	    remote = "https://github.com/google/subpar",
-	    # tag = "2.0.0",
-        commit = "35bb9f0092f71ea56b742a520602da9b3638a24f",
-        shallow_since = "1557863961 -0400"
-)
-git_repository(
-    name = "xctestrunner",
-    commit = "e0bc4b29976cf000794e9e796cb8a584b0c443bc",
-    remote = "https://github.com/google/xctestrunner.git",
-)
+# git_repository(
+# 	    name = "subpar",
+# 	    remote = "https://github.com/google/subpar",
+# 	    # tag = "2.0.0",
+#         commit = "35bb9f0092f71ea56b742a520602da9b3638a24f",
+#         shallow_since = "1557863961 -0400"
+# )
+# git_repository(
+#     name = "xctestrunner",
+#     commit = "e0bc4b29976cf000794e9e796cb8a584b0c443bc",
+#     remote = "https://github.com/google/xctestrunner.git",
+# )
 
 # http_archive(
 #     name = "xchammer",
@@ -137,26 +222,26 @@ git_repository(
 # )
 
 
-git_repository(
-    name = "build_bazel_rules_apple",
-    remote = "https://github.com/bazelbuild/rules_apple.git",
-    # tag = "0.33.0",
-    commit = "aa0b4843ed98ba1723e42ac88f54374d20b9fde2"
-    # commit = "0d1e9559332ad97dc3d2e7e5165a10f958279bf4" # see if 
-)
+# git_repository(
+#     name = "build_bazel_rules_apple",
+#     remote = "https://github.com/bazelbuild/rules_apple.git",
+#     # tag = "0.33.0",
+#     commit = "aa0b4843ed98ba1723e42ac88f54374d20b9fde2"
+#     # commit = "0d1e9559332ad97dc3d2e7e5165a10f958279bf4" # see if 
+# )
 
-load(
-    "@build_bazel_rules_apple//apple:repositories.bzl",
-    "apple_rules_dependencies",
-)
+# load(
+#     "@build_bazel_rules_apple//apple:repositories.bzl",
+#     "apple_rules_dependencies",
+# )
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+# load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-http_archive(
-    name = "build_bazel_rules_swift",
-    # sha256 = "3e52a508cdc47a7adbad36a3d2b712e282cc39cc211b0d63efcaf608961eb36b",
-    url = "https://github.com/bazelbuild/rules_swift/releases/download/0.26.0/rules_swift.0.26.0.tar.gz",
-)
+# http_archive(
+#     name = "build_bazel_rules_swift",
+#     # sha256 = "3e52a508cdc47a7adbad36a3d2b712e282cc39cc211b0d63efcaf608961eb36b",
+#     url = "https://github.com/bazelbuild/rules_swift/releases/download/0.26.0/rules_swift.0.26.0.tar.gz",
+# )
 # git_repository(
 #     name = "build_bazel_rules_swift",
 #     remote = "https://github.com/bazelbuild/rules_swift.git",
@@ -167,29 +252,29 @@ http_archive(
 # )
 
 
-http_archive(
-    name = "rules_cc",
-    sha256 = "3cde212ccda3ba152897e7fd354c42eba275878b6d98fe4f2125c684a73f3842",
-    strip_prefix = "rules_cc-d66a13e2a01630afcafc4ba411d83e291ecf02bd",
-    urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_cc/archive/d66a13e2a01630afcafc4ba411d83e291ecf02bd.tar.gz",
-        "https://github.com/bazelbuild/rules_cc/archive/d66a13e2a01630afcafc4ba411d83e291ecf02bd.tar.gz",
-    ],
-)
+# http_archive(
+#     name = "rules_cc",
+#     sha256 = "3cde212ccda3ba152897e7fd354c42eba275878b6d98fe4f2125c684a73f3842",
+#     strip_prefix = "rules_cc-d66a13e2a01630afcafc4ba411d83e291ecf02bd",
+#     urls = [
+#         "https://mirror.bazel.build/github.com/bazelbuild/rules_cc/archive/d66a13e2a01630afcafc4ba411d83e291ecf02bd.tar.gz",
+#         "https://github.com/bazelbuild/rules_cc/archive/d66a13e2a01630afcafc4ba411d83e291ecf02bd.tar.gz",
+#     ],
+# )
 
-load(
-    "@build_bazel_rules_swift//swift:repositories.bzl",
-    "swift_rules_dependencies",
-)
+# load(
+#     "@build_bazel_rules_swift//swift:repositories.bzl",
+#     "swift_rules_dependencies",
+# )
 
-swift_rules_dependencies()
+# swift_rules_dependencies()
 
-load(
-    "@build_bazel_rules_swift//swift:extras.bzl",
-    "swift_rules_extra_dependencies",
-)
+# load(
+#     "@build_bazel_rules_swift//swift:extras.bzl",
+#     "swift_rules_extra_dependencies",
+# )
 
-swift_rules_extra_dependencies()
+# swift_rules_extra_dependencies()
 
 git_repository(
     name = "rules_proto_grpc",
@@ -209,46 +294,46 @@ load("@rules_proto_grpc//swift:repositories.bzl", rules_proto_grpc_swift_repos =
 
 rules_proto_grpc_swift_repos()
 
-load(
-    "@build_bazel_rules_swift//swift:repositories.bzl",
-    "swift_rules_dependencies",
-)
+# load(
+#     "@build_bazel_rules_swift//swift:repositories.bzl",
+#     "swift_rules_dependencies",
+# )
 
-swift_rules_dependencies()
+# swift_rules_dependencies()
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-http_archive(
-    name = "cgrindel_rules_spm",
-    sha256 = "b85d8d089c5f707b451f142718b32c647b22d0a72a5b7c1832af0f3e4d25be4f",
-    strip_prefix = "rules_spm-0.9.0",
-    urls = [
-        "https://github.com/cgrindel/rules_spm/archive/v0.9.0.tar.gz",
-    ],
-)
+# http_archive(
+#     name = "cgrindel_rules_spm",
+#     sha256 = "b85d8d089c5f707b451f142718b32c647b22d0a72a5b7c1832af0f3e4d25be4f",
+#     strip_prefix = "rules_spm-0.9.0",
+#     urls = [
+#         "https://github.com/cgrindel/rules_spm/archive/v0.9.0.tar.gz",
+#     ],
+# )
 
-load(
-    "@cgrindel_rules_spm//spm:deps.bzl",
-    "spm_rules_dependencies",
-)
+# load(
+#     "@cgrindel_rules_spm//spm:deps.bzl",
+#     "spm_rules_dependencies",
+# )
 
-spm_rules_dependencies()
+# spm_rules_dependencies()
 
-load(
-    "@build_bazel_rules_swift//swift:repositories.bzl",
-    "swift_rules_dependencies",
-)
+# load(
+#     "@build_bazel_rules_swift//swift:repositories.bzl",
+#     "swift_rules_dependencies",
+# )
 
-swift_rules_dependencies()
+# swift_rules_dependencies()
 
-load(
-    "@build_bazel_rules_swift//swift:extras.bzl",
-    "swift_rules_extra_dependencies",
-)
+# load(
+#     "@build_bazel_rules_swift//swift:extras.bzl",
+#     "swift_rules_extra_dependencies",
+# )
 
-swift_rules_extra_dependencies()
-# end new spm
-load("@cgrindel_rules_spm//spm:defs.bzl", "spm_pkg", "spm_repositories")
+# swift_rules_extra_dependencies()
+# # end new spm
+# load("@cgrindel_rules_spm//spm:defs.bzl", "spm_pkg", "spm_repositories")
 
 # spm_repositories(
 #     name = "swift_pkgs",
@@ -396,7 +481,7 @@ objc_library(
     srcs = glob(["Sources/CGRPCZlib/**/*.c"]),
     visibility = ["//visibility:public"],
     includes = [".", "Sources/CGRPCZlib/include"],
-    sdk_dylibs = ["z", "libswift_Concurrency"],
+    sdk_dylibs = ["z"],# "libswift_Concurrency"],
         # sdk_dylibs = [".dylib"],
  )
 
