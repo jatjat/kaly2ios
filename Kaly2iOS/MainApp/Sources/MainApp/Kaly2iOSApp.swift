@@ -32,6 +32,12 @@ class Kaly2iOSApp: App {
     }
 }
 
+struct Kaly2iOSApp_Previews: PreviewProvider {
+    static var previews: some View {
+        Button("asd") {}
+    }
+}
+
 extension Kaly2iOSApp {
     struct Component: Cleanse.RootComponent {
         typealias Root = PropertyInjector<Kaly2iOSApp>
