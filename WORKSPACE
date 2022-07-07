@@ -26,7 +26,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 git_repository(
     name = "com_github_buildbuddy_io_rules_xcodeproj",
     remote = "https://github.com/buildbuddy-io/rules_xcodeproj.git",
-    commit = "5710480e1c726b34ecc45f1abf1bedb0d8054a46",
+    commit = "a93aabc34aa3c04338c7ffe4fa5e869e9dda45a1",
     # patch_cmds = [
     #     """
     #     sed -i '' 's/\\:__subpackages__/visibility\\:public/g' src/TulsiGenerator/BUILD
