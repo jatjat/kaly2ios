@@ -6,6 +6,7 @@
 //
 
 @testable import Domain
+import DomainMocks
 import XCTest
 
 class DomainTests: XCTestCase {
@@ -17,12 +18,20 @@ class DomainTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testChangeRobotSettingsUseCase() async throws {
+        // GIVEN
+        let mock = SessionClientMock()
+        mock.modifySessionSettingsHandler = { sessionID, shouldRun in
+            XCTAssertEqual(sessionID, 99)
+            XCTAssertEqual(shouldRun, false)
+        }
+        let use = ChangeRobotSettingsUseCaseImpl(sessionClient: mock)
+
+        // WHEN
+        try await use.execute(robotSessionID: 99, shouldRun: false)
+
+        // THEN
+        XCTAssertEqual(mock.modifySessionSettingsCallCount, 1)
     }
 
     func testPerformanceExample() throws {

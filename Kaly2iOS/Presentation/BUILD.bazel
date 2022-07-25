@@ -2,19 +2,12 @@ load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_unit_test")
 
 swift_library(
-    name = "presentation-api",
-    module_name = "PresentationAPI",
-    srcs = glob(["Sources/PresentationAPI/**/*.swift"]),
-    visibility = ["//visibility:public"],
-    deps = ["//Kaly2iOS/Common:common-api"],
-)
-
-swift_library(
     name = "presentation",
     module_name = "Presentation",
     srcs = glob(["Sources/Presentation/**/*.swift"]),
     visibility = ["//visibility:public"],
-    deps = ["//Kaly2iOS/Presentation:presentation-api",
+    deps = [
+            "//Kaly2iOS/Domain:domain",
             "//Kaly2iOS/Common:common",
             "@cleanse-repo//:Cleanse"
             ],
@@ -22,26 +15,11 @@ swift_library(
 )
 
 swift_library(
-    name = "presentation-api-tests-lib",
-    module_name = "PresentationAPITests",
-    srcs = glob(["Tests/PresentationAPITests/**/*.swift"]),
-    deps = [":presentation-api"],
-)
-
-swift_library(
     name = "presentation-tests-lib",
     module_name = "PresentationTests",
     srcs = glob(["Tests/PresentationTests/**/*.swift"]),
-    deps = [":presentation"],
+    deps = [":presentation", "//Kaly2iOS/Domain:domain-mocks"],
     tags = ["xchammer"],
-)
-
-ios_unit_test(
-    name = "presentation-api-tests",
-    size = "medium",
-    minimum_os_version = "15.0",
-    visibility = ["//visibility:public"],
-    deps = ["presentation-api-tests-lib"]
 )
 
 ios_unit_test(

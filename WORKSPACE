@@ -78,204 +78,6 @@ apple_support_dependencies()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# PINTEREST_TULSI_COMMIT = "c9b533f4612444e0a5e0fa639d4cb508399d9e08"
-
-# namespaced_git_repository(
-#     name = "Tulsi",
-#     remote = "https://github.com/pinterest/tulsi.git",
-#     commit = PINTEREST_TULSI_COMMIT,
-#     patch_cmds = [
-#         """
-#         sed -i '' 's/\\:__subpackages__/visibility\\:public/g' src/TulsiGenerator/BUILD
-#         """,
-#     ],
-# )
-
-# http_archive(
-#     name = "build_bazel_tulsi",
-#     commit = ""
-#     # Grabbing master for this example, so it always points to the latest. You may want to do otherwise.
-#     urls = ["https://github.com/bazelbuild/tulsi/archive/master.zip"],
-#     strip_prefix = "tulsi-master"
-# )
-
-# git_repository(
-#     name = "build_bazel_tulsi",
-#     remote = "https://github.com/pinterest/tulsi.git",
-#     commit = "97f645b66d40f591ab31d4de1729913cb843d5cc",
-#     patch_cmds = [
-#         """
-#         sed -i '' 's/\\:__subpackages__/visibility\\:public/g' src/TulsiGenerator/BUILD
-#         """,
-#     ],
-# )
-
-
-
-# # This is a hack for XCHammer development, but is how XCHammer is imported
-# # into a workspace as a binary build
-# new_git_repository(
-#     name = "xchammer_tulsi_aspects",
-#     remote = "https://github.com/pinterest/tulsi.git",
-#     commit = PINTEREST_TULSI_COMMIT,
-#     strip_prefix = "src/TulsiGenerator/Bazel",
-#     build_file_content = "exports_files(['tulsi'])",
-# )
-
-
-# load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
-
-# git_repository(
-#     name = "xchammer",
-#     remote  = "https://github.com/jatjat/xchammer",
-#     # remote  = "https://github.com/pinterest/xchammer",
-#     commit = "34280f4940250a014f41fdb9e31846884fd29fa7",
-#     # commit = "c588329904e05072c8d674191318e64d8dabc685"
-#     shallow_since = "1649826880 -0500",
-# )
-# local_repository(
-#     name = "xchammer",
-#     path = "/Users/joel/Development/xchammer",
-# )
-
-# load("@xchammer//third_party:repositories.bzl", "xchammer_dependencies")
-
-# xchammer_dependencies()
-
-
-# http_archive(
-#     name = "com_github_bazelbuild_buildtools",
-#     strip_prefix = "buildtools-5.0.0",
-#     url = "https://github.com/bazelbuild/buildtools/archive/5.0.0.zip",
-# )
-
-# load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
-
-# buildifier_dependencies()
-
-
-
-
-## Build system
-# This needs to be manually imported
-# https://github.com/bazelbuild/bazel/issues/1550
-# git_repository(
-#     name = "xcbuildkit",
-#     commit = "b619d25f65cf7195c57e2dbc26d488e5606e763a",
-#     remote = "https://github.com/jerrymarino/xcbuildkit.git",
-# )
-
-# load("@xcbuildkit//third_party:repositories.bzl", xcbuildkit_dependencies = "dependencies")
-
-# xcbuildkit_dependencies()
-
-# http_file(
-#     name = "xctestrunner",
-#     executable = 1,
-#     urls = ["https://github.com/google/xctestrunner/releases/download/0.2.15/ios_test_runner.par"],
-# )
-# git_repository(
-# 	    name = "subpar",
-# 	    remote = "https://github.com/google/subpar",
-# 	    # tag = "2.0.0",
-#         commit = "35bb9f0092f71ea56b742a520602da9b3638a24f",
-#         shallow_since = "1557863961 -0400"
-# )
-# git_repository(
-#     name = "xctestrunner",
-#     commit = "e0bc4b29976cf000794e9e796cb8a584b0c443bc",
-#     remote = "https://github.com/google/xctestrunner.git",
-# )
-
-# http_archive(
-#     name = "xchammer",
-#     sha256 = "dbb998f08a2efaade0a6e76363249cc581107d5c4fec63a1b7ef16a40b64c32e",
-#     urls = [ "https://github.com/pinterest/xchammer/releases/download/v3.4.1.6/xchammer.zip" ],
-# )
-# git_repository(
-#     name = "xchammer",
-#     remote = "https://github.com/pinterest/xchammer.git",
-#     commit = "c588329904e05072c8d674191318e64d8dabc685",
-# )
-
-# http_archive(
-#     name = "xchammer",
-#     # urls = [ "https://github.com/pinterest/xchammer/releases/download/v3.4.1.0/xchammer.zip" ],
-#     # xchammer_dist
-
-#     # urls = ["file:////Users/joel/Development/xchammer/bazel-bin/xchammer_dist_repo.zip"]
-#     urls = ["file:////Users/joel/Development/xchammer/xchammer.zip"]
-# )
-
-
-# git_repository(
-#     name = "build_bazel_rules_apple",
-#     remote = "https://github.com/bazelbuild/rules_apple.git",
-#     # tag = "0.33.0",
-#     commit = "aa0b4843ed98ba1723e42ac88f54374d20b9fde2"
-#     # commit = "0d1e9559332ad97dc3d2e7e5165a10f958279bf4" # see if 
-# )
-
-# load(
-#     "@build_bazel_rules_apple//apple:repositories.bzl",
-#     "apple_rules_dependencies",
-# )
-
-# load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
-# http_archive(
-#     name = "build_bazel_rules_swift",
-#     # sha256 = "3e52a508cdc47a7adbad36a3d2b712e282cc39cc211b0d63efcaf608961eb36b",
-#     url = "https://github.com/bazelbuild/rules_swift/releases/download/0.26.0/rules_swift.0.26.0.tar.gz",
-# )
-# git_repository(
-#     name = "build_bazel_rules_swift",
-#     remote = "https://github.com/bazelbuild/rules_swift.git",
-#     commit = "c1d7d1df6969c2675c7826ecf1202d78016b1753", 
-#     # commit = "4e66b096d5f7d4b75932573f8d8745c2d5f54d2b", # old working
-#     # commit = "9d4c3b1dd99cab67fa922af2b0bd0a96f791afa7", # feb 14
-#     # commit = "c72cbc61f172851848826569766185c458f95e0a", # feb 4
-# )
-
-
-# http_archive(
-#     name = "rules_cc",
-#     sha256 = "3cde212ccda3ba152897e7fd354c42eba275878b6d98fe4f2125c684a73f3842",
-#     strip_prefix = "rules_cc-d66a13e2a01630afcafc4ba411d83e291ecf02bd",
-#     urls = [
-#         "https://mirror.bazel.build/github.com/bazelbuild/rules_cc/archive/d66a13e2a01630afcafc4ba411d83e291ecf02bd.tar.gz",
-#         "https://github.com/bazelbuild/rules_cc/archive/d66a13e2a01630afcafc4ba411d83e291ecf02bd.tar.gz",
-#     ],
-# )
-
-# load(
-#     "@build_bazel_rules_swift//swift:repositories.bzl",
-#     "swift_rules_dependencies",
-# )
-
-# swift_rules_dependencies()
-
-# load(
-#     "@build_bazel_rules_swift//swift:extras.bzl",
-#     "swift_rules_extra_dependencies",
-# )
-
-# swift_rules_extra_dependencies()
-
 git_repository(
     name = "rules_proto_grpc",
     remote = "https://github.com/rules-proto-grpc/rules_proto_grpc.git",
@@ -294,72 +96,7 @@ load("@rules_proto_grpc//swift:repositories.bzl", rules_proto_grpc_swift_repos =
 
 rules_proto_grpc_swift_repos()
 
-# load(
-#     "@build_bazel_rules_swift//swift:repositories.bzl",
-#     "swift_rules_dependencies",
-# )
-
-# swift_rules_dependencies()
-
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
-# http_archive(
-#     name = "cgrindel_rules_spm",
-#     sha256 = "b85d8d089c5f707b451f142718b32c647b22d0a72a5b7c1832af0f3e4d25be4f",
-#     strip_prefix = "rules_spm-0.9.0",
-#     urls = [
-#         "https://github.com/cgrindel/rules_spm/archive/v0.9.0.tar.gz",
-#     ],
-# )
-
-# load(
-#     "@cgrindel_rules_spm//spm:deps.bzl",
-#     "spm_rules_dependencies",
-# )
-
-# spm_rules_dependencies()
-
-# load(
-#     "@build_bazel_rules_swift//swift:repositories.bzl",
-#     "swift_rules_dependencies",
-# )
-
-# swift_rules_dependencies()
-
-# load(
-#     "@build_bazel_rules_swift//swift:extras.bzl",
-#     "swift_rules_extra_dependencies",
-# )
-
-# swift_rules_extra_dependencies()
-# # end new spm
-# load("@cgrindel_rules_spm//spm:defs.bzl", "spm_pkg", "spm_repositories")
-
-# spm_repositories(
-#     name = "swift_pkgs",
-#     dependencies = [
-#         spm_pkg(
-#             "https://github.com/grpc/grpc-swift.git",
-#             # products = ["GRPC", "protoc-gen-grpc-swift"],
-#             products = ["protoc-gen-grpc-swift"],
-#             revision = "8fcf4f3765a09fdebd6bb4a504ab48cccf617619" #"1.6.0-async-await",
-#         ),
-#     ],
-# )
-
-# spm_repositories(
-#     name = "swift_di_pkgs",
-#     dependencies = [
-#         spm_pkg(
-#             "https://github.com/square/cleanse.git",
-#             name = "Cleanse",
-#             products = ["Cleanse"],
-#             exact_version = "4.2.6"
-#             #revision = "4.2.6",
-#         ),
-#     ],
-# )
-
 
 
 # Recompiles every time the $PATH changes (all the time)
@@ -369,16 +106,6 @@ http_archive(
     url = "https://github.com/google/protobuf/releases/download/v3.19.4/protobuf-cpp-3.19.4.zip",
     strip_prefix = "protobuf-3.19.4",
 )
-# http_archive(
-#     name = "protobuf",
-#     url = "https://github.com/protocolbuffers/protobuf/releases/download/v3.20.0/protoc-3.20.0-osx-aarch_64.zip",
-#     strip_prefix = "bin",
-# )
-
-# run_binary(
-#     name = "protoc",
-#     tool = "@protobuf//protoc"
-# )
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 new_git_repository(
@@ -405,41 +132,6 @@ swift_library(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#   http_archive(
-#       name = "my_ssl",
-#       urls = ["http://example.com/openssl.zip"],
-#       sha256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    #   build_file = "@//:openssl.BUILD",
-#   )
-
-
-# http_archive(
-#     name = "grpc-swift-repo",
-#     url = "https://github.com/grpc/grpc-swift/archive/refs/tags/1.6.0-async-await.1.tar.gz",
-#     strip_prefix = "grpc-swift-1.6.0-async-await.1",
-#     build_file_content = """
-# XCHammer seems to ignore Git branches:
 new_git_repository(
     name = "grpc-swift-repo",
     remote = "https://github.com/grpc/grpc-swift.git",
@@ -524,18 +216,6 @@ swift_library(
 
 
 
-
-# load("swiftniorepo.bzl", "new_http_archive")
-# http_archive(
-#     name = "swift-nio-repo",
-#     url = "https://github.com/apple/swift-nio/archive/refs/tags/2.33.0.tar.gz",
-#     strip_prefix = "swift-nio-2.33.0",
-#     build_file_content = """
-
-# load("swiftniorepo.bzl", "my_source_lib")
-# my_source_lib(
-#     name = "swift-nio-repo",
-#     build_file_content = """
 
 # XCHammer doesn't seem to work for git repos:
 new_git_repository(
@@ -888,42 +568,113 @@ swift_library(
 """,
 )
 
+# new_git_repository(
+#     name = "swift-argument-parser-repo",
+#     remote = "https://github.com/apple/swift-argument-parser.git",
+#     tag = "1.0.0",
+#     build_file_content = """
+# load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+# swift_library(
+#    name = "SwiftProtobuf",
+#    module_name = "SwiftProtobuf",
+#    srcs = glob(["Sources/SwiftProtobuf/**/*.swift"]),
+#    visibility = ["//visibility:public"],
+#    # deps = ["NIOCore"],
+# )
+# """,
+# )
+
+
+
+
+
+
+
 new_git_repository(
-    name = "swift-argument-parser-repo",
-    remote = "https://github.com/apple/swift-argument-parser.git",
-    tag = "1.0.0",
+    name = "swift-syntax-repo",
+    remote = "https://github.com/apple/swift-syntax.git",
+    tag = "0.50600.1",
     build_file_content = """
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 
 swift_library(
-   name = "SwiftProtobuf",
-   module_name = "SwiftProtobuf",
-   srcs = glob(["Sources/SwiftProtobuf/**/*.swift"]),
+   name = "SwiftSyntaxParser",
+   module_name = "SwiftSyntaxParser",
+   srcs = glob(["Sources/SwiftSyntaxParser/**/*.swift"]),
+   visibility = ["//visibility:public"],
+   deps = ["_CSwiftSyntax"],
+)
+
+
+
+swift_library(
+   name = "_CSwiftSyntax",
+   module_name = "_CSwiftSyntax",
+   srcs = glob(["Sources/_CSwiftSyntax/**/*.swift"]),
    visibility = ["//visibility:public"],
    # deps = ["NIOCore"],
 )
 """,
 )
 
+# http_archive(
+#     name = "mockolo",
+#     url = "https://github.com/uber/mockolo/releases/download/1.7.0/mockolo.tar.gz",
+#     strip_prefix = "mockolo",
+#     visibility = ["//visibility:public"],
+# )
 
 
 
 
+new_git_repository(
+    name = "swift-argument-parser",
+    remote = "https://github.com/apple/swift-argument-parser",
+    commit = "1.0.3",
+    build_file_content = """
+
+"""
+)
+
+
+new_git_repository(
+    name = "swift-tools-support-core",
+    remote = "https://github.com/apple/swift-tools-support-core.git",
+    commit = "1.0.3",
+    build_file_content = """
+"""
+)
 
 
 
+new_git_repository(
+    name = "mockolo",
+    remote = "https://github.com/uber/mockolo.git",
+    commit = "b006932f6821c161ccf684597fe8c836f42a7d7e",
+    build_file_content = """
 
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library", "swift_binary", "swift_c_module")
+load("@build_bazel_rules_apple//apple:apple.bzl","apple_static_framework_import")
+load(
+    "@build_bazel_rules_apple//apple:macos.bzl",
+    "macos_command_line_application",
+)
 
+macos_command_line_application(
+        name = "mockolo",
+        deps = ["MockoloFramework", "SwiftToolsSupport-auto", ArgumentParser],
+        minimum_os_version = "10.11",
+        visibility = ["//visibility:public"],
+)
 
+swift_library(
+    name = "MockoloFramework",
+    module_name = "MockoloFramework",
+    srcs = glob(["Sources/MockoloFramework/**/*.swift"]),
+    visibility = ["//visibility:public"],
+    deps = ["SwiftSyntaxParser"],
+)
 
-
-
-
-
-
-
-# module "CNIOAtomics" {
-#     export *
-
-#     header "external/swift-nio-repo/Sources/CNIOAtomics/include/CNIOAtomics.h"
-# }
+"""
+)

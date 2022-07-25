@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug mockolo (iOS App.xcodeproj/rules_xcodeproj/links/external/mockolo)",
+            "program": ".build/debug/mockolo",
+            "args": [],
+            "cwd": "${workspaceFolder:kaly2ios}/iOS App.xcodeproj/rules_xcodeproj/links/external/mockolo",
+            "preLaunchTask": "swift: Build Debug mockolo (iOS App.xcodeproj/rules_xcodeproj/links/external/mockolo)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release mockolo (iOS App.xcodeproj/rules_xcodeproj/links/external/mockolo)",
+            "program": ".build/release/mockolo",
+            "args": [],
+            "cwd": "${workspaceFolder:kaly2ios}/iOS App.xcodeproj/rules_xcodeproj/links/external/mockolo",
+            "preLaunchTask": "swift: Build Release mockolo (iOS App.xcodeproj/rules_xcodeproj/links/external/mockolo)"
+        }
+    ]
+}

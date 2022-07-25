@@ -5,7 +5,7 @@
 //  Created by Joel Thiessen on 2021-09-29.
 //
 
-import DataAPI
+import Domain
 import Foundation
 
 class MapClientImpl: MapClient {

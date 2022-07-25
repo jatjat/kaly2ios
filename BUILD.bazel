@@ -24,7 +24,8 @@ XCODEPROJ_TARGETS = [
     # "//ExampleTests",
     # "//ExampleObjcTests",
     # "//ExampleUITests",
-    "//Kaly2iOS/Presentation:presentation-api-tests",
+    "//Kaly2iOS/Common:common-tests",
+    "//Kaly2iOS/Domain:domain-tests",
     "//Kaly2iOS/Presentation:presentation-tests",
 ]
 xcodeproj(
@@ -36,127 +37,6 @@ xcodeproj(
     build_mode = "xcode",
     # build_mode = "bazel",
 )
-
-# xcode_project(
-#     name = "kaly2",
-#     targets = [ "//:ios-app" ],
-#     project_config = project_config(
-#     paths = [ "Kaly2iOS/**" ],
-#     )
-# )
-# load("@xchammer//:BazelExtensions/xcodeproject.bzl", "xcode_project",
-#     # "execution_action",
-
-# )
-
-# load("@xchammer//:BazelExtensions/xchammerconfig.bzl",
-#     "project_config",
-#     "scheme_action_config",
-#     "target_config",
-#     "app_scheme_config"
-# )
-
-
-
-# load(
-#     "@xchammer//:BazelExtensions/xchammerconfig.bzl",
-#     "project_config",
-#     "execution_action",
-#         "scheme_action_config",
-#         "target_config",
-# )
-# load("@xchammer//:BazelExtensions/xcodeproject.bzl", "xcode_project")
-
-# Spawn the index import action as a background process
-# app_scheme_config = {
-#     "Build": scheme_action_config(
-#         post_actions = [
-#             execution_action(
-#                 name = "Import global index",
-#                 script = "$SRCROOT/tools/XCHammerIndexImportAction.sh &",
-#             ),
-#         ],
-#         pre_actions = [],
-#     ),
-# }
-
-# xcode_project(
-#     name = "XcodeBazel",
-#     bazel = "bazel.sh",
-#     project_config = project_config(
-        
-#         # build_bazel_platform_options = {
-#         #     "ios_x86_64": ["--config=ios_x86_64"],
-#         #     "ios_i386": ["--config=ios_i386"],
-#         #     "ios_arm64": ["--config=ios_arm64"],
-#         #     "ios_armv7": ["--config=ios_armv7"],
-#         # },
-#         generate_transitive_xcode_targets = True,
-#     #    generate_transitive_xcode_targets = False,
-#         generate_xcode_schemes = True,
-#     #    generate_xcode_schemes = False,
-#         paths = ["**"],
-#         # paths = ["Kaly2iOS/**"],
-#         # paths = ["Kaly2iOS/Presentation/**"],
-#         xcconfig_overrides = {
-#             "Release": "tools/BazelToolchain.xcconfig",
-#             "Debug": "tools/BazelToolchain.xcconfig",
-#             "Profile": "tools/BazelToolchain.xcconfig",
-#         },
-#     ),
-#     target_config = {
-#         "//:ios-app": target_config(
-#             scheme_config = app_scheme_config,
-#         ),
-#     },
-#     targets = [
-#         "//:ios-app",
-#         "//Kaly2iOS/Presentation:presentation-api-tests",
-#         "//Kaly2iOS/Presentation:presentation-tests",
-#     ],
-#     testonly = True,
-# )
-
-# xcode_project(
-#     name = "kaly2",
-    # testonly = True,
-    # bazel = "tools/bazelwrapper",
-    # project_config = project_config(
-    #     build_bazel_platform_options = {
-    #         "ios_x86_64": ["--config=ios_x86_64"],
-    #         "ios_i386": ["--config=ios_i386"],
-    #         "ios_arm64": ["--config=ios_arm64"],
-    #         "ios_armv7": ["--config=ios_armv7"],
-    #     },
-    #     generate_transitive_xcode_targets = True,
-    #     generate_xcode_schemes = False,
-    #     paths = ["Kaly2iOS/**"],
-    # ),
-    # target_config = {
-    #     "//ios-app:ios-app": target_config(
-    #         scheme_config = app_scheme_config,
-    #     ),
-    # },
-    # targets = [
-    #     ":ios-app",
-        # "//Kaly2iOS/Shared:ios-app",
-        # "//ios-app:UrlGetClasses",
-        # "//ios-app:UnitTests",
-        # "//ios-app:UnitTestsWithHost",
-    # ],
-# )
-
-# genrule(
-#     name = "wat",
-#     outs = ["kaly2.xcodeproject"],
-#     cmd = """
-#     pwd && cd -P . && ls ./bazel-out/host/bin/external/xchammer && unzip -qq ./bazel-out/host/bin/external/xchammer/xchammer.zip && ./xchammer.app/Contents/MacOS/xchammer \
-#     --plugin= \
-#     --swift_out=$(GENDIR) \
-#     --proto_path=. $(SRCS)
-#     """,
-#     tools = ["@xchammer//:xchammer"]
-# )
 
 
 alias(
@@ -172,9 +52,8 @@ ios_application(
     minimum_os_version = "15.0",
     # visibility = ["//swift:__subpackages__"],
     deps = [
-            "//Kaly2iOS/MainApp:main-app",        
-
-            ],
+            "//Kaly2iOS/MainApp:main-app",
+    ],
 )
 ios_application(
     name = "ios-app-h",
@@ -193,3 +72,4 @@ swift_library(
     ],
     visibility = ["//visibility:public"],
 )
+

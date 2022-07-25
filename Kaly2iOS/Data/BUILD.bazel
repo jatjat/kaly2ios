@@ -17,76 +17,22 @@ protos = glob([
     ])
 
 swift_library(
-    name = "data-api",
-    srcs = glob(["Sources/DataAPI/**/*.swift"]),
-    visibility = ["//visibility:public"],
-    module_name = "DataAPI",
-    deps = ["//Kaly2iOS/Common:common-api"]
-)
-
-swift_library(
     name = "data",
-    srcs = glob(["Sources/Data/Clients/**/*.swift","Sources/Data/Repositories/**/*.swift", "Sources/Data/*.swift"]) + grpc_stubs + proto_models,
+    srcs = glob([
+        "Sources/Data/Clients/**/*.swift",
+        "Sources/Data/Repositories/**/*.swift",
+        "Sources/Data/*.swift",
+        "Sources/Data/Cleanse/*.swift"
+    ]) + grpc_stubs + proto_models,
     visibility = ["//visibility:public"],
     module_name = "Data",
-    deps = ["@grpc-swift-repo//:GRPC", "data-api",
+    deps = ["@grpc-swift-repo//:GRPC",
     "@cleanse-repo//:Cleanse",
-],
+    "//Kaly2iOS/Domain:domain"
+    ],
     tags = ["xchammer"],
     # data = [":grpc_stubs"]
 )
-
-# go_binary = rule(
-#     _go_binary_impl,
-#     attrs = {
-#         "srcs": attr.label_list(
-#             doc = "Source files to compile for the main package of this binary",
-#         ),
-#     },
-#     doc = "Builds an executable program from Go source code",
-#     executable = True,
-# )
-
-# def _go_binary_impl(ctx):
-#     # Declare an output file for the main package and compile it from srcs. All
-#     # our output files will start with a prefix to avoid conflicting with
-#     # other rules.
-#     prefix = ctx.label.name + "%/"
-#     main_archive = ctx.actions.declare_file(prefix + "main.a")
-#     go_compile(
-#         ctx,
-#         srcs = ctx.files.srcs,
-#         out = main_archive,
-#     )
-
-#     # Declare an output file for the executable and link it. Note that output
-#     # files may not have the same name as the rule, so we still need to use the
-#     # prefix here.
-#     executable = ctx.actions.declare_file(prefix + ctx.label.name)
-#     go_link(
-#         ctx,
-#         main = main_archive,
-#         out = executable,
-#     )
-
-#     # Return the DefaultInfo provider. This tells Bazel what files should be
-#     # built when someone asks to build a go_binary rules. It also says which
-#     # one is executable (in this case, there's only one).
-#     return [DefaultInfo(
-#         files = depset([executable]),
-#         executable = executable,
-#     )]
-
-# genrule(
-#     name = "protoc"
-#     outs = "libprotoc-gen-grpc-swift.a"
-#     cmd = """
-    
-#     """,
-#     srcs = protos,
-#     tools = tools,
-#     tags = ["xchammer"]
-# )
 
 genrule(
     name = "grpc_stubs",

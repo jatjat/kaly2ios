@@ -7,8 +7,6 @@
 
 import Cleanse
 import Combine
-import CommonAPI
-import DataAPI
 import Foundation
 
 public struct DomainModule: Module {
@@ -16,6 +14,9 @@ public struct DomainModule: Module {
         binder
             .bind(ChangeRobotSettingsUseCase.self)
             .to(factory: ChangeRobotSettingsUseCaseImpl.init)
+        binder
+            .bind(SeeMapUseCase.self)
+            .to(factory: SeeMapUseCase.init)
     }
 }
 
@@ -28,7 +29,7 @@ public actor SessionServiceImpl: SessionService {
 
     let sessionClient: SessionClient
 
-    var iterations = [Iteration]()
+//    var iterations = [IterationData]()
 
     var itr: SessionIterator?
 

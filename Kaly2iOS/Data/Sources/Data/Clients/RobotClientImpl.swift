@@ -5,9 +5,10 @@
 //  Created by Joel Thiessen on 2021-09-30.
 //
 
-import DataAPI
+import Domain
 import Foundation
 import GRPC
+import NIOCore
 
 class RobotClientImpl: RobotClient {
     let client: Ca_Joelathiessen_Kaly2_Proto_RobotServiceAsyncClient

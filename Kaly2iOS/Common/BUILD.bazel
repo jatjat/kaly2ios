@@ -2,25 +2,18 @@ load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library", "swift_test")
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_unit_test")
 
 swift_library(
-    name = "common-api",
-    module_name = "CommonAPI",
-    srcs = glob(["Sources/CommonAPI/**/*.swift"]),
-    visibility = ["//visibility:public"],
-)
-
-swift_library(
     name = "common",
     module_name = "Common",
     srcs = glob(["Sources/Common/**/*.swift"]),
     visibility = ["//visibility:public"],
-    deps = ["//Kaly2iOS/Common:common-api"],
+    deps = [],
 )
 
 # swift_library(
 #     name = "common-test-utils",
 #     module_name = "CommonTestUtils",
 #     visibility = ["//visibility:public"],
-#     deps = ["//Kaly2iOS/Common:common-api"],
+#     deps = [],
 # )
 
 swift_library(

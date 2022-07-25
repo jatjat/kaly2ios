@@ -23,21 +23,38 @@ class GRPCChannelFactoryImpl: GRPCChannelFactory {
         return innerChannel!
     }
 
-    func setup() {
-        innerChannel = makeChannel()
+    func setup() throws {
+        innerChannel = try makeChannel()
     }
 
     func makeChannel() -> GRPCChannel {
-        let host = "" // config.host
+        let host = "localhost" // config.host
         let port = 9000 // config.port
 
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        defer {
-            try? group.syncShutdownGracefully()
-        }
+//        defer {
+//            try? group.syncShutdownGracefully()
+//        }
 
         let channel = ClientConnection.insecure(group: group)
             .connect(host: host, port: port)
+
         return channel
+
+//        let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+//
+//        let keepalive = ClientConnectionKeepalive(
+//          interval: .seconds(15),
+//          timeout: .seconds(10)
+//        )
+//
+//        let channel = try GRPCChannelPool.with(
+//          target: .host("localhost"),
+//          transportSecurity: .plaintext,
+//          eventLoopGroup: group
+//        ) {
+//          // Configure keepalive.
+//          $0.keepalive = keepalive
+//        }
     }
 }
