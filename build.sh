@@ -1,2 +1,2 @@
 #!/bin/bash
-brew install mint && bazelisk build xcodeproj && bazelisk build ios-app
+brew install mint && mint bootstrap && bazelisk build xcodeproj && bazelisk build ios-app

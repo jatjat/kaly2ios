@@ -60,7 +60,7 @@ genrule(
     name = "domain-mocks-gen",
     srcs = glob(["Sources/Domain/**/*.swift"]),
     outs = ["Generated/GeneratedDomainMocks.swift"],
-    cmd = "/opt/homebrew/bin/mint run mockolo -srcs $(SRCS) -d $@ -i Domain",
+    cmd = "mint run mockolo -srcs $(SRCS) -d $@ -i Domain",
     visibility = ["//visibility:public"],
     # tools = ["@mockolo//:mockolo"],
 )
