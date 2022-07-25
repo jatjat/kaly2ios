@@ -67,3 +67,8 @@ fastlane/screenshots
 fastlane/test_output
 
 XcodeBazel.xcodeproj/
+
+bazel-bin
+bazel-kaly2ios
+bazel-out
+bazel-testlogs

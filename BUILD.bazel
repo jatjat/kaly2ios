@@ -30,7 +30,7 @@ XCODEPROJ_TARGETS = [
 ]
 xcodeproj(
     name = "xcodeproj",
-    project_name = "iOS App",
+    project_name = "XcodeBazel",
     # tags = ["manual"],
     targets = XCODEPROJ_TARGETS,
 
