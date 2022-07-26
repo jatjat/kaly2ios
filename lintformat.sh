@@ -1,1 +1,1 @@
-./format.sh --lint && which mint
+./format.sh --lint

@@ -31,17 +31,11 @@ struct BottomSheetView<Content: View>: View {
     let content: Content
 
     // Animation params for when finger is dragging bottom sheet
-    ////     or bottom sheet top edge is tapped:
-//    let touchResp = 0.15
-//    let touchDampFrac = 0.86
-//    let touchBlendDur = 0.25
+    //     or bottom sheet top edge is tapped:
     let dragOrTapAnim: Animation = .spring(response: 0.15, dampingFraction: 0.86, blendDuration: 0.25)
 
     // Animation for after finger is lifted from dragging
     // bottom sheet, or bottom sheet top edge is tapped:
-//    let touchEndedResp = 0.3
-//    let touchEndedDampFrac = 0.8
-//    let touchEndedBlendDur = 0.25
     let tapOrTouchEndedAnim: Animation = .spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0.25)
 
     @GestureState private var translation: CGFloat = 0

@@ -9,7 +9,8 @@ import SwiftUI
 // import Cleanse
 
 struct MainAppViewImpl: MainAppView {
-    // SwiftUI compatibility, see below for an alternative approach
+    @StateObject var viewModel: MainAppViewModel
+    // SwiftUI compatibility, see above/below for an alternative approach
 //    var mapViewModel: MapViewModel
 
     let contentView: ContentView
@@ -18,36 +19,29 @@ struct MainAppViewImpl: MainAppView {
         contentView
     }
 
-    public init(contentView: ContentView) {
+    public init(contentView: ContentView, viewModel: MainAppViewModel) {
 //        self.mapViewModel = mapViewModel
         self.contentView = contentView
 
         // There is conflicting information on whether this is a good approach:
         // For: https://swiftui-lab.com/random-lessons/#data-10
         // Against: https://stackoverflow.com/questions/68900888/how-do-i-properly-perform-dependency-injection-into-swiftui-stateobjects
-//        self._viewModel = StateObject(wrappedValue: viewModel)
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
-//    @StateObject var viewModel: MainAppViewModel
 }
 
 struct ContentView: View {
     @State private var bottomSheetShown = false
-//    let mapComponent: MapComponent
-//    let insideBottomSheetComponent: InsideBottomSheetComponent
     let mapView: MapView
     var body: some View {
-        mapView
         GeometryReader { geometry in
             Color.green
-//            mapComponent.mapView
-//            bottomSheetComponent.bottomSheetView
-//            MapView()
-
+            mapView
             BottomSheetView(
                 isOpen: self.$bottomSheetShown,
                 maxHeight: geometry.size.height * 0.7
             ) {
-//                insideBottomSheetComponent.insideBottomSheetView
+//              insideBottomSheetView
                 Color.blue
             }
         }.edgesIgnoringSafeArea(.all)
@@ -58,16 +52,19 @@ struct ContentView: View {
     }
 }
 
-// extension MainAppViewImpl {
-//    func injectProperties(mapViewModel: MapViewModel) {
-////        func injectProperties(viewModel: MainAppViewModel, mapViewModel: MapViewModel) {
-////        self.viewModel = viewModel
-//        self.mapViewModel = mapViewModel
-//    }
-// }
+#if PREVIEW
+    import DomainMocks
+    struct MainAppView_Previews: PreviewProvider {
+        let seeMapUseCaseMock = SeeMapUseCaseMock()
+        static var previews: some View {
+            MainAppViewImpl(contentView: ContentView(mapView: MapView(viewModel: MapViewModel(updateMapUseCase: seeMapUseCaseMock))))
+        }
 
-// struct MainAppView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MainAppViewImpl(mapViewModel: Map)
-//    }
-// }
+        init() {
+            seeMapUseCaseMock.executeHandler = {
+                let pose = PoseEntity(x: 0, y: 0, heading: 0)
+                UpdateMapUseCaseResult(bestPoses: [pose], odoPoses: [pose], truePoses: [pose])
+            }
+        }
+    }
+#endif

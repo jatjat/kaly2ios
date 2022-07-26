@@ -16,6 +16,7 @@ import XCTest
 
 class MapViewTests: XCTestCase {
     var sut: MapViewModel!
+    var cancellables = Set<AnyCancellable>()
 
     func esttestPerformanceExample() throws {
         // This is an example of a performance test case.
@@ -24,54 +25,37 @@ class MapViewTests: XCTestCase {
         }
     }
 
-    func testMapAgain() async throws {
+    func testMapAgain() throws {
         // GIVEN
+        var itrCalls = 0
         let sessionClient = SessionClientMock()
-//        let sessionClient = StubSessionClient()
-//        sessionClient.subscribeNewCallback = {
-//            let itr = StubSessionIterator()
-//            itr.nextCallback = {
-//                SubscribeResponse()
-//            }
-//        }
-//        sut = await MapViewModel(updateMapUseCase: UpdateMapUseCase())
+        sessionClient.subscribeNewHandler = { _, _ in
+            let itr = SessionIteratorMock()
+            itr.nextHandler = {
+                if itrCalls > 0 {
+                    try await Task.sleep(nanoseconds: 100_000_000)
+                }
+                itrCalls += 1
+                let pose = PoseEntity(x: 0, y: 0, heading: 0)
+                return try SubscribeResponseEntity(robotSessionID: 0, iteration: IterationEntity(bestPose: pose, odoPose: pose, truePose: pose))
+            }
+            return itr
+        }
+        let useCase = SeeMapUseCaseImpl(robotClient: RobotClientMock(), mapClient: MapClientMock(), sessionClient: sessionClient, openRobotSessionRepo: OpenRobotSessionRepoMock(), lastErrorTimeRepo: LastErrorTimeRepoMock())
+        sut = MapViewModel(updateMapUseCase: useCase)
+        let expectation = XCTestExpectation(description: "Publishes true pose")
 
         // WHEN
-        let useCase = SeeMapUseCase(robotClient: RobotClientMock(), mapClient: MapClientMock(), sessionClient: sessionClient, openRobotSessionRepo: OpenRobotSessionRepoMock(), lastErrorTimeRepo: LastErrorTimeRepoMock())
-        sut = MapViewModel(updateMapUseCase: useCase)
-
-        // THEN
         sut.onAppear()
 
-//        XCTAssertEqual(next?.first?.x, 0)
+        // THEN
+        sut.$truePoses
+            .dropFirst()
+            .sink {
+                XCTAssertNotNil($0)
+                expectation.fulfill()
+            }
+            .store(in: &cancellables)
+        wait(for: [expectation], timeout: 5)
     }
 }
-
-// class StubSessionIterator: SessionIterator {
-//    var nextCallback: () -> SubscribeResponse? = {
-//        nil
-//    }
-//    func next() async throws -> SubscribeResponse? {
-//        nextCallback()
-//    }
-// }
-//
-// class StubSessionClient: SessionClient {
-//    var subscribeNewCallback: () -> SessionIterator = {
-//        return StubSessionIterator()
-//    }
-//
-//    func subscribeNew(robotID: Int64, mapID: Int64) async throws -> SessionIterator {
-//        subscribeNewCallback()
-//    }
-//
-//    func modifySessionSettings(robotSessionID: Int64, shouldRun: Bool) async throws {
-//
-//    }
-//
-//    func modifySlamSettings(robotSessionID: Int64, numParticles: Int32, sensorAngVar: Float, sensorDistVar: Float) async throws {
-//
-//    }
-// }
-
-// PreviewData().real.sessionClient

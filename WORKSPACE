@@ -231,7 +231,7 @@ swift_library(
     module_name = "NIO",
     srcs = glob(["Sources/NIO/**/*.swift"]),
     visibility = ["//visibility:public"],
-    generates_header = True,
+    generates_header = False,
     deps = ["NIOCore", "NIOEmbedded", "_NIODataStructures", "NIOPosix"],
 )
 

@@ -120,7 +120,14 @@ enum SeeMapUseCaseErrors: Error {
     case noIteration
 }
 
-public class SeeMapUseCase {
+/// @mockable
+public protocol SeeMapUseCase {
+    func execute() async throws -> UpdateMapUseCaseResult
+}
+
+// Implementation is public too besides the protocol,
+// to allow previewing with real domain logic:
+public class SeeMapUseCaseImpl: SeeMapUseCase {
     let retryWaitTime: TimeInterval = 5
     let robotClient: RobotClient
     let mapClient: MapClient
@@ -135,10 +142,10 @@ public class SeeMapUseCase {
     }
 
     private func getRobotSession() async throws -> OpenRobotSessionEntity {
-        // try to resume a session, if not make one:
+        // Try to resume a session; if not, make one:
         guard let ses = openRobotSessionRepo.get() else {
-            let robotID = try await robotClient.createRobot(robotName: "foriOS", isReal: false)
-            let mapID = try await mapClient.createMap(mapName: "foriOS")
+            let robotID = try await robotClient.createRobot(robotName: "robotNameForiOS", isReal: false)
+            let mapID = try await mapClient.createMap(mapName: "mapNameForiOS")
 
             let itr = try await sessionClient.subscribeNew(robotID: robotID, mapID: mapID)
             let ses = OpenRobotSessionEntity(robotSessionItr: itr, storedItrs: [])
@@ -153,9 +160,9 @@ public class SeeMapUseCase {
         var itr = ses.robotSessionItr
         let res = try await itr.next()
         guard let itr: IterationEntity = res?.iteration else {
-            // an empty iteration means robot session has ended on the server:
+            // An empty iteration means robot session has ended on the server:
             openRobotSessionRepo.save(nil)
-            // the server should never end a robot session except in exceptional
+            // The server should never end a robot session except in exceptional
             // circumstances:
             throw SeeMapUseCaseErrors.noIteration
         }
@@ -167,17 +174,5 @@ public class SeeMapUseCase {
         let odoPoses = ses.storedItrs.map(\.odoPose)
         let truePoses = ses.storedItrs.map(\.truePose)
         return UpdateMapUseCaseResult(bestPoses: bestPoses, odoPoses: odoPoses, truePoses: truePoses)
-
-//        return UpdateMapUseCaseResult(bestPoses: bestPoses, odoPoses: [UIPose(pose: itr.odoPose)], truePoses: [UIPose(pose: itr.truePose)])
-
-        ////        if counter > 2 {
-        ////            try await Task.sleep(nanoseconds: 100_000_000)
-        ////        }
-//        var bestPoses = [UIPose]()
-        ////        for i in 1 ..< Int.random(in: 1 ..< 10) {
-        ////            bestPoses.append(UIPose(x: Float(i), y: Float(i), heading: Float(i)))
-        ////        }
-        ////        counter += 1
-//        return UpdateMapUseCaseResult(bestPoses: bestPoses, odoPoses: [], truePoses: [])
     }
 }
