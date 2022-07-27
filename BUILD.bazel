@@ -55,21 +55,3 @@ ios_application(
             "//Kaly2iOS/MainApp:main-app",
     ],
 )
-ios_application(
-    name = "ios-app-h",
-    bundle_id = "ca.joelathiessen.kaly2",
-    families = ["iphone"],
-    infoplists = ["Info.plist"],
-    minimum_os_version = "15.0",
-    visibility = ["//visibility:public"],
-    deps = [":ios-app-main"],
-)
-
-swift_library(
-    name = "ios-app-main",
-    srcs = [
-        "Dummy.swift",
-    ],
-    visibility = ["//visibility:public"],
-)
-

@@ -478,7 +478,7 @@ swift_library(
   module_name = "NIOTransportServices",
   srcs = glob(["Sources/NIOTransportServices/**/*.swift"]),
   visibility = ["//visibility:public"],
-  deps = ["@swift-nio-repo//:NIO", "@swift-nio-repo//:NIOFoundationCompat"]
+  deps = ["@swift-nio-repo//:NIO", "@swift-nio-repo//:NIOTLS", "@swift-nio-repo//:NIOFoundationCompat"]
 )
 """,
 )
