@@ -88,7 +88,9 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 new_git_repository(
     name = "cleanse-repo",
     remote = "https://github.com/square/cleanse.git",
-    tag = "4.2.6",
+    # tag = "4.2.6",
+    commit = "c854787f83d99527587b5387f04ccd0030e6133a",
+    shallow_since = "1598987494 -0700",
     build_file_content = """
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 
@@ -484,7 +486,9 @@ swift_library(
 new_git_repository(
     name = "swift-protobuf-repo",
     remote = "https://github.com/apple/swift-protobuf.git",
-    tag = "1.9.0",
+    # tag = "1.9.0",
+    commit = "7f36441e3372665b1b414f8ac93b5905cc42a405",
+    shallow_since = "1589825556 -0400",
     build_file_content = """
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 load(
