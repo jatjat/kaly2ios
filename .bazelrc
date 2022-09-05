@@ -1,5 +1,4 @@
 build --incompatible_strict_action_env
-build --action_env=PATH=/usr/bin:/bin:/usr/local/bin:/opt/homebrew/bin
 build --strategy=SwiftCompile=worker
 build --spawn_strategy=local
 build --features=swift.cacheable_swiftmodules
