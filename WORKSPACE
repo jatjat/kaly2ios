@@ -196,7 +196,9 @@ swift_library(
 new_git_repository(
     name = "swift-nio-repo",
     remote = "https://github.com/apple/swift-nio.git",
-    tag = "2.33.0",
+    # tag = "2.33.0",
+    commit = "6aa9347d9bc5bbfe6a84983aec955c17ffea96ef",
+    shallow_since = "1632408653 +0200",
     build_file_content = """
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library", "swift_module_alias", "swift_c_module")
 
@@ -459,7 +461,9 @@ swift_library(
 new_git_repository(
     name = "swift-nio-extras-repo",
     remote = "https://github.com/apple/swift-nio-extras.git",
-    tag = "1.4.0",
+    # tag = "1.4.0",
+    commit = "b4dbfacff47fb8d0f9e0a422d8d37935a9f10570",
+    shallow_since = "1579607023 +0000",
     build_file_content = """
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 
