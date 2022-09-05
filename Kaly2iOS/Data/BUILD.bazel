@@ -31,7 +31,6 @@ swift_library(
     "@cleanse-repo//:Cleanse",
     "//Kaly2iOS/Domain:domain"
     ],
-    tags = ["xchammer"],
     # data = [":grpc_stubs"]
 )
 
@@ -46,7 +45,6 @@ genrule(
     """,
     srcs = protos,
     tools = tools,
-    tags = ["xchammer"],
 )
 
 genrule(
@@ -60,7 +58,6 @@ genrule(
     """,
     srcs = protos,
     tools = tools,
-    tags = ["xchammer"],
 )
 
 
@@ -69,7 +66,6 @@ swift_library(
     module_name = "DataTests",
     srcs = glob(["Tests/DataTests/**/*.swift"]),
     testonly = True,
-    visibility = ["//visibility:public"],
     deps = [
             "//Kaly2iOS/Common:common",
             "data",

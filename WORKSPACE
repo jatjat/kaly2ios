@@ -193,7 +193,6 @@ swift_library(
 
 
 
-# XCHammer doesn't seem to work for git repos:
 new_git_repository(
     name = "swift-nio-repo",
     remote = "https://github.com/apple/swift-nio.git",
@@ -242,7 +241,6 @@ swift_library(
     visibility = ["//visibility:public"],
     # deps = ["CNIOAtomics-i"],
     deps = ["CNIOAtomics"],
-    # tags = ["xchammer"],
 )
 
 
@@ -294,7 +292,6 @@ swift_library(
 #     }\\"\""",
 #     # srcs = protos,
 #     # exec_tools = tools,
-#     # tags = ["xchammer"],
 # )
 
 
@@ -316,7 +313,6 @@ objc_library(
     srcs = glob(["Sources/CNIOAtomics/src/**"]),
     visibility = ["//visibility:public"],
     # data = [":cnio_modulemaps"],
-    # tags = ["xchammer"],
     # enable_modules = True,
     # tags = ["swift_module=CNIOAtomics"],
 )
@@ -472,8 +468,7 @@ swift_library(
    module_name = "NIOExtras",
    srcs = glob(["Sources/NIOExtras/**/*.swift"]),
    visibility = ["//visibility:public"],
-   deps = ["@swift-nio-repo//:NIO", # code imports this
-        # XCHammer requires these:
+   deps = ["@swift-nio-repo//:NIO", # code imports this line only
         "@swift-nio-repo//:NIOCore",
         "@swift-nio-repo//:NIOEmbedded",
         "@swift-nio-repo//:_NIODataStructures",
