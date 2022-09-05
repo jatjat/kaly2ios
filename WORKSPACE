@@ -115,7 +115,6 @@ new_git_repository(
     name = "grpc-swift-repo",
     remote = "https://github.com/grpc/grpc-swift.git",
     commit = "8fcf4f3765a09fdebd6bb4a504ab48cccf617619",
-    shallow_since = "1640008839 +0000",
     build_file_content = """
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library", "swift_binary", "swift_c_module")
 load("@build_bazel_rules_apple//apple:apple.bzl","apple_static_framework_import")
@@ -488,7 +487,6 @@ new_git_repository(
     remote = "https://github.com/apple/swift-protobuf.git",
     # tag = "1.9.0",
     commit = "7f36441e3372665b1b414f8ac93b5905cc42a405",
-    shallow_since = "1589825556 -0400",
     build_file_content = """
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 load(
