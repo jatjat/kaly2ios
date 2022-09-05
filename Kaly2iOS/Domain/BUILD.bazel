@@ -29,6 +29,7 @@ swift_library(
     name = "domain-tests-lib",
     module_name = "DomainTests",
     srcs = glob(["Tests/DomainTests/**/*.swift"]),
+    testonly = True,
     visibility = ["//visibility:public"],
     deps = [
             "//Kaly2iOS/Common:common",

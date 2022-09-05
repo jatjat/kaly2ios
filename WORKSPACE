@@ -1,37 +1,14 @@
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
-
-
-
-
-
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
-
-
-
-
-
-
-
-
-
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# http_archive(
-#     name = "com_github_buildbuddy_io_rules_xcodeproj",
-#     sha256 = "7f617ea9f353567d6443f071391d29e0e365fae4b4c9ef2f7514437a9a3ea9e5",
-#     url = "https://github.com/buildbuddy-io/rules_xcodeproj/releases/download/0.4.1/release.tar.gz",
-# )
 git_repository(
     name = "com_github_buildbuddy_io_rules_xcodeproj",
     remote = "https://github.com/buildbuddy-io/rules_xcodeproj.git",
-    commit = "a93aabc34aa3c04338c7ffe4fa5e869e9dda45a1",
-    # patch_cmds = [
-    #     """
-    #     sed -i '' 's/\\:__subpackages__/visibility\\:public/g' src/TulsiGenerator/BUILD
-    #     """,
-    # ],
+    commit = "130476fe70e9c56f82f2bf9db9dbc382fc9dd723",
+    shallow_since = "1661805004 -0500",
 )
 
 
@@ -135,12 +112,9 @@ swift_library(
 new_git_repository(
     name = "grpc-swift-repo",
     remote = "https://github.com/grpc/grpc-swift.git",
-    commit = "8fcf4f3765a09fdebd6bb4a504ab48cccf617619", #"1.6.0-async-await",
+    commit = "8fcf4f3765a09fdebd6bb4a504ab48cccf617619",
     shallow_since = "1640008839 +0000",
-    # commit = "4ca9bcf161fc5555747f3095343b41b00616a559", # 1.7.1 async/await
     build_file_content = """
-
-
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library", "swift_binary", "swift_c_module")
 load("@build_bazel_rules_apple//apple:apple.bzl","apple_static_framework_import")
 load(

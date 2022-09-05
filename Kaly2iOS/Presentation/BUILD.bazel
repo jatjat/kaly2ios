@@ -18,8 +18,10 @@ swift_library(
     name = "presentation-tests-lib",
     module_name = "PresentationTests",
     srcs = glob(["Tests/PresentationTests/**/*.swift"]),
+    testonly = True,
     deps = [":presentation", "//Kaly2iOS/Domain:domain-mocks"],
-    tags = ["xchammer"],
+    visibility = ["//visibility:public"],
+    tags = ["manual"],
 )
 
 ios_unit_test(

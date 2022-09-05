@@ -19,6 +19,7 @@ swift_library(
 swift_library(
     name = "common-tests-lib",
     srcs = glob(["Tests/CommonTests/**/*.swift"]),
+    testonly = True,
     visibility = ["//visibility:public"], # for now...
     deps = [":common"],
 )

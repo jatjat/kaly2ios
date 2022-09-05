@@ -1,47 +1,43 @@
-# BUILD.Bazel
-#load("@xchammer//:xcodeproject.bzl", "xcode_project")
-
-# load(
-#     "@xchammer//:xcodeproject.bzl",
-#     "xcode_project",
-#     "execution_action",
-#     "project_config",
-#     "scheme_action_config",
-#     "target_config",
-# )
-
-# load("@xchammer//:xcodeproject.bzl", "xcode_project")
-
-
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application", "ios_unit_test")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-load("@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:xcodeproj.bzl", "xcodeproj")
+load("@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:xcodeproj.bzl", "top_level_target","xcodeproj",     "xcode_schemes", )
 
 
-XCODEPROJ_TARGETS = [
-    "//:ios-app",
-    # "//Example",
-    # "//ExampleTests",
-    # "//ExampleObjcTests",
-    # "//ExampleUITests",
-    "//Kaly2iOS/Common:common-tests",
-    "//Kaly2iOS/Domain:domain-tests",
-    "//Kaly2iOS/Presentation:presentation-tests",
-]
 xcodeproj(
     name = "xcodeproj",
     project_name = "XcodeBazel",
+    scheme_autogeneration_mode = "all",
     # tags = ["manual"],
-    targets = XCODEPROJ_TARGETS,
-
-    build_mode = "xcode",
-    # build_mode = "bazel",
-)
-
-
-alias(
-    name = "swiftlint",
-    actual = "@grpc-swift-repo//:protoc-gen-grpc-swift",
+    top_level_targets =  [
+        top_level_target(":ios-app"),
+        # top_level_target("//Kaly2iOS/MainApp:main-app-tests"),
+        top_level_target("//Kaly2iOS/Presentation:presentation-tests"),
+        top_level_target("//Kaly2iOS/Domain:domain-tests"),
+        # top_level_target("//Kaly2iOS/Data:data-tests"),
+    ],
+    tags = ["manual"],
+    # build_mode = "xcode",
+    build_mode = "bazel",
+    schemes = [
+    xcode_schemes.scheme(
+            name = "Kaly2",
+            build_action = xcode_schemes.build_action([
+                xcode_schemes.build_target(
+                    ":ios-app",
+                    xcode_schemes.build_for(archiving = True),
+                ),
+            ]),
+            launch_action = xcode_schemes.launch_action(
+                ":ios-app",
+                env = {"CUSTOM_ENV_VAR": "hello"},
+            ),
+            test_action = xcode_schemes.test_action([
+                "//Kaly2iOS/Presentation:presentation-tests"
+            ],
+            env = {"CUSTOM_ENV_VAR": "hello"},
+            ),
+        ),
+    ],
 )
 
 ios_application(
@@ -50,7 +46,6 @@ ios_application(
     families = ["iphone"],
     infoplists = ["Info.plist"],
     minimum_os_version = "15.0",
-    # visibility = ["//swift:__subpackages__"],
     deps = [
             "//Kaly2iOS/MainApp:main-app",
     ],
