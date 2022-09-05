@@ -12,7 +12,6 @@ build:cache --config=ci
 
 # Build using remote cache, including writing to it (use only from CI):
 build:ci --experimental_remote_cache_compression
-build:ci --remote_download_toplevel
 build:ci --modify_execution_info=^(BitcodeSymbolsCopy|BundleApp|BundleTreeApp|DsymDwarf|DsymLipo|GenerateAppleSymbolsFile|ObjcBinarySymbolStrip|CppLink|ObjcLink|ProcessAndSign|SignBinary|SwiftArchive|SwiftStdlibCopy)$=+no-remote,^(BundleResources|ImportedDynamicFrameworkProcessor)$=+no-remote-exec
 build:ci --experimental_remote_cache_async
 build:ci --bes_results_url=https://app.buildbuddy.io/invocation/
@@ -23,6 +22,7 @@ build:ci --build_metadata=REPO_URL=https://github.com/jatjat/kaly2ios.git
 build:ci --workspace_status_command=$(pwd)/workspace_status.sh
 build:ci --build_metadata=ROLE=CI
 
+# build:ci --remote_download_toplevel
 # build --noremote_upload_local_results
 
 #build --compilation_mode dbg
