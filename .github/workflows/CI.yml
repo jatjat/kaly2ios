@@ -7,16 +7,16 @@ jobs:
     - name: Choose Xcode
       run: sudo xcode-select -s /Applications/Xcode_13.2.1.app
     - name: Setup Bazel cache
-      uses: actions/cache@v2.1.4
-      env:
-        cache-name: bazel-cache
+      uses: actions/cache@v3.0.8
       with:
         path: |
           ~/.cache/bazelisk
           ~/.cache/bazel
           /private/var/tmp/_bazel_runner
           ~/.mint
-        key: ${{ runner.os }}-${{ env.cache-name }}
+        key: kaly2-${{ runner.os }}-${{ github.run_id }}
+        restore-keys: |
+          kaly2-${{ runner.os }}
     - name: Checkout repository
       uses: actions/checkout@v2
     - name: Lint
