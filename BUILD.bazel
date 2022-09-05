@@ -13,7 +13,7 @@ xcodeproj(
         # top_level_target("//Kaly2iOS/MainApp:main-app-tests"),
         top_level_target("//Kaly2iOS/Presentation:presentation-tests"),
         top_level_target("//Kaly2iOS/Domain:domain-tests"),
-        # top_level_target("//Kaly2iOS/Data:data-tests"),
+        top_level_target("//Kaly2iOS/Data:data-tests"),
     ],
     tags = ["manual"],
     # build_mode = "xcode",
@@ -32,7 +32,9 @@ xcodeproj(
                 env = {"CUSTOM_ENV_VAR": "hello"},
             ),
             test_action = xcode_schemes.test_action([
-                "//Kaly2iOS/Presentation:presentation-tests"
+                "//Kaly2iOS/Presentation:presentation-tests",
+                # "//Kaly2iOS/Domain:domain-tests",
+                # "//Kaly2iOS/Data:data-tests",
             ],
             env = {"CUSTOM_ENV_VAR": "hello"},
             ),

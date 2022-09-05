@@ -1,5 +1,6 @@
 
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_unit_test")
 
 grpc_stubs = [
         "Sources/Data/Protos/MapService.grpc.swift",
@@ -60,4 +61,46 @@ genrule(
     srcs = protos,
     tools = tools,
     tags = ["xchammer"],
+)
+
+
+swift_library(
+    name = "data-tests-lib",
+    module_name = "DataTests",
+    srcs = glob(["Tests/DataTests/**/*.swift"]),
+    testonly = True,
+    visibility = ["//visibility:public"],
+    deps = [
+            "//Kaly2iOS/Common:common",
+            "data",
+            "data-mocks",
+            "@cleanse-repo//:Cleanse"
+    ],
+)
+
+ios_unit_test(
+    name = "data-tests",
+    size = "medium",
+    minimum_os_version = "15.0",
+    visibility = ["//visibility:public"],
+    deps = [":data-tests-lib"]
+)
+
+swift_library(
+    name = "data-mocks",
+    module_name = "DataMocks",
+    srcs = ["data-mocks-gen"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "data",
+        "@cleanse-repo//:Cleanse",
+    ],
+)
+genrule(
+    name = "data-mocks-gen",
+    srcs = glob(["Sources/Data/**/*.swift"]),
+    outs = ["Generated/GeneratedDataMocks.swift"],
+    cmd = "mint run mockolo -srcs $(SRCS) -d $@ -i Data",
+    visibility = ["//visibility:public"],
+    # tools = ["@mockolo//:mockolo"],
 )

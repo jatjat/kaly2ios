@@ -12,19 +12,6 @@ swift_library(
             ],
 )
 
-
-
-
-
-# swift_library(
-#     name = "MyUnitTestsLib",
-#     module_name = "MyUnitTestsLib",
-#     srcs = glob(["Tests/UnitTests/**/*.swift"]) + [":GeneratedMocks"],
-#     deps = [
-#         ":MyLib"
-#     ]
-# )
-
 swift_library(
     name = "domain-tests-lib",
     module_name = "DomainTests",
