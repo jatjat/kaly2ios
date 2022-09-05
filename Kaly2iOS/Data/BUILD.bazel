@@ -100,7 +100,7 @@ genrule(
     name = "data-mocks-gen",
     srcs = glob(["Sources/Data/**/*.swift"]),
     outs = ["Generated/GeneratedDataMocks.swift"],
-    cmd = "/opt/homebrew/bin/mint run mockolo -srcs $(SRCS) -d $@ -i Data",
+    cmd = "mint run mockolo -srcs $(SRCS) -d $@ -i Data",
     visibility = ["//visibility:public"],
     # tools = ["@mockolo//:mockolo"],
 )
