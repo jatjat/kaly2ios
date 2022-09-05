@@ -90,7 +90,7 @@ new_git_repository(
     remote = "https://github.com/square/cleanse.git",
     # tag = "4.2.6",
     commit = "c854787f83d99527587b5387f04ccd0030e6133a",
-    shallow_since = "1598987494 -0700",
+    # shallow_since = "1598987494 -0700",
     build_file_content = """
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 
