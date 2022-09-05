@@ -10,6 +10,7 @@ import Domain
 import Foundation
 import SwiftUI
 
+@MainActor
 class MapViewModel: ObservableObject {
     @Published var bestPoses = [PoseEntity]()
     @Published var odoPoses = [PoseEntity]()
@@ -21,7 +22,7 @@ class MapViewModel: ObservableObject {
 
     var updateTask: Task<Void, Error>?
 
-    init(updateMapUseCase: SeeMapUseCase) {
+    nonisolated init(updateMapUseCase: SeeMapUseCase) {
         self.updateMapUseCase = updateMapUseCase
     }
 

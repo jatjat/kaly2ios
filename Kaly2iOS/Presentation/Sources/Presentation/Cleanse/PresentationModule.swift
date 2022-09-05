@@ -14,14 +14,14 @@ public struct PresentationModule: Module {
         binder
             .bind(AnyView.self)
             .tagged(with: MainAppViewTag.self)
-            .to(factory: { (contentView: ContentView, viewModel: MainAppViewModel) in
-                let vmi = MainAppViewImpl(contentView: contentView, viewModel: viewModel)
+            .to(factory: { (contentView: ContentView, viewModel: MainAppScreenViewModel) in
+                let vmi = MainAppScreenViewImpl(contentView: contentView, viewModel: viewModel)
                 return AnyView(vmi)
             })
 
         binder
             .bind(MapViewModel.self).to(factory: MapViewModel.init)
-        binder.bind(MainAppViewModel.self).to(factory: MainAppViewModel.init)
+        binder.bind(MainAppScreenViewModel.self).to(factory: MainAppScreenViewModel.init)
 
         binder.bind(ContentView.self).to(factory: ContentView.init)
         binder.bind(MapView.self).to(factory: MapView.init)

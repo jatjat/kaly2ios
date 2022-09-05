@@ -8,8 +8,8 @@
 import SwiftUI
 // import Cleanse
 
-struct MainAppViewImpl: MainAppView {
-    @StateObject var viewModel: MainAppViewModel
+struct MainAppScreenViewImpl: MainAppScreenView {
+    @StateObject var viewModel: MainAppScreenViewModel
     // SwiftUI compatibility, see above/below for an alternative approach
 //    var mapViewModel: MapViewModel
 
@@ -19,7 +19,7 @@ struct MainAppViewImpl: MainAppView {
         contentView
     }
 
-    public init(contentView: ContentView, viewModel: MainAppViewModel) {
+    public init(contentView: ContentView, viewModel: MainAppScreenViewModel) {
 //        self.mapViewModel = mapViewModel
         self.contentView = contentView
 

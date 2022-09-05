@@ -9,9 +9,9 @@ import Domain
 import Foundation
 import SwiftUI
 
+@MainActor
 struct MapView: View {
     @StateObject var viewModel: MapViewModel
-//    @EnvironmentObject var viewModel: MapViewModel
 
     var body: some View {
         HStack(alignment: .center) {
@@ -23,6 +23,7 @@ struct MapView: View {
                 .onAppear {
                     viewModel.onAppear()
                 }
+            MapContentsViewRepresentable()
         }
     }
 
@@ -30,7 +31,7 @@ struct MapView: View {
     // For: https://swiftui-lab.com/random-lessons/#data-10
     // Against: https://stackoverflow.com/questions/68900888/how-do-i-properly-perform-dependency-injection-into-swiftui-stateobjects
 
-    init(viewModel: MapViewModel) {
+    nonisolated init(viewModel: MapViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 }

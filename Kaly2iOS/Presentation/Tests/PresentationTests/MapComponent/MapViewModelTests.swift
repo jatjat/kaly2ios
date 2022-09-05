@@ -25,7 +25,7 @@ class MapViewTests: XCTestCase {
         }
     }
 
-    func testMapAgain() throws {
+    func testMapAgain() async throws {
         // GIVEN
         var itrCalls = 0
         let sessionClient = SessionClientMock()
@@ -36,26 +36,38 @@ class MapViewTests: XCTestCase {
                     try await Task.sleep(nanoseconds: 100_000_000)
                 }
                 itrCalls += 1
-                let pose = PoseEntity(x: 0, y: 0, heading: 0)
+                let pose = PoseEntity(x: 1, y: 2, heading: 3)
                 return try SubscribeResponseEntity(robotSessionID: 0, iteration: IterationEntity(bestPose: pose, odoPose: pose, truePose: pose))
             }
             return itr
         }
         let useCase = SeeMapUseCaseImpl(robotClient: RobotClientMock(), mapClient: MapClientMock(), sessionClient: sessionClient, openRobotSessionRepo: OpenRobotSessionRepoMock(), lastErrorTimeRepo: LastErrorTimeRepoMock())
         sut = MapViewModel(updateMapUseCase: useCase)
-        let expectation = XCTestExpectation(description: "Publishes true pose")
 
         // WHEN
-        sut.onAppear()
+        await sut.onAppear()
 
         // THEN
-        sut.$truePoses
+        let pose = await sut.$truePoses
+            .secondAsync()?
+            .first
+
+        let uPose = try XCTUnwrap(pose)
+        XCTAssertEqual(uPose.x, 1)
+        XCTAssertEqual(uPose.y, 2)
+        XCTAssertEqual(uPose.heading, 3)
+    }
+}
+
+extension Published.Publisher {
+    func firstAsync() async -> Published<Value>.Publisher.Output? {
+        await AsyncPublisher(self)
+            .first(where: { _ in true })
+    }
+
+    func secondAsync() async -> Published<Value>.Publisher.Output? {
+        await AsyncPublisher(self)
             .dropFirst()
-            .sink {
-                XCTAssertNotNil($0)
-                expectation.fulfill()
-            }
-            .store(in: &cancellables)
-        wait(for: [expectation], timeout: 5)
+            .first(where: { _ in true })
     }
 }

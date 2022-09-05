@@ -8,4 +8,4 @@
 import Foundation
 import SwiftUI
 
-public protocol MainAppView: View {}
+public protocol MainAppScreenView: View {}

@@ -1,5 +1,5 @@
 //
-//  UpdateMapUseCase.swift
+//  SeeMapUseCase.swift
 //  domain
 //
 //  Created by Joel Thiessen on 2022-07-22.
@@ -7,59 +7,7 @@
 
 import Foundation
 
-//
-//  SubscribeResponse.swift
-//  Kaly2iOS
-//
-//  Created by Joel Thiessen on 2021-10-02.
-//
-
-import Foundation
-
-// public protocol ParticleData {
-//    var x: Float { get }
-//    var y: Float { get }
-//    var heading: Float { get }
-// }
-//
-// public protocol FeatureData {
-//    var x: Float { get }
-//    var y: Float { get }
-// }
-//
-// public protocol PoseData {
-//    var x: Float { get }
-//    var y: Float { get }
-//    var heading: Float { get }
-// }
-//
-// public protocol SlamSettingsData {
-//    var numParticles: Int32 { get }
-//    var sensorDistVar: Float { get }
-//    var sensorAngVar: Float { get }
-// }
-//
-// public protocol SessionSettingsData {
-//    var isRunning: Bool { get }
-// }
-//
-// public protocol IterationData {
-//    var bestPose: PoseData { get }
-//    var odoPose: PoseData { get }
-//    var truePose: PoseData { get }
-//    var features: [FeatureData] { get }
-//    var particles: [ParticleData] { get }
-//    var slamSettings: SlamSettingsData { get }
-//    var sessionSettings: SessionSettingsData { get }
-// }
-//
-///// @mockable
-// public protocol SubscribeResponseData {
-//    var robotSessionID: Int64 { get }
-//    var iteration: IterationEntity { get }
-// }
-
-public struct UpdateMapUseCaseResult {
+public struct UpdateMapUseCaseResult: Sendable {
     public let bestPoses: [PoseEntity]
     public let odoPoses: [PoseEntity]
     public let truePoses: [PoseEntity]
@@ -75,10 +23,10 @@ public struct SubscribeResponseEntity {
     }
 }
 
-public struct PoseEntity {
-    let x: Float
-    let y: Float
-    let heading: Float
+public struct PoseEntity: Sendable {
+    public let x: Float
+    public let y: Float
+    public let heading: Float
 
     public init(x: Float, y: Float, heading: Float) {
         self.x = x
