@@ -9,6 +9,7 @@ import Cleanse
 import Foundation
 import SwiftUI
 
+// @MainActor
 public struct PresentationModule: Module {
     public static func configure(binder: Binder<Singleton>) {
         binder

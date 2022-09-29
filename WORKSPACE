@@ -6,11 +6,12 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 git_repository(
     name = "com_github_buildbuddy_io_rules_xcodeproj",
+    commit = "5053e11dcefb5885d487bb4cad32e26c44b0be67",
     remote = "https://github.com/buildbuddy-io/rules_xcodeproj.git",
-    commit = "130476fe70e9c56f82f2bf9db9dbc382fc9dd723",
+    # commit = "7ee46ec29bb4365f2c81525200a078b80bf5ca4a",
+    # commit = "130476fe70e9c56f82f2bf9db9dbc382fc9dd723",
     shallow_since = "1661805004 -0500",
 )
-
 
 load(
     "@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:repositories.bzl",
@@ -99,16 +100,9 @@ swift_library(
     module_name = "Cleanse",
     srcs = glob(["Cleanse/**/*.swift"]),
     visibility = ["//visibility:public"],
+                    alwayslink = True,
  )""",
 )
-
-
-
-
-
-
-
-
 
 
 new_git_repository(
@@ -212,13 +206,6 @@ swift_library(
     deps = ["NIOCore", "NIOEmbedded", "_NIODataStructures", "NIOPosix"],
 )
 
-# swift_module_alias(
-#     name = "NIO",
-#     module_name = "NIO",
-#     deps = ["NIOCore", "NIOEmbedded", "_NIODataStructures", "NIOPosix"],
-#     visibility = ["//visibility:public"],
-# )
-
 swift_library(
     name = "_NIODataStructures",
     module_name = "_NIODataStructures",
@@ -245,68 +232,6 @@ swift_library(
     deps = ["CNIOAtomics"],
 )
 
-
-
-
-
-
-
-
-# def _impl(repo_ctx):
-#   repo_ctx.download_and_extract(...)
-#   repo_ctx.file('BUILD', content = ...)
-#   repo_ctx.file('config.h', content = ...)
-
-# my_source_lib = repository_rule(
-#   implementation = _impl,
-#   local = False,
-# )
-
-
-
-
-
-
-
-
-
-
-
-# genrule(
-#     # output_to_bindir = True,
-#     name = "cnio_modulemaps",
-#     outs = ["Sources/CNIOAtomics/CNIOAtomics.modulemap"],
-#     cmd = \"\"\" tee $@ <<EOF
-# module "CNIOAtomics" {
-#     export *
-#     header "external/swift-nio-repo/Sources/CNIOAtomics/include/CNIOAtomics.h"
-# }
-# EOF\"\"\"
-# )
-
-# genrule(
-#     name = "cnio_modulemaps",
-#     outs = ["$(GENDIR)/CNIOAtomics.modulemap"],
-#     cmd = 
-#     \"""$(GENDIR)/CNIOAtomicsa.modulemap <<< \\"module \\"CNIOAtomics\\" { 
-#     export *
-#     header \\"external/swift-nio-repo/Sources/CNIOAtomics/include/CNIOAtomics.h\\"
-#     }\\"\""",
-#     # srcs = protos,
-#     # exec_tools = tools,
-# )
-
-
-
-# swift_c_module(
-#     name = "CNIOAtomics",
-#     deps = ["CNIOAtomics-a"],
-#     module_map = "Sources/CNIOAtomics/CNIOAtomics.modulemap",
-#     module_name = "CNIOAtomics",
-#     # files = [],
-# )
-# cc_library(
-#     # data = ["CNIOAtomics.modulemap"],
 objc_library(
     name = "CNIOAtomics",
     # module_name = "CNIOAtomics",
@@ -380,31 +305,6 @@ objc_library(
     defines = ["__APPLE_USE_RFC_3542"],
     # sdk_dylibs = ["system"]
 )
-
-
-#  swift_library(
-#     name = "NIOExtras",
-#     module_name = "NIOExtras",
-#     srcs = glob(["Sources/NIOExtras/**/*.swift"]),
-#     visibility = ["//visibility:public"],
-#     # deps = ["NIOCore"],
-#  )
-
-#  swift_library(
-#     name = "Logging",
-#     module_name = "Logging",
-#     srcs = glob(["Sources/Logging/**/*.swift"]),
-#     visibility = ["//visibility:public"],
-#     # deps = ["NIOCore"],
-#  )
-
-#   swift_library(
-#     name = "Protobuf",
-#     module_name = "Protobuf",
-#     srcs = glob(["Sources/Protobuf/**/*.swift"]),
-#     visibility = ["//visibility:public"],
-#     # deps = ["NIOCore"],
-#  )
 
  """,
 )
@@ -545,29 +445,6 @@ swift_library(
 """,
 )
 
-# new_git_repository(
-#     name = "swift-argument-parser-repo",
-#     remote = "https://github.com/apple/swift-argument-parser.git",
-#     tag = "1.0.0",
-#     build_file_content = """
-# load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-
-# swift_library(
-#    name = "SwiftProtobuf",
-#    module_name = "SwiftProtobuf",
-#    srcs = glob(["Sources/SwiftProtobuf/**/*.swift"]),
-#    visibility = ["//visibility:public"],
-#    # deps = ["NIOCore"],
-# )
-# """,
-# )
-
-
-
-
-
-
-
 new_git_repository(
     name = "swift-syntax-repo",
     remote = "https://github.com/apple/swift-syntax.git",
@@ -594,16 +471,6 @@ swift_library(
 )
 """,
 )
-
-# http_archive(
-#     name = "mockolo",
-#     url = "https://github.com/uber/mockolo/releases/download/1.7.0/mockolo.tar.gz",
-#     strip_prefix = "mockolo",
-#     visibility = ["//visibility:public"],
-# )
-
-
-
 
 new_git_repository(
     name = "swift-argument-parser",

@@ -1,8 +1,20 @@
+////
+////  StubLastErrorTimeImpl.swift
+////  data
+////
+////  Created by Joel Thiessen on 2022-08-31.
+////
 //
-//  StubLastErrorTimeImpl.swift
-//  data
+// import Domain
+// import Foundation
 //
-//  Created by Joel Thiessen on 2022-08-31.
+// class StubLastErrorTimeRepoImpl: LastErrorTimeRepo {
+//    var date: Date?
+//    func get() -> Date? {
+//        date
+//    }
 //
-
-import Foundation
+//    func save(_ newDate: Date?) {
+//        date = newDate
+//    }
+// }

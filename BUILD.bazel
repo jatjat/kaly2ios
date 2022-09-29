@@ -1,19 +1,16 @@
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application", "ios_unit_test")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-load("@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:xcodeproj.bzl", "top_level_target","xcodeproj",     "xcode_schemes", )
+load("@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:defs.bzl", "top_level_target","xcodeproj",     "xcode_schemes", )
 
 
 xcodeproj(
     name = "xcodeproj",
     project_name = "XcodeBazel",
-    scheme_autogeneration_mode = "all",
-    # tags = ["manual"],
-    top_level_targets =  [
+    # scheme_autogeneration_mode = "all",
+    top_level_targets = [
         top_level_target(":ios-app"),
-        # top_level_target("//Kaly2iOS/MainApp:main-app-tests"),
         top_level_target("//Kaly2iOS/Presentation:presentation-tests"),
         top_level_target("//Kaly2iOS/Domain:domain-tests"),
-        top_level_target("//Kaly2iOS/Data:data-tests"),
     ],
     tags = ["manual"],
     # build_mode = "xcode",
@@ -33,7 +30,7 @@ xcodeproj(
             ),
             test_action = xcode_schemes.test_action([
                 "//Kaly2iOS/Presentation:presentation-tests",
-                # "//Kaly2iOS/Domain:domain-tests",
+                "//Kaly2iOS/Domain:domain-tests",
                 # "//Kaly2iOS/Data:data-tests",
             ],
             env = {"CUSTOM_ENV_VAR": "hello"},
@@ -46,9 +43,10 @@ ios_application(
     name = "ios-app",
     bundle_id = "ca.joelathiessen.kaly2",
     families = ["iphone"],
+    frameworks = ["//Kaly2iOS/Presentation:presentation-dynamic"],
     infoplists = ["Info.plist"],
     minimum_os_version = "15.0",
     deps = [
-            "//Kaly2iOS/MainApp:main-app",
+        "//Kaly2iOS/MainApp:main-app",
     ],
 )

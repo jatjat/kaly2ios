@@ -9,7 +9,9 @@ import Cleanse
 import Combine
 import Foundation
 
+// @DomainActor
 public struct DomainModule: Module {
+//    @DomainActor
     public static func configure(binder: Binder<Singleton>) {
         binder
             .bind(ChangeRobotSettingsUseCase.self)

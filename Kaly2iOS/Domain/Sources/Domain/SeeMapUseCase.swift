@@ -7,10 +7,17 @@
 
 import Foundation
 
-public struct UpdateMapUseCaseResult: Sendable {
+/// @mockable
+public struct UpdateMapUseCaseResult {
     public let bestPoses: [PoseEntity]
     public let odoPoses: [PoseEntity]
     public let truePoses: [PoseEntity]
+
+    public init(bestPoses: [PoseEntity], odoPoses: [PoseEntity], truePoses: [PoseEntity]) {
+        self.bestPoses = bestPoses
+        self.odoPoses = odoPoses
+        self.truePoses = truePoses
+    }
 }
 
 public struct SubscribeResponseEntity {
@@ -23,6 +30,7 @@ public struct SubscribeResponseEntity {
     }
 }
 
+/// @mockable
 public struct PoseEntity: Sendable {
     public let x: Float
     public let y: Float
@@ -75,6 +83,8 @@ public protocol SeeMapUseCase {
 
 // Implementation is public too besides the protocol,
 // to allow previewing with real domain logic:
+
+/// @mockable
 public class SeeMapUseCaseImpl: SeeMapUseCase {
     let retryWaitTime: TimeInterval = 5
     let robotClient: RobotClient

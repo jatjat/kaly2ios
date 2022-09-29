@@ -1,5 +1,6 @@
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_unit_test")
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_framework")
 
 swift_library(
     name = "domain",
@@ -36,9 +37,10 @@ ios_unit_test(
 swift_library(
     name = "domain-mocks",
     module_name = "DomainMocks",
-    srcs = ["domain-mocks-gen"],
+    srcs = ["Generated/GeneratedDomainMocks.swift"],
     visibility = ["//visibility:public"],
     deps = [
+        # "domain-mocks-gen",
         "domain",
         "@cleanse-repo//:Cleanse",
     ],
@@ -50,4 +52,18 @@ genrule(
     cmd = "mint run mockolo -srcs $(SRCS) -d $@ -i Domain",
     visibility = ["//visibility:public"],
     # tools = ["@mockolo//:mockolo"],
+)
+
+ios_framework(
+    name = "DomainFramework.iOS",
+    extension_safe = True,
+    bundle_id = "ca.joelathiessen.kaly2.domain",
+    families = ["iphone"],
+    # frameworks = ["//Kaly2iOS/Domain:DomainFramework.iOS"],
+    # frameworks = ["//Lib:LibFramework.iOS"],
+    infoplists = ["Info.plist"],
+    minimum_os_version = "15.0",
+    # version = "//iOSApp:Version",
+    visibility = ["//visibility:public"],
+    deps = ["//Kaly2iOS/Domain:domain"],
 )

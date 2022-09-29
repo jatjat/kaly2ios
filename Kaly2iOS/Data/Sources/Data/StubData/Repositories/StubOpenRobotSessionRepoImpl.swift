@@ -1,8 +1,20 @@
+////
+////  StubOpenRobotSessionRepoImpl.swift
+////  data
+////
+////  Created by Joel Thiessen on 2022-08-31.
+////
 //
-//  StubOpenRobotSessionRepoImpl.swift
-//  data
+// import Domain
+// import Foundation
 //
-//  Created by Joel Thiessen on 2022-08-31.
+// class StubOpenRobotSessionRepoImpl: OpenRobotSessionRepo {
+//    var session: OpenRobotSessionEntity?
+//    func get() -> OpenRobotSessionEntity? {
+//        session
+//    }
 //
-
-import Foundation
+//    func save(_ sesIn: OpenRobotSessionEntity?) {
+//        session = sesIn
+//    }
+// }

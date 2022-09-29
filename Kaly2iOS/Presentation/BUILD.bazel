@@ -1,16 +1,35 @@
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-load("@build_bazel_rules_apple//apple:ios.bzl", "ios_unit_test")
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_unit_test", "ios_application")
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_framework", "ios_dynamic_framework")
 
 swift_library(
     name = "presentation",
     module_name = "Presentation",
     srcs = glob(["Sources/Presentation/**/*.swift"]),
     visibility = ["//visibility:public"],
+        tags = ["manual"],
+
     deps = [
+            "//Kaly2iOS/Domain:domain-mocks",
             "//Kaly2iOS/Domain:domain",
             "//Kaly2iOS/Common:common",
             "@cleanse-repo//:Cleanse"
             ],
+    alwayslink = True,
+)
+
+ios_dynamic_framework(
+    name = "presentation-dynamic",
+    bundle_name = "Presentation",
+    bundle_id = "ca.joelathiessen.kaly2.presentation",
+    infoplists = ["Info.plist"],
+    minimum_os_version = "15.0",
+    families = ["iphone"],
+    # module_name = "Presentation",
+    deps = [
+        "presentation"
+    ],
+    visibility = ["//visibility:public"],
 )
 
 swift_library(
@@ -18,7 +37,7 @@ swift_library(
     module_name = "PresentationTests",
     srcs = glob(["Tests/PresentationTests/**/*.swift"]),
     testonly = True,
-    deps = [":presentation", "//Kaly2iOS/Domain:domain-mocks"],
+    deps = [":presentation-dynamic", "//Kaly2iOS/Domain:domain-mocks"],
     tags = ["manual"],
 )
 

@@ -52,19 +52,41 @@ struct ContentView: View {
     }
 }
 
-#if PREVIEW
-    import DomainMocks
-    struct MainAppView_Previews: PreviewProvider {
-        let seeMapUseCaseMock = SeeMapUseCaseMock()
-        static var previews: some View {
-            MainAppViewImpl(contentView: ContentView(mapView: MapView(viewModel: MapViewModel(updateMapUseCase: seeMapUseCaseMock))))
-        }
+// #if PREVIEW
+import Domain
+import DomainMocks
+struct MainAppView_Previews: PreviewProvider {
+    static let seeMapUseCaseMock = SeeMapUseCaseImpl(robotClient: RobotClientMock(), mapClient: MapClientMock(), sessionClient: SessionClientMock(), openRobotSessionRepo: OpenRobotSessionRepoMock(), lastErrorTimeRepo: LastErrorTimeRepoMock())
 
-        init() {
-            seeMapUseCaseMock.executeHandler = {
-                let pose = PoseEntity(x: 0, y: 0, heading: 0)
-                UpdateMapUseCaseResult(bestPoses: [pose], odoPoses: [pose], truePoses: [pose])
-            }
-        }
+//        static let seeMapUseCaseMock = SeeMapUseCaseImpl(robotClient: RobotClientMock(), mapClient: MapClientMock(), sessionClient: SessionClientMock(), openRobotSessionRepo: OpenRobotSessionRepoMock(), lastErrorTimeRepo: LastErrorTimeRepoMock())
+//        seeMapUseCaseMock.
+
+//        let contentView =
+
+    static var previews: some View {
+        MainAppScreenViewImpl(contentView: ContentView(mapView: MapView(viewModel: MapViewModel(updateMapUseCase: seeMapUseCaseMock))), viewModel: MainAppScreenViewModel())
+
+//            MainAppScreenViewImpl(contentView: ContentView(mapView: MapView(viewModel: MapViewModel(updateMapUseCase: seeMapUseCaseMock))))
     }
-#endif
+
+    init() async {
+//            try? await MainAppView_Previews.seeMapUseCaseMock.execute()
+//            seeMapUseCaseMock.executeHandler = {
+//                let pose = PoseEntity(x: 0, y: 0, heading: 0)
+//                return UpdateMapUseCaseResult(bestPoses: [pose], odoPoses: [pose], truePoses: [pose])
+//            }
+    }
+}
+
+// #endif
+//
+// @main
+// class Kaly2iOSAp2p: App {
+//    var body: some Scene {
+//        WindowGroup {
+//        }
+//    }
+//
+//    required init() {
+//    }
+// }
