@@ -1,22 +1,14 @@
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application", "ios_unit_test")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-load("@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:defs.bzl", "top_level_target","xcodeproj",     "xcode_schemes", )
-
+load("@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:defs.bzl", "top_level_target", "xcode_schemes", "xcodeproj")
 
 xcodeproj(
     name = "xcodeproj",
-    project_name = "XcodeBazel",
-    # scheme_autogeneration_mode = "all",
-    top_level_targets = [
-        top_level_target(":ios-app"),
-        top_level_target("//Kaly2iOS/Presentation:presentation-tests"),
-        top_level_target("//Kaly2iOS/Domain:domain-tests"),
-    ],
-    tags = ["manual"],
     # build_mode = "xcode",
     build_mode = "bazel",
+    project_name = "XcodeBazel",
     schemes = [
-    xcode_schemes.scheme(
+        xcode_schemes.scheme(
             name = "Kaly2",
             build_action = xcode_schemes.build_action([
                 xcode_schemes.build_target(
@@ -28,14 +20,22 @@ xcodeproj(
                 ":ios-app",
                 env = {"CUSTOM_ENV_VAR": "hello"},
             ),
-            test_action = xcode_schemes.test_action([
-                "//Kaly2iOS/Presentation:presentation-tests",
-                "//Kaly2iOS/Domain:domain-tests",
-                # "//Kaly2iOS/Data:data-tests",
-            ],
-            env = {"CUSTOM_ENV_VAR": "hello"},
+            test_action = xcode_schemes.test_action(
+                [
+                    "//Kaly2iOS/Presentation:presentation-tests",
+                    "//Kaly2iOS/Domain:domain-tests",
+                    # "//Kaly2iOS/Data:data-tests",
+                ],
+                env = {"CUSTOM_ENV_VAR": "hello"},
             ),
         ),
+    ],
+    tags = ["manual"],
+    # scheme_autogeneration_mode = "all",
+    top_level_targets = [
+        top_level_target(":ios-app"),
+        top_level_target("//Kaly2iOS/Presentation:presentation-tests"),
+        top_level_target("//Kaly2iOS/Domain:domain-tests"),
     ],
 )
 
@@ -49,4 +49,10 @@ ios_application(
     deps = [
         "//Kaly2iOS/MainApp:main-app",
     ],
+)
+
+load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+
+buildifier(
+    name = "buildifier",
 )

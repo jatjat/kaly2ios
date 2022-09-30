@@ -4,25 +4,25 @@ load("@build_bazel_rules_apple//apple:ios.bzl", "ios_framework")
 
 swift_library(
     name = "domain",
-    module_name = "Domain",
     srcs = glob(["Sources/Domain/**/*.swift"]),
+    module_name = "Domain",
     visibility = ["//visibility:public"],
     deps = [
-            "//Kaly2iOS/Common:common",
-            "@cleanse-repo//:Cleanse"
-            ],
+        "//Kaly2iOS/Common:common",
+        "@cleanse-repo//:Cleanse",
+    ],
 )
 
 swift_library(
     name = "domain-tests-lib",
-    module_name = "DomainTests",
-    srcs = glob(["Tests/DomainTests/**/*.swift"]),
     testonly = True,
+    srcs = glob(["Tests/DomainTests/**/*.swift"]),
+    module_name = "DomainTests",
     deps = [
-            "//Kaly2iOS/Common:common",
-            "domain",
-            "domain-mocks",
-            "@cleanse-repo//:Cleanse"
+        "domain",
+        "domain-mocks",
+        "//Kaly2iOS/Common:common",
+        "@cleanse-repo//:Cleanse",
     ],
 )
 
@@ -31,13 +31,13 @@ ios_unit_test(
     size = "medium",
     minimum_os_version = "15.0",
     visibility = ["//visibility:public"],
-    deps = [":domain-tests-lib"]
+    deps = [":domain-tests-lib"],
 )
 
 swift_library(
     name = "domain-mocks",
-    module_name = "DomainMocks",
     srcs = ["Generated/GeneratedDomainMocks.swift"],
+    module_name = "DomainMocks",
     visibility = ["//visibility:public"],
     deps = [
         # "domain-mocks-gen",
@@ -45,6 +45,7 @@ swift_library(
         "@cleanse-repo//:Cleanse",
     ],
 )
+
 genrule(
     name = "domain-mocks-gen",
     srcs = glob(["Sources/Domain/**/*.swift"]),
@@ -56,8 +57,8 @@ genrule(
 
 ios_framework(
     name = "DomainFramework.iOS",
-    extension_safe = True,
     bundle_id = "ca.joelathiessen.kaly2.domain",
+    extension_safe = True,
     families = ["iphone"],
     # frameworks = ["//Kaly2iOS/Domain:DomainFramework.iOS"],
     # frameworks = ["//Lib:LibFramework.iOS"],

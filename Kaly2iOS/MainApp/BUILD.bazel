@@ -3,7 +3,7 @@ load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 swift_library(
     # module_name = "iOSApp",
     name = "main-app",
-        # name = "iOSApp.library",
+    # name = "iOSApp.library",
     srcs = glob(["Sources/**/*.swift"]),
     # data = [":ExampleLibraryResourceGroup"] + select({
     #     ":release_build": [],
@@ -11,13 +11,13 @@ swift_library(
     # }),
     visibility = ["//visibility:public"],
     deps = [
-            "//Kaly2iOS/Presentation:presentation-dynamic",
+        "//Kaly2iOS/Presentation:presentation-dynamic",
         # "//Kaly2iOS/Presentation:presentation",
-            "//Kaly2iOS/Domain:domain",
-            "//Kaly2iOS/Data:data",
-            "//Kaly2iOS/Common:common",
-            "@cleanse-repo//:Cleanse",
-            ],
+        "//Kaly2iOS/Domain:domain",
+        "//Kaly2iOS/Data:data",
+        "//Kaly2iOS/Common:common",
+        "@cleanse-repo//:Cleanse",
+    ],
 )
 
 # apple_resource_group(

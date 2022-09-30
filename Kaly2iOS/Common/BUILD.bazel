@@ -3,8 +3,8 @@ load("@build_bazel_rules_apple//apple:ios.bzl", "ios_unit_test")
 
 swift_library(
     name = "common",
-    module_name = "Common",
     srcs = glob(["Sources/Common/**/*.swift"]),
+    module_name = "Common",
     visibility = ["//visibility:public"],
     deps = [],
 )
@@ -18,9 +18,9 @@ swift_library(
 
 swift_library(
     name = "common-tests-lib",
-    srcs = glob(["Tests/CommonTests/**/*.swift"]),
     testonly = True,
-    visibility = ["//visibility:public"], # for now...
+    srcs = glob(["Tests/CommonTests/**/*.swift"]),
+    visibility = ["//visibility:public"],  # for now...
     deps = [":common"],
 )
 
@@ -29,5 +29,5 @@ ios_unit_test(
     size = "medium",
     minimum_os_version = "15.0",
     visibility = ["//visibility:public"],
-    deps = [":common-tests-lib"]
+    deps = [":common-tests-lib"],
 )

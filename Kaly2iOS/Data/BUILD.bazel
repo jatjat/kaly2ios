@@ -1,21 +1,27 @@
-
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_unit_test")
 
 grpc_stubs = [
-        "Sources/Data/Protos/MapService.grpc.swift",
-        "Sources/Data/Protos/RobotService.grpc.swift",
-        "Sources/Data/Protos/SessionService.grpc.swift"
-      ]
-proto_models = [
-        "Sources/Data/Protos/MapService.pb.swift",
-        "Sources/Data/Protos/RobotService.pb.swift",
-        "Sources/Data/Protos/SessionService.pb.swift"
+    "Sources/Data/Protos/MapService.grpc.swift",
+    "Sources/Data/Protos/RobotService.grpc.swift",
+    "Sources/Data/Protos/SessionService.grpc.swift",
 ]
-tools = ["@protobuf//:protoc", "@grpc-swift-repo//:protoc-gen-grpc-swift", "@swift-protobuf-repo//:protoc-gen-swift"]
+
+proto_models = [
+    "Sources/Data/Protos/MapService.pb.swift",
+    "Sources/Data/Protos/RobotService.pb.swift",
+    "Sources/Data/Protos/SessionService.pb.swift",
+]
+
+tools = [
+    "@protobuf//:protoc",
+    "@grpc-swift-repo//:protoc-gen-grpc-swift",
+    "@swift-protobuf-repo//:protoc-gen-swift",
+]
+
 protos = glob([
-        "**/*.proto",
-    ])
+    "**/*.proto",
+])
 
 swift_library(
     name = "data",
@@ -23,19 +29,21 @@ swift_library(
         "Sources/Data/Clients/**/*.swift",
         "Sources/Data/Repositories/**/*.swift",
         "Sources/Data/*.swift",
-        "Sources/Data/Cleanse/*.swift"
+        "Sources/Data/Cleanse/*.swift",
     ]) + grpc_stubs + proto_models,
-    visibility = ["//visibility:public"],
     module_name = "Data",
-    deps = ["@grpc-swift-repo//:GRPC",
-    "@cleanse-repo//:Cleanse",
-    "//Kaly2iOS/Domain:domain"
+    visibility = ["//visibility:public"],
+    deps = [
+        "//Kaly2iOS/Domain:domain",
+        "@cleanse-repo//:Cleanse",
+        "@grpc-swift-repo//:GRPC",
     ],
     # data = [":grpc_stubs"]
 )
 
 genrule(
     name = "grpc_stubs",
+    srcs = protos,
     outs = grpc_stubs,
     cmd = """
     $(location @protobuf//:protoc) \
@@ -43,12 +51,12 @@ genrule(
     --grpc-swift_out=Client=true,ExperimentalAsyncClient=true:$(GENDIR) \
     --proto_path=. $(SRCS)
     """,
-    srcs = protos,
     tools = tools,
 )
 
 genrule(
     name = "proto_models",
+    srcs = protos,
     outs = proto_models,
     cmd = """
     $(location @protobuf//:protoc) \
@@ -56,21 +64,19 @@ genrule(
     --swift_out=$(GENDIR) \
     --proto_path=. $(SRCS)
     """,
-    srcs = protos,
     tools = tools,
 )
 
-
 swift_library(
     name = "data-tests-lib",
-    module_name = "DataTests",
-    srcs = glob(["Tests/DataTests/**/*.swift"]),
     testonly = True,
+    srcs = glob(["Tests/DataTests/**/*.swift"]),
+    module_name = "DataTests",
     deps = [
-            "//Kaly2iOS/Common:common",
-            "data",
-            "data-mocks",
-            "@cleanse-repo//:Cleanse"
+        "data",
+        "data-mocks",
+        "//Kaly2iOS/Common:common",
+        "@cleanse-repo//:Cleanse",
     ],
 )
 
@@ -79,19 +85,20 @@ ios_unit_test(
     size = "medium",
     minimum_os_version = "15.0",
     visibility = ["//visibility:public"],
-    deps = [":data-tests-lib"]
+    deps = [":data-tests-lib"],
 )
 
 swift_library(
     name = "data-mocks",
-    module_name = "DataMocks",
     srcs = ["data-mocks-gen"],
+    module_name = "DataMocks",
     visibility = ["//visibility:public"],
     deps = [
         "data",
         "@cleanse-repo//:Cleanse",
     ],
 )
+
 genrule(
     name = "data-mocks-gen",
     srcs = glob(["Sources/Data/**/*.swift"]),

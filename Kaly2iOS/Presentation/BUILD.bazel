@@ -1,44 +1,48 @@
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-load("@build_bazel_rules_apple//apple:ios.bzl", "ios_unit_test", "ios_application")
-load("@build_bazel_rules_apple//apple:ios.bzl", "ios_framework", "ios_dynamic_framework")
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application", "ios_unit_test")
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_dynamic_framework", "ios_framework")
 
 swift_library(
     name = "presentation",
-    module_name = "Presentation",
     srcs = glob(["Sources/Presentation/**/*.swift"]),
+    module_name = "Presentation",
+    tags = ["manual"],
     visibility = ["//visibility:public"],
-        tags = ["manual"],
-
     deps = [
-            "//Kaly2iOS/Domain:domain-mocks",
-            "//Kaly2iOS/Domain:domain",
-            "//Kaly2iOS/Common:common",
-            "@cleanse-repo//:Cleanse"
-            ],
+        "//Kaly2iOS/Common:common",
+        "//Kaly2iOS/Domain:domain",
+        "//Kaly2iOS/Domain:domain-mocks",
+        "@cleanse-repo//:Cleanse",
+    ],
     alwayslink = True,
 )
 
 ios_dynamic_framework(
     name = "presentation-dynamic",
-    bundle_name = "Presentation",
     bundle_id = "ca.joelathiessen.kaly2.presentation",
+    bundle_name = "Presentation",
+    families = ["iphone"],
     infoplists = ["Info.plist"],
     minimum_os_version = "15.0",
-    families = ["iphone"],
+    visibility = ["//visibility:public"],
     # module_name = "Presentation",
     deps = [
-        "presentation"
+        "presentation",
     ],
-    visibility = ["//visibility:public"],
 )
 
 swift_library(
     name = "presentation-tests-lib",
-    module_name = "PresentationTests",
-    srcs = glob(["Tests/PresentationTests/**/*.swift"]),
     testonly = True,
-    deps = [":presentation-dynamic", "//Kaly2iOS/Domain:domain-mocks"],
+    srcs = glob(["Tests/PresentationTests/**/*.swift"]),
+    module_name = "PresentationTests",
     tags = ["manual"],
+    # Previews won't work on Xcode 14.0 if this is used:
+    # deps = [":presentation", "//Kaly2iOS/Domain:domain-mocks"],
+    deps = [
+        ":presentation-dynamic",
+        "//Kaly2iOS/Domain:domain-mocks",
+    ],
 )
 
 ios_unit_test(
@@ -46,5 +50,5 @@ ios_unit_test(
     size = "medium",
     minimum_os_version = "15.0",
     visibility = ["//visibility:public"],
-    deps = [":presentation-tests-lib"]
+    deps = [":presentation-tests-lib"],
 )
