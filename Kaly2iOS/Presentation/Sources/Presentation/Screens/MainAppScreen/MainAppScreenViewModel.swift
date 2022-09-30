@@ -8,4 +8,6 @@
 import Foundation
 
 @MainActor
-final class MainAppScreenViewModel: ObservableObject {}
+final class MainAppScreenViewModel: ObservableObject {
+    nonisolated init() {}
+}

@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-@MainActor
 final class MapContentsView: UIView {
     private var animationShapeLayers: [CAShapeLayer] = .init()
     private var shapeLayers: [CAShapeLayer] = .init()

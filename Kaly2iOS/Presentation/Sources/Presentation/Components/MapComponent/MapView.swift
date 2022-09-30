@@ -9,7 +9,6 @@ import Domain
 import Foundation
 import SwiftUI
 
-@MainActor
 struct MapView: View {
     @StateObject var viewModel: MapViewModel
 
