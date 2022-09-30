@@ -58,35 +58,9 @@ import DomainMocks
 struct MainAppView_Previews: PreviewProvider {
     static let seeMapUseCaseMock = SeeMapUseCaseImpl(robotClient: RobotClientMock(), mapClient: MapClientMock(), sessionClient: SessionClientMock(), openRobotSessionRepo: OpenRobotSessionRepoMock(), lastErrorTimeRepo: LastErrorTimeRepoMock())
 
-//        static let seeMapUseCaseMock = SeeMapUseCaseImpl(robotClient: RobotClientMock(), mapClient: MapClientMock(), sessionClient: SessionClientMock(), openRobotSessionRepo: OpenRobotSessionRepoMock(), lastErrorTimeRepo: LastErrorTimeRepoMock())
-//        seeMapUseCaseMock.
-
-//        let contentView =
-
     static var previews: some View {
         MainAppScreenViewImpl(contentView: ContentView(mapView: MapView(viewModel: MapViewModel(updateMapUseCase: seeMapUseCaseMock))), viewModel: MainAppScreenViewModel())
-
-//            MainAppScreenViewImpl(contentView: ContentView(mapView: MapView(viewModel: MapViewModel(updateMapUseCase: seeMapUseCaseMock))))
     }
 
-    init() async {
-//            try? await MainAppView_Previews.seeMapUseCaseMock.execute()
-//            seeMapUseCaseMock.executeHandler = {
-//                let pose = PoseEntity(x: 0, y: 0, heading: 0)
-//                return UpdateMapUseCaseResult(bestPoses: [pose], odoPoses: [pose], truePoses: [pose])
-//            }
-    }
+    init() async {}
 }
-
-// #endif
-//
-// @main
-// class Kaly2iOSAp2p: App {
-//    var body: some Scene {
-//        WindowGroup {
-//        }
-//    }
-//
-//    required init() {
-//    }
-// }
