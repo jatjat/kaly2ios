@@ -11,7 +11,7 @@ import Foundation
 import SwiftUI
 
 @MainActor
-class MapViewModel: ObservableObject {
+final class MapViewModel: ObservableObject {
     @Published var bestPoses = [PoseEntity]()
     @Published var odoPoses = [PoseEntity]()
     @Published var truePoses = [PoseEntity]()

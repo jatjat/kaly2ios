@@ -7,4 +7,5 @@
 
 import Foundation
 
-class InsideBottomSheetViewModel: ObservableObject {}
+@MainActor
+final class InsideBottomSheetViewModel: ObservableObject {}

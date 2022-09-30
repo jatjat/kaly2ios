@@ -7,4 +7,5 @@
 
 import Foundation
 
-class MainAppScreenViewModel: ObservableObject {}
+@MainActor
+final class MainAppScreenViewModel: ObservableObject {}
