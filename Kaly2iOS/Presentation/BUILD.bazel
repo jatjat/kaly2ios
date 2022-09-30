@@ -37,10 +37,8 @@ swift_library(
     srcs = glob(["Tests/PresentationTests/**/*.swift"]),
     module_name = "PresentationTests",
     tags = ["manual"],
-    # Previews won't work on Xcode 14.0 if this is used:
-    # deps = [":presentation", "//Kaly2iOS/Domain:domain-mocks"],
     deps = [
-        ":presentation-dynamic",
+        ":presentation",
         "//Kaly2iOS/Domain:domain-mocks",
     ],
 )
