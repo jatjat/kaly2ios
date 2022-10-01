@@ -9,6 +9,7 @@ swift_library(
     #     ":release_build": [],
     #     "//conditions:default": [":PreviewContent"],
     # }),
+    linkstatic = 0,
     visibility = ["//visibility:public"],
     deps = [
         "//Kaly2iOS/Presentation:presentation-dynamic",
