@@ -63,9 +63,15 @@ final class MapViewModel: ObservableObject {
                     truePoses = update.truePoses
                 } catch {
                     shownError = .custom(text: "Error updating map")
+                    try await timeOut(1)
+//                    updateTask?.cancel()
                 }
             }
         }
+    }
+
+    func timeOut(_ seconds: UInt64) async throws {
+        try await Task.sleep(nanoseconds: seconds * 1_000_000_000)
     }
 
     func onDissappear() {
