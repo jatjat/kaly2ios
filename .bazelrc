@@ -5,6 +5,7 @@ build --spawn_strategy=local
 build --features=swift.cacheable_swiftmodules
 build --define=apple.experimental.tree_artifact_outputs=1
 build --apple_platform_type=ios
+build --xcode_version=14.0.1
 
 # Build reading from remote cache (faster):
 build:cache --noremote_upload_local_results
