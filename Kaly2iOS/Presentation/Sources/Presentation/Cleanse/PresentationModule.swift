@@ -21,11 +21,19 @@ public struct PresentationModule: Module {
             })
 
         binder
-            .bind(MapViewModel.self).to(factory: MapViewModel.init)
-        binder.bind(MainAppScreenViewModel.self).to(factory: MainAppScreenViewModel.init)
+            .bind(MapViewModel.self)
+            .to(factory: MapViewModel.init)
+        binder
+            .bind(MainAppScreenViewModel.self)
+            .to(factory: MainAppScreenViewModel.init)
 
-        binder.bind(ContentView.self).to(factory: ContentView.init)
-        binder.bind(MapView.self).to(factory: MapView.init)
+        binder
+            .bind(ContentView.self)
+            .to(factory: ContentView.init)
+        binder.bind(MapContentsViewRepresentable.self)
+            .to(factory: MapContentsViewRepresentable.init)
+        binder.bind(MapView.self)
+            .to(factory: MapView.init)
     }
 }
 

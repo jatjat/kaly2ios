@@ -59,7 +59,7 @@ struct MainAppView_Previews: PreviewProvider {
     static let seeMapUseCaseMock = SeeMapUseCaseImpl(robotClient: RobotClientMock(), mapClient: MapClientMock(), sessionClient: SessionClientMock(), openRobotSessionRepo: OpenRobotSessionRepoMock(), lastErrorTimeRepo: LastErrorTimeRepoMock())
 
     static var previews: some View {
-        MainAppScreenViewImpl(contentView: ContentView(mapView: MapView(viewModel: MapViewModel(updateMapUseCase: seeMapUseCaseMock))), viewModel: MainAppScreenViewModel())
+        MainAppScreenViewImpl(contentView: ContentView(mapView: MapView(viewModel: MapViewModel(updateMapUseCase: seeMapUseCaseMock), representable: MapContentsViewRepresentable())), viewModel: MainAppScreenViewModel())
     }
 
     init() async {}
