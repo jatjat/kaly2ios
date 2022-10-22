@@ -6,11 +6,11 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 git_repository(
     name = "com_github_buildbuddy_io_rules_xcodeproj",
-    commit = "1e95b0d0afd16b2aec2723fa19e616f916e460a1",
+    commit = "ecb65c996f28eb4aa2e756c7e0ea71eab6287d57",
     remote = "https://github.com/buildbuddy-io/rules_xcodeproj.git",
     # commit = "7ee46ec29bb4365f2c81525200a078b80bf5ca4a",
     # commit = "130476fe70e9c56f82f2bf9db9dbc382fc9dd723",
-    shallow_since = "1661805004 -0500",
+    shallow_since = "1665781612 -0500",
 )
 
 load(
@@ -50,8 +50,10 @@ apple_support_dependencies()
 
 git_repository(
     name = "rules_proto_grpc",
+    # tag = "4.1.0",
+    commit = "f303fa8e43195415a9bc80ed6b8f625086f088b0",
     remote = "https://github.com/rules-proto-grpc/rules_proto_grpc.git",
-    tag = "4.1.0",
+    shallow_since = "1639341196 +0000",
 )
 
 load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_proto_grpc_toolchains")
@@ -75,6 +77,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # Recompiles every time the $PATH changes (all the time)
 http_archive(
     name = "protobuf",
+    sha256 = "a11a262a395f999f9dca83e195cc15b6c23b6d5e74133f8e3250ad0950485da1",
     strip_prefix = "protobuf-3.19.4",
     #    https://github.com/protocolbuffers/protobuf/releases/download/v3.20.0/protobuf-cpp-3.20.0.tar.gz
     url = "https://github.com/google/protobuf/releases/download/v3.19.4/protobuf-cpp-3.19.4.zip",
@@ -123,7 +126,7 @@ swift_library(
     srcs = glob(["Sources/protoc-gen-grpc-swift/*.swift"]),
     # outs = ["protoc-gen-grpc-swift.a"],
     visibility = ["//visibility:public"],
-    alwayslink = True,
+    # alwayslink = True,
 )
 
 
@@ -381,7 +384,7 @@ swift_library(
     deps = ["@swift-protobuf-repo//:SwiftProtobuf", "@swift-protobuf-repo//:SwiftProtobufPluginLibrary"],
     srcs = glob(["Sources/protoc-gen-swift/*.swift"]),
     visibility = ["//visibility:public"],
-    alwayslink = True,
+    # alwayslink = True,
 )
 
 swift_library(

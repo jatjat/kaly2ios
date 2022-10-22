@@ -14,7 +14,7 @@ swift_library(
         "//Kaly2iOS/Domain:domain-mocks",
         "@cleanse-repo//:Cleanse",
     ],
-    alwayslink = True,
+    # alwayslink = True,
 )
 
 ios_dynamic_framework(
