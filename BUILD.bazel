@@ -22,7 +22,7 @@ xcodeproj(
             ),
             test_action = xcode_schemes.test_action(
                 [
-                    "//Kaly2iOS/Presentation:presentation-tests",
+                    "//Kaly2iOS/Presentation:presentation-tests-dynamic",
                     "//Kaly2iOS/Domain:domain-tests",
                     # "//Kaly2iOS/Data:data-tests",
                 ],
@@ -34,7 +34,7 @@ xcodeproj(
     # scheme_autogeneration_mode = "all",
     top_level_targets = [
         top_level_target(":ios-app"),
-        top_level_target("//Kaly2iOS/Presentation:presentation-tests"),
+        top_level_target("//Kaly2iOS/Presentation:presentation-tests-dynamic"),
         top_level_target("//Kaly2iOS/Domain:domain-tests"),
     ],
 )
@@ -55,4 +55,14 @@ load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
 buildifier(
     name = "buildifier",
+)
+
+test_suite(
+    name = "ci_tests",
+    tags = ["-xcode"],
+    tests = [
+        "//Kaly2iOS/Data:data-tests",
+        "//Kaly2iOS/Domain:domain-tests",
+        "//Kaly2iOS/Presentation:presentation-tests",
+    ],
 )

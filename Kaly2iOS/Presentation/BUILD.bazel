@@ -38,7 +38,29 @@ swift_library(
     module_name = "PresentationTests",
     tags = ["manual"],
     deps = [
+        # Works for Xcode previews if this is set:
+        # ":presentation-dynamic",
+
+        # Works for command-line tests (./test.sh) if this is set:
         ":presentation",
+        #
+        "//Kaly2iOS/Domain:domain-mocks",
+    ],
+)
+
+swift_library(
+    name = "presentation-tests-lib-dynamic",
+    testonly = True,
+    srcs = glob(["Tests/PresentationTests/**/*.swift"]),
+    module_name = "PresentationTestsDynamic",
+    tags = ["manual"],
+    deps = [
+        # Works for Xcode previews if this is set:
+        ":presentation-dynamic",
+
+        # Works for command-line tests (./test.sh) if this is set:
+        # ":presentation",
+        #
         "//Kaly2iOS/Domain:domain-mocks",
     ],
 )
@@ -49,4 +71,13 @@ ios_unit_test(
     minimum_os_version = "15.0",
     visibility = ["//visibility:public"],
     deps = [":presentation-tests-lib"],
+)
+
+ios_unit_test(
+    name = "presentation-tests-dynamic",
+    size = "medium",
+    minimum_os_version = "15.0",
+    tags = ["xcode"],
+    visibility = ["//visibility:public"],
+    deps = [":presentation-tests-lib-dynamic"],
 )
