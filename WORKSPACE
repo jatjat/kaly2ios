@@ -3,10 +3,11 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 git_repository(
-    name = "com_github_buildbuddy_io_rules_xcodeproj",
-    commit = "ecb65c996f28eb4aa2e756c7e0ea71eab6287d57",
+    name = "rules_xcodeproj",
+    commit = "649007c4cf011fc8654cec9eb8ae23649627a72b",
     remote = "https://github.com/buildbuddy-io/rules_xcodeproj.git",
     # commit = "7ee46ec29bb4365f2c81525200a078b80bf5ca4a",
     # commit = "130476fe70e9c56f82f2bf9db9dbc382fc9dd723",
@@ -14,7 +15,7 @@ git_repository(
 )
 
 load(
-    "@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:repositories.bzl",
+    "@rules_xcodeproj//xcodeproj:repositories.bzl",
     "xcodeproj_rules_dependencies",
 )
 
@@ -116,7 +117,7 @@ load(
 macos_command_line_application(
         name = "protoc-gen-grpc-swift",
         deps = ["protoc-gen-grpc-swift-l"],
-        minimum_os_version = "10.11",
+        minimum_os_version = "13.4.1",
         visibility = ["//visibility:public"],
 )
 
@@ -126,7 +127,7 @@ swift_library(
     srcs = glob(["Sources/protoc-gen-grpc-swift/*.swift"]),
     # outs = ["protoc-gen-grpc-swift.a"],
     visibility = ["//visibility:public"],
-    # alwayslink = True,
+    alwayslink = True,
 )
 
 
@@ -375,7 +376,7 @@ load(
 macos_command_line_application(
         name = "protoc-gen-swift",
         deps = ["protoc-gen-swift-l"],
-        minimum_os_version = "10.11",
+        minimum_os_version = "13.4.1",
         visibility = ["//visibility:public"],
 )
 
