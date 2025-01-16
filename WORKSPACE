@@ -5,13 +5,18 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-git_repository(
+# http_archive(
+#     name = "rules_xcodeproj",
+#     sha256 = "db021dcb7203c90b92b7adc4470174bc2bf98ccb",
+#     url = "https://github.com/MobileNativeFoundation/rules_xcodeproj/releases/download/1.3.3/release.tar.gz",
+# )
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
     name = "rules_xcodeproj",
-    commit = "09effbb",
-    remote = "https://github.com/buildbuddy-io/rules_xcodeproj.git",
-    # commit = "7ee46ec29bb4365f2c81525200a078b80bf5ca4a",
-    # commit = "130476fe70e9c56f82f2bf9db9dbc382fc9dd723",
-    shallow_since = "1665781612 -0500",
+    integrity = "sha256-GJAmZRiNMmN/CpGEjO20eMndARx4ByCrRJt4PyQ4BSc=",
+    url = "https://github.com/MobileNativeFoundation/rules_xcodeproj/releases/download/2.9.2/release.tar.gz",
 )
 
 load(
@@ -20,6 +25,10 @@ load(
 )
 
 xcodeproj_rules_dependencies()
+
+load("@bazel_features//:deps.bzl", "bazel_features_deps")
+
+bazel_features_deps()
 
 load(
     "@build_bazel_rules_apple//apple:repositories.bzl",
