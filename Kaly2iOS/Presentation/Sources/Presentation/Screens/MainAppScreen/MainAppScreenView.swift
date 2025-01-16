@@ -41,8 +41,7 @@ struct ContentView: View {
                 isOpen: self.$bottomSheetShown,
                 maxHeight: geometry.size.height * 0.7
             ) {
-//              insideBottomSheetView
-                Color.blue
+                InsideBottomSheetView()
             }
         }.edgesIgnoringSafeArea(.all)
     }

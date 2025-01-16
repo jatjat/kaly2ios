@@ -7,7 +7,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 git_repository(
     name = "rules_xcodeproj",
-    commit = "649007c4cf011fc8654cec9eb8ae23649627a72b",
+    commit = "09effbb",
     remote = "https://github.com/buildbuddy-io/rules_xcodeproj.git",
     # commit = "7ee46ec29bb4365f2c81525200a078b80bf5ca4a",
     # commit = "130476fe70e9c56f82f2bf9db9dbc382fc9dd723",

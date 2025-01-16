@@ -98,7 +98,7 @@ struct BottomSheetView<Content: View>: View {
 
 struct BottomSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        BottomSheetView(isOpen: .constant(false), maxHeight: 200) {
+        BottomSheetView(isOpen: .constant(true), maxHeight: 500) {
             Rectangle().fill(Color.red)
         }.edgesIgnoringSafeArea(.all)
     }

@@ -11,23 +11,27 @@ import Domain
 import Presentation
 import SwiftUI
 
-@main
-class Kaly2iOSApp: App {
+class Container {
     var mainAppView: AnyView!
 
-    required init() {
-        let propertyInjector = try! ComponentFactory.of(Kaly2iOSApp.Component.self).build(())
-        propertyInjector.injectProperties(into: self)
+    func injectProperties(provider: TaggedProvider<MainAppViewTag>) {
+        mainAppView = provider.get()
+    }
+}
+
+@main
+struct Kaly2iOSApp: App {
+    let container = Container()
+
+    init() {
+        let propertyInjector = try! ComponentFactory.of(Container.Component.self).build(())
+        propertyInjector.injectProperties(into: container)
     }
 
     var body: some Scene {
         WindowGroup {
-            mainAppView
+            container.mainAppView
         }
-    }
-
-    func injectProperties(provider: TaggedProvider<MainAppViewTag>) {
-        mainAppView = provider.get()
     }
 }
 
@@ -37,13 +41,15 @@ struct Kaly2iOSApp_Previews: PreviewProvider {
     }
 }
 
-extension Kaly2iOSApp {
+extension Container {
     struct Component: Cleanse.RootComponent {
-        typealias Root = PropertyInjector<Kaly2iOSApp>
+        typealias Root = PropertyInjector<Container>
 
-        static func configureRoot(binder bind: ReceiptBinder<PropertyInjector<Kaly2iOSApp>>) -> BindingReceipt<PropertyInjector<Kaly2iOSApp>> {
+        static func configureRoot(binder bind: ReceiptBinder<PropertyInjector<Container>>)
+            -> BindingReceipt<PropertyInjector<Container>>
+        {
             bind.propertyInjector(configuredWith: { bind in
-                bind.to(injector: Kaly2iOSApp.injectProperties)
+                bind.to(injector: Container.injectProperties)
             })
         }
 

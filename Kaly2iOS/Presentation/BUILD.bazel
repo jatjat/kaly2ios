@@ -17,19 +17,19 @@ swift_library(
     # alwayslink = True,
 )
 
-ios_dynamic_framework(
-    name = "presentation-dynamic",
-    bundle_id = "ca.joelathiessen.kaly2.presentation",
-    bundle_name = "Presentation",
-    families = ["iphone"],
-    infoplists = ["Info.plist"],
-    minimum_os_version = "15.0",
-    visibility = ["//visibility:public"],
-    # module_name = "Presentation",
-    deps = [
-        "presentation",
-    ],
-)
+# ios_dynamic_framework(
+#     name = "presentation-dynamic",
+#     bundle_id = "ca.joelathiessen.kaly2.presentation",
+#     bundle_name = "Presentation",
+#     families = ["iphone"],
+#     infoplists = ["Info.plist"],
+#     minimum_os_version = "15.0",
+#     visibility = ["//visibility:public"],
+#     # module_name = "Presentation",
+#     deps = [
+#         "presentation",
+#     ],
+# )
 
 swift_library(
     name = "presentation-tests-lib",
@@ -48,22 +48,22 @@ swift_library(
     ],
 )
 
-swift_library(
-    name = "presentation-tests-lib-dynamic",
-    testonly = True,
-    srcs = glob(["Tests/PresentationTests/**/*.swift"]),
-    module_name = "PresentationTestsDynamic",
-    tags = ["manual"],
-    deps = [
-        # Works for Xcode previews if this is set:
-        ":presentation-dynamic",
+# swift_library(
+#     name = "presentation-tests-lib-dynamic",
+#     testonly = True,
+#     srcs = glob(["Tests/PresentationTests/**/*.swift"]),
+#     module_name = "PresentationTestsDynamic",
+#     tags = ["manual"],
+#     deps = [
+#         # Works for Xcode previews if this is set:
+#         ":presentation-dynamic",
 
-        # Works for command-line tests (./test.sh) if this is set:
-        # ":presentation",
-        #
-        "//Kaly2iOS/Domain:domain-mocks",
-    ],
-)
+#         # Works for command-line tests (./test.sh) if this is set:
+#         # ":presentation",
+#         #
+#         "//Kaly2iOS/Domain:domain-mocks",
+#     ],
+# )
 
 ios_unit_test(
     name = "presentation-tests",

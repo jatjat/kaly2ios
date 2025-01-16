@@ -12,8 +12,8 @@ swift_library(
     linkstatic = 0,
     visibility = ["//visibility:public"],
     deps = [
-        "//Kaly2iOS/Presentation:presentation-dynamic",
-        # "//Kaly2iOS/Presentation:presentation",
+        # "//Kaly2iOS/Presentation:presentation-dynamic",
+        "//Kaly2iOS/Presentation:presentation",
         "//Kaly2iOS/Domain:domain",
         "//Kaly2iOS/Data:data",
         "//Kaly2iOS/Common:common",
