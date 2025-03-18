@@ -25,6 +25,6 @@ jobs:
       - name: Lint
         run: ./lintformat.sh
       - name: Build for iOS
-        run: ./build.sh --config ci
+        run: ./build.sh --config ci --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_API_KEY }}
       - name: Run iOS tests
-        run: ./test.sh --config ci
+        run: ./test.sh --config ci --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_API_KEY }}
