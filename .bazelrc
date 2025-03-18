@@ -7,6 +7,9 @@ build --define=apple.experimental.tree_artifact_outputs=1
 build --apple_platform_type=ios
 build --xcode_version=16.2.0
 
+build --ios_simulator_device="iPhone 16 Pro Max"
+build --ios_simulator_version="18.2"
+
 # Build reading from remote cache (faster):
 build:cache --noremote_upload_local_results
 build:cache --config=ci
