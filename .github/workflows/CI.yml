@@ -10,7 +10,7 @@ jobs:
       - name: Choose Xcode
         run: sudo xcode-select -s /Applications/Xcode_16.2.app
       - name: Setup Bazel cache
-        uses: actions/cache@v3.0.8
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cache/bazelisk
